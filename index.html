@@ -806,7 +806,7 @@
       font-size: var(--cp-text-base);
       padding: var(--cp-space-3) var(--cp-space-6);
       border: none;
-      border-radius: var(--cp-radius-md);
+      border-radius: var(--cp-radius-lg);
       cursor: pointer;
       user-select: none;
       display: inline-flex;
@@ -875,6 +875,25 @@
     .cp-btn-ghost:hover {
       background: var(--cp-bg-tertiary);
       color: var(--cp-text-primary);
+    }
+
+    .cp-btn-outline {
+      background: var(--cp-bg-primary);
+      color: var(--cp-text-secondary);
+      font-weight: var(--cp-font-bold);
+      border: 2px solid var(--cp-border);
+      box-shadow: 0 4px 0 var(--cp-border);
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+    .cp-btn-outline:hover {
+      background: var(--cp-bg-secondary);
+      color: var(--cp-text-primary);
+      transform: translateY(-1px);
+      box-shadow: 0 5px 0 var(--cp-border);
+    }
+    .cp-btn-outline:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 var(--cp-border);
     }
 
     .cp-btn-success {
@@ -3131,6 +3150,7 @@
         <p class="desc">
           Todos os botões usam a classe base <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">.cp-btn</code> combinada com uma variante.
           Botões primário, sucesso e perigo usam efeito 3D com <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">box-shadow</code> + <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">translateY</code>.
+          Use <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">.cp-btn-outline</code> para ações de baixo destaque — borda sutil com sombra leve.
         </p>
 
         <h3>Primário (3D)</h3>
@@ -3153,6 +3173,14 @@
         <div class="ds-preview ds-flex">
           <button class="cp-btn cp-btn-ghost">Padrão</button>
           <button class="cp-btn cp-btn-ghost" disabled>Desabilitado</button>
+        </div>
+
+        <h3>Outline (Baixo destaque)</h3>
+        <div class="ds-preview ds-flex">
+          <button class="cp-btn cp-btn-outline cp-btn--sm">Pequeno</button>
+          <button class="cp-btn cp-btn-outline">Padrão</button>
+          <button class="cp-btn cp-btn-outline cp-btn--lg">Grande</button>
+          <button class="cp-btn cp-btn-outline" disabled>Desabilitado</button>
         </div>
 
         <h3>Sucesso &amp; Perigo (3D)</h3>
@@ -5165,7 +5193,7 @@ Todos os botões compartilham propriedades base via `.cp-btn`:
   font-size: var(--cp-text-base);
   padding: var(--cp-space-3) var(--cp-space-6);
   border: none;
-  border-radius: var(--cp-radius-md);
+  border-radius: var(--cp-radius-lg);
   cursor: pointer;
   user-select: none;
   display: inline-flex;
@@ -5243,6 +5271,26 @@ Todos os botões compartilham propriedades base via `.cp-btn`:
 .cp-btn-ghost:hover {
   background: var(--cp-bg-tertiary);
   color: var(--cp-text-primary);
+}
+```
+
+**Outline (baixo destaque — 3D cinza para ações discretas):**
+```css
+.cp-btn-outline {
+  background: var(--cp-bg-primary);
+  color: var(--cp-text-secondary);
+  font-weight: var(--cp-font-bold);
+  border: 2px solid var(--cp-border);
+  box-shadow: 0 4px 0 var(--cp-border);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.cp-btn-outline:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 0 var(--cp-border);
+}
+.cp-btn-outline:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--cp-border);
 }
 ```
 
