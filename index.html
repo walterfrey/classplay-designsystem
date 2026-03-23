@@ -941,6 +941,97 @@
       box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
     }
 
+    /* --- Search Input (cp-search) --- */
+    .cp-search {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      background: var(--cp-bg-elevated);
+      border: 2px solid var(--cp-border);
+      border-radius: var(--cp-radius-pill);
+      padding: var(--cp-space-1);
+      padding-left: var(--cp-space-5);
+      transition: border-color var(--cp-transition-base), box-shadow var(--cp-transition-base);
+    }
+    .cp-search:focus-within {
+      border-color: var(--cp-primary-500);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+    }
+    .cp-search__icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      color: var(--cp-text-muted);
+      transition: color var(--cp-transition-base);
+    }
+    .cp-search:focus-within .cp-search__icon {
+      color: var(--cp-primary-500);
+    }
+    .cp-search__input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-base);
+      font-weight: var(--cp-font-semibold);
+      color: var(--cp-text-primary);
+      padding: var(--cp-space-3) var(--cp-space-3);
+      min-width: 0;
+    }
+    .cp-search__input::placeholder {
+      color: var(--cp-text-muted);
+      font-weight: var(--cp-font-regular);
+    }
+    .cp-search__btn {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--cp-radius-circle);
+      border: none;
+      background: var(--cp-primary-600);
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--cp-transition-base), transform var(--cp-transition-bounce);
+    }
+    .cp-search__btn:hover {
+      background: var(--cp-primary-700);
+      transform: scale(1.08);
+    }
+    .cp-search__btn:active {
+      background: var(--cp-primary-800);
+      transform: scale(0.95);
+    }
+    .cp-search__btn svg {
+      width: 18px;
+      height: 18px;
+    }
+    /* Size variant: large */
+    .cp-search--lg {
+      padding: var(--cp-space-2);
+      padding-left: var(--cp-space-6);
+    }
+    .cp-search--lg .cp-search__input {
+      font-size: var(--cp-text-lg);
+      padding: var(--cp-space-4) var(--cp-space-3);
+    }
+    .cp-search--lg .cp-search__icon {
+      width: 24px;
+      height: 24px;
+    }
+    .cp-search--lg .cp-search__btn {
+      width: 48px;
+      height: 48px;
+    }
+    .cp-search--lg .cp-search__btn svg {
+      width: 22px;
+      height: 22px;
+    }
+
     .cp-label {
       font-family: var(--cp-font-family);
       font-size: var(--cp-text-sm);
@@ -1099,6 +1190,711 @@
       border-radius: var(--cp-radius-xl);
       padding: var(--cp-space-8);
       box-shadow: var(--cp-shadow-xl);
+    }
+
+    /* --- Card de Curso Showcase (portrait hover-reveal) --- */
+    .cp-card-showcase {
+      position: relative;
+      width: 280px;
+      height: 400px;
+      border-radius: var(--cp-radius-xl);
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--cp-bg-secondary);
+      border: 1px solid var(--cp-border-subtle);
+      transition: transform var(--cp-transition-slow), box-shadow var(--cp-transition-slow);
+    }
+    .cp-card-showcase:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .cp-card-showcase__image {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+    }
+
+    .cp-card-showcase__image-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      position: relative;
+    }
+
+    /* Gradient overlay — darkens more on hover */
+    .cp-card-showcase__overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 50%, transparent 100%);
+      z-index: 2;
+      display: flex;
+      align-items: flex-end;
+      padding: var(--cp-space-6);
+      transition: background 0.4s ease;
+    }
+    .cp-card-showcase:hover .cp-card-showcase__overlay {
+      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.4) 100%);
+    }
+
+    .cp-card-showcase__overlay-title {
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-xl);
+      font-weight: var(--cp-font-extra);
+      color: #FFFFFF;
+      line-height: 1.3;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .cp-card-showcase:hover .cp-card-showcase__overlay-title {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+
+    /* Reveal body — hidden by default, slides up on hover */
+    .cp-card-showcase__body {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: var(--cp-space-5) var(--cp-space-5) var(--cp-space-6);
+      z-index: 3;
+      transform: translateY(100%);
+      opacity: 0;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      gap: var(--cp-space-3);
+    }
+    .cp-card-showcase:hover .cp-card-showcase__body {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .cp-card-showcase__tag {
+      display: inline-block;
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-xs);
+      font-weight: var(--cp-font-bold);
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .cp-card-showcase__title {
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-lg);
+      font-weight: var(--cp-font-extra);
+      color: #FFFFFF;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .cp-card-showcase__desc {
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-regular);
+      color: rgba(255,255,255,0.7);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .cp-card-showcase__meta {
+      display: flex;
+      gap: var(--cp-space-2);
+      flex-wrap: wrap;
+    }
+
+    .cp-card-showcase__pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--cp-space-1);
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-xs);
+      font-weight: var(--cp-font-bold);
+      color: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: var(--cp-space-1) var(--cp-space-3);
+      border-radius: var(--cp-radius-pill);
+      backdrop-filter: blur(4px);
+    }
+
+    .cp-card-showcase__cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--cp-space-2);
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-bold);
+      color: #FFFFFF;
+      background: var(--cp-primary-600);
+      border: none;
+      border-radius: var(--cp-radius-pill);
+      padding: var(--cp-space-3) var(--cp-space-6);
+      cursor: pointer;
+      box-shadow: 0 4px 0 var(--cp-primary-800);
+      transition: transform var(--cp-transition-fast), box-shadow var(--cp-transition-fast), background var(--cp-transition-fast);
+      align-self: flex-start;
+      margin-top: var(--cp-space-1);
+    }
+    .cp-card-showcase__cta:hover {
+      background: var(--cp-primary-500);
+      transform: translateY(-1px);
+      box-shadow: 0 5px 0 var(--cp-primary-800);
+    }
+    .cp-card-showcase__cta:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 var(--cp-primary-800);
+    }
+
+    .cp-card-showcase__cta-icon {
+      width: 18px;
+      height: 18px;
+      background: rgba(255,255,255,0.25);
+      border-radius: var(--cp-radius-circle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+    }
+
+    /* Shimmer effect on the image */
+    .cp-card-showcase__image-inner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        transparent 40%,
+        rgba(255,255,255,0.08) 45%,
+        rgba(255,255,255,0.12) 50%,
+        rgba(255,255,255,0.08) 55%,
+        transparent 60%
+      );
+      transform: translateX(-100%);
+      transition: none;
+    }
+    .cp-card-showcase:hover .cp-card-showcase__image-inner::after {
+      animation: showcase-shimmer 0.8s 0.2s ease forwards;
+    }
+    @keyframes showcase-shimmer {
+      to { transform: translateX(100%); }
+    }
+
+    /* =========================================================
+       6.3.x Card de Módulo (Landscape hover-reveal)
+    ========================================================= */
+    .cp-card-module {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--cp-radius-xl);
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--cp-bg-secondary);
+      border: 1px solid var(--cp-border-subtle);
+      transition: transform var(--cp-transition-slow), box-shadow var(--cp-transition-slow);
+    }
+    .cp-card-module:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .cp-card-module__image {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+      transition: filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .cp-card-module:hover .cp-card-module__image {
+      filter: brightness(0.35);
+    }
+
+    /* Bottom gradient for title legibility (default state) */
+    .cp-card-module__gradient {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 55%;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.35) 50%, transparent 100%);
+      z-index: 2;
+      transition: opacity 0.35s ease;
+    }
+    .cp-card-module:hover .cp-card-module__gradient {
+      opacity: 0;
+    }
+
+    /* Default title — visible at bottom-left */
+    .cp-card-module__default-title {
+      position: absolute;
+      bottom: var(--cp-space-5);
+      left: var(--cp-space-6);
+      right: var(--cp-space-16);
+      z-index: 3;
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-lg);
+      font-weight: var(--cp-font-extra);
+      color: #FFFFFF;
+      line-height: 1.3;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .cp-card-module:hover .cp-card-module__default-title {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    /* Small icon — bottom-right corner (default state) */
+    .cp-card-module__icon {
+      position: absolute;
+      bottom: var(--cp-space-5);
+      right: var(--cp-space-5);
+      z-index: 3;
+      width: 28px;
+      height: 28px;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+    }
+    .cp-card-module:hover .cp-card-module__icon {
+      opacity: 0;
+    }
+
+    /* Hover reveal body — centered content */
+    .cp-card-module__body {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--cp-space-8) var(--cp-space-8);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.4s ease 0.05s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.05s;
+    }
+    .cp-card-module:hover .cp-card-module__body {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .cp-card-module__title {
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-xl);
+      font-weight: var(--cp-font-extra);
+      color: #FFFFFF;
+      line-height: 1.3;
+      margin-bottom: var(--cp-space-2);
+    }
+
+    .cp-card-module__desc {
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-regular);
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.5;
+      margin-bottom: var(--cp-space-5);
+      max-width: 85%;
+    }
+
+    .cp-card-module__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cp-card-module__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--cp-space-2);
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-bold);
+      color: #FFFFFF;
+      background: var(--cp-info-600);
+      border: none;
+      border-radius: var(--cp-radius-pill);
+      padding: var(--cp-space-2) var(--cp-space-5);
+      cursor: pointer;
+      transition: background var(--cp-transition-fast), transform var(--cp-transition-fast), box-shadow var(--cp-transition-fast);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .cp-card-module__cta:hover {
+      background: var(--cp-info-500);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    }
+    .cp-card-module__cta:active {
+      transform: translateY(1px);
+    }
+
+    .cp-card-module__cta-icon {
+      width: 22px;
+      height: 22px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: var(--cp-radius-circle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+    }
+
+    .cp-card-module__count {
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-semibold);
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Shimmer on hover */
+    .cp-card-module__image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        transparent 40%,
+        rgba(255,255,255,0.06) 45%,
+        rgba(255,255,255,0.1) 50%,
+        rgba(255,255,255,0.06) 55%,
+        transparent 60%
+      );
+      transform: translateX(-100%);
+      transition: none;
+    }
+    .cp-card-module:hover .cp-card-module__image::after {
+      animation: module-shimmer 0.8s 0.15s ease forwards;
+    }
+    @keyframes module-shimmer {
+      to { transform: translateX(100%); }
+    }
+
+    /* --- Card Hub (portal / community access card) --- */
+    .cp-card-hub {
+      background: var(--cp-bg-secondary);
+      border: 1px solid var(--cp-border-subtle);
+      border-radius: var(--cp-radius-xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    .cp-card-hub:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .cp-card-hub--active {
+      border-color: var(--cp-primary-500);
+      box-shadow: 0 0 0 2px var(--cp-primary-200), 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+    [data-theme="dark"] .cp-card-hub--active {
+      box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    .cp-card-hub--active:hover {
+      box-shadow: 0 0 0 2px var(--cp-primary-300), 0 16px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .cp-card-hub__image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cp-card-hub__image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.08) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .cp-card-hub__body {
+      padding: var(--cp-space-5) var(--cp-space-5) var(--cp-space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--cp-space-2);
+      flex: 1;
+    }
+
+    .cp-card-hub__title {
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-lg);
+      font-weight: var(--cp-font-extra);
+      color: var(--cp-text-primary);
+      line-height: 1.3;
+    }
+
+    .cp-card-hub__desc {
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-regular);
+      color: var(--cp-text-secondary);
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .cp-card-hub__cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--cp-space-2);
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-bold);
+      color: #FFFFFF;
+      background: var(--cp-primary-600);
+      border: none;
+      border-radius: var(--cp-radius-pill);
+      padding: var(--cp-space-3) var(--cp-space-6);
+      cursor: pointer;
+      margin-top: auto;
+      box-shadow: 0 4px 0 var(--cp-primary-800);
+      transition: transform var(--cp-transition-fast), box-shadow var(--cp-transition-fast), background var(--cp-transition-fast);
+    }
+    .cp-card-hub__cta:hover {
+      background: var(--cp-primary-500);
+      transform: translateY(-1px);
+      box-shadow: 0 5px 0 var(--cp-primary-800);
+    }
+    .cp-card-hub__cta:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 var(--cp-primary-800);
+    }
+
+    .cp-card-hub__cta-arrow {
+      transition: transform 0.2s ease;
+    }
+    .cp-card-hub__cta:hover .cp-card-hub__cta-arrow {
+      transform: translateX(3px);
+    }
+
+    /* =========================================================
+       6.3.x Card de Trilha (Knowledge Trail / Step Card)
+    ========================================================= */
+    .cp-card-trail {
+      background: var(--cp-bg-secondary);
+      border: 1px solid var(--cp-border-subtle);
+      border-radius: var(--cp-radius-lg);
+      overflow: hidden;
+      transition: box-shadow var(--cp-transition-base);
+    }
+    .cp-card-trail:hover {
+      box-shadow: var(--cp-shadow-md);
+    }
+    .cp-card-trail--active {
+      border-left: 3px solid var(--cp-primary-500);
+    }
+    .cp-card-trail--completed {
+      border-left: 3px solid var(--cp-success);
+    }
+
+    .cp-card-trail__header {
+      display: flex;
+      align-items: center;
+      padding: var(--cp-space-5) var(--cp-space-6);
+      gap: var(--cp-space-4);
+    }
+
+    .cp-card-trail__step {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: var(--cp-radius-circle);
+      background: var(--cp-bg-tertiary);
+      border: 2px solid var(--cp-border);
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-extra);
+      color: var(--cp-text-secondary);
+      flex-shrink: 0;
+      transition: all var(--cp-transition-base);
+    }
+    .cp-card-trail--active .cp-card-trail__step {
+      background: var(--cp-primary-600);
+      border-color: var(--cp-primary-600);
+      color: #FFFFFF;
+      box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
+    }
+    .cp-card-trail--completed .cp-card-trail__step {
+      background: var(--cp-success);
+      border-color: var(--cp-success);
+      color: #FFFFFF;
+    }
+
+    .cp-card-trail__info {
+      flex: 1;
+      min-width: 0;
+    }
+    .cp-card-trail__title {
+      font-size: var(--cp-text-lg);
+      font-weight: var(--cp-font-bold);
+      color: var(--cp-text-primary);
+      line-height: 1.3;
+    }
+    .cp-card-trail__subtitle {
+      font-size: var(--cp-text-sm);
+      color: var(--cp-primary-400);
+      margin-top: var(--cp-space-1);
+    }
+    [data-theme="light"] .cp-card-trail__subtitle {
+      color: var(--cp-primary-600);
+    }
+
+    .cp-card-trail__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--cp-space-3) var(--cp-space-6) var(--cp-space-5);
+      border-top: 1px solid var(--cp-border-subtle);
+    }
+
+    .cp-card-trail__toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--cp-space-2);
+      font-size: var(--cp-text-sm);
+      color: var(--cp-text-secondary);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--cp-space-2) var(--cp-space-3);
+      border-radius: var(--cp-radius-md);
+      font-family: var(--cp-font-family);
+      transition: color var(--cp-transition-fast), background var(--cp-transition-fast);
+    }
+    .cp-card-trail__toggle:hover {
+      color: var(--cp-text-primary);
+      background: var(--cp-bg-tertiary);
+    }
+    .cp-card-trail__toggle-icon {
+      display: inline-block;
+      font-size: var(--cp-text-xs);
+      transition: transform var(--cp-transition-base);
+    }
+    .cp-card-trail[data-open="true"] .cp-card-trail__toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .cp-card-trail__complete-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--cp-space-2);
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-bold);
+      color: var(--cp-primary-500);
+      background: transparent;
+      border: 2px solid var(--cp-border);
+      border-radius: var(--cp-radius-pill);
+      padding: var(--cp-space-2) var(--cp-space-5);
+      cursor: pointer;
+      transition: all var(--cp-transition-base);
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .cp-card-trail__complete-btn:hover {
+      border-color: var(--cp-primary-400);
+      background: rgba(168, 85, 247, 0.08);
+    }
+    .cp-card-trail__complete-btn--done {
+      color: var(--cp-success);
+      border-color: var(--cp-success-200);
+      pointer-events: none;
+    }
+    [data-theme="dark"] .cp-card-trail__complete-btn--done {
+      border-color: var(--cp-success-800);
+    }
+    .cp-card-trail__complete-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .cp-card-trail__body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+      opacity: 0;
+    }
+    .cp-card-trail[data-open="true"] .cp-card-trail__body {
+      max-height: 500px;
+      opacity: 1;
+    }
+
+    .cp-card-trail__content {
+      background: var(--cp-bg-tertiary);
+      border: 1px solid var(--cp-border-subtle);
+      border-radius: var(--cp-radius-lg);
+      margin: 0 var(--cp-space-6) var(--cp-space-6);
+      padding: var(--cp-space-6);
+    }
+    .cp-card-trail__desc {
+      font-size: var(--cp-text-sm);
+      color: var(--cp-text-secondary);
+      line-height: 1.7;
+      margin-bottom: var(--cp-space-6);
+    }
+
+    .cp-card-trail__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--cp-space-3);
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-base);
+      font-weight: var(--cp-font-bold);
+      color: #FFFFFF;
+      background: var(--cp-primary-600);
+      border: none;
+      border-radius: var(--cp-radius-md);
+      padding: var(--cp-space-3) var(--cp-space-8);
+      cursor: pointer;
+      box-shadow: 0 4px 0 var(--cp-primary-800);
+      transition: transform var(--cp-transition-fast), box-shadow var(--cp-transition-fast), background var(--cp-transition-fast);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .cp-card-trail__cta:hover {
+      background: var(--cp-primary-500);
+      transform: translateY(-1px);
+      box-shadow: 0 5px 0 var(--cp-primary-800);
+    }
+    .cp-card-trail__cta:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 var(--cp-primary-800);
+    }
+    .cp-card-trail__cta svg {
+      width: 18px;
+      height: 18px;
     }
 
     /* =========================================================
@@ -1768,6 +2564,363 @@
       opacity: 1;
     }
 
+    /* =========================================================
+       Tarefas — cp-task (Task List Component)
+    ========================================================= */
+    .cp-task-list {
+      width: 100%;
+    }
+    .cp-task-list__header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: var(--cp-space-3);
+    }
+    .cp-task-list__title {
+      font-size: var(--cp-text-xl);
+      font-weight: var(--cp-font-extra);
+      color: var(--cp-text-primary);
+    }
+    .cp-task-list__counter {
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-semibold);
+      color: var(--cp-text-secondary);
+    }
+    .cp-task-list__progress {
+      margin-bottom: var(--cp-space-5);
+    }
+    .cp-task-list__items {
+      display: flex;
+      flex-direction: column;
+      gap: var(--cp-space-3);
+    }
+
+    .cp-task {
+      display: flex;
+      align-items: center;
+      gap: var(--cp-space-4);
+      background: var(--cp-bg-secondary);
+      border: 1px solid var(--cp-border-subtle);
+      border-radius: var(--cp-radius-lg);
+      padding: var(--cp-space-4) var(--cp-space-5);
+      cursor: pointer;
+      transition: transform var(--cp-transition-fast), box-shadow var(--cp-transition-base), border-color var(--cp-transition-base);
+      user-select: none;
+    }
+    .cp-task:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--cp-shadow-md);
+      border-color: var(--cp-border);
+    }
+    .cp-task--completed {
+      border-left: 3px solid var(--cp-success);
+    }
+    .cp-task--completed .cp-task__text {
+      color: var(--cp-text-secondary);
+    }
+
+    .cp-task__check {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: var(--cp-radius-circle);
+      border: 2px solid var(--cp-border);
+      flex-shrink: 0;
+      transition: all var(--cp-transition-base);
+      background: transparent;
+    }
+    .cp-task:hover .cp-task__check {
+      border-color: var(--cp-primary-400);
+    }
+    .cp-task--completed .cp-task__check {
+      background: var(--cp-success);
+      border-color: var(--cp-success);
+      color: #FFFFFF;
+    }
+    .cp-task__check-icon {
+      display: none;
+      font-size: var(--cp-text-sm);
+      line-height: 1;
+    }
+    .cp-task--completed .cp-task__check-icon {
+      display: block;
+    }
+
+    .cp-task__text {
+      flex: 1;
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-semibold);
+      color: var(--cp-text-primary);
+      line-height: 1.4;
+      min-width: 0;
+    }
+
+    .cp-task__reward {
+      flex-shrink: 0;
+    }
+
+    /* =========================================================
+       Lesson Index Panel — cp-lesson-panel
+    ========================================================= */
+    .cp-lesson-panel {
+      width: 100%;
+      max-width: 400px;
+      background: var(--cp-bg-secondary);
+      border: 1px solid var(--cp-border);
+      border-radius: var(--cp-radius-xl);
+      box-shadow: var(--cp-shadow-xl);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .cp-lesson-panel__header {
+      padding: var(--cp-space-6);
+      border-bottom: 1px solid var(--cp-border);
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.06) 0%, rgba(249, 115, 22, 0.04) 100%);
+    }
+    [data-theme="dark"] .cp-lesson-panel__header {
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(249, 115, 22, 0.06) 100%);
+    }
+    .cp-lesson-panel__title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--cp-space-3);
+    }
+    .cp-lesson-panel__title {
+      font-size: var(--cp-text-xl);
+      font-weight: var(--cp-font-extra);
+      color: var(--cp-text-primary);
+      line-height: 1.3;
+      flex: 1;
+    }
+    .cp-lesson-panel__close {
+      width: 32px; height: 32px;
+      border: none;
+      background: var(--cp-bg-tertiary);
+      color: var(--cp-text-secondary);
+      border-radius: var(--cp-radius-md);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--cp-transition-base), color var(--cp-transition-base), transform var(--cp-transition-fast);
+      flex-shrink: 0;
+    }
+    .cp-lesson-panel__close:hover { background: var(--cp-danger); color: #fff; transform: scale(1.05); }
+    .cp-lesson-panel__close svg { width: 16px; height: 16px; }
+
+    .cp-lesson-panel__progress {
+      padding: var(--cp-space-5) var(--cp-space-6);
+      border-bottom: 1px solid var(--cp-border);
+    }
+    .cp-lesson-panel__progress-label {
+      font-size: var(--cp-text-xs);
+      font-weight: var(--cp-font-bold);
+      color: var(--cp-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--cp-space-2);
+    }
+    .cp-lesson-panel__progress-bar {
+      width: 100%; height: 8px;
+      background: var(--cp-bg-tertiary);
+      border-radius: var(--cp-radius-pill);
+      overflow: hidden;
+      margin-bottom: var(--cp-space-2);
+    }
+    .cp-lesson-panel__progress-fill {
+      height: 100%;
+      border-radius: var(--cp-radius-pill);
+      background: linear-gradient(90deg, var(--cp-primary-600), var(--cp-streak));
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .cp-lesson-panel__progress-text {
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-semibold);
+      color: var(--cp-text-secondary);
+    }
+    .cp-lesson-panel__progress-text strong {
+      color: var(--cp-primary-400);
+      font-weight: var(--cp-font-extra);
+    }
+
+    .cp-lesson-panel__toolbar {
+      padding: var(--cp-space-3) var(--cp-space-6);
+      display: flex;
+      justify-content: flex-end;
+      border-bottom: 1px solid var(--cp-border-subtle);
+    }
+    .cp-lesson-panel__collapse-btn {
+      background: none; border: none;
+      color: var(--cp-primary-400);
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-bold);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: var(--cp-space-1);
+      padding: var(--cp-space-1) var(--cp-space-2);
+      border-radius: var(--cp-radius-sm);
+      transition: background var(--cp-transition-base), color var(--cp-transition-base);
+    }
+    .cp-lesson-panel__collapse-btn:hover { background: rgba(124, 58, 237, 0.1); color: var(--cp-primary-300); }
+    .cp-lesson-panel__collapse-btn svg { width: 14px; height: 14px; transition: transform var(--cp-transition-slow); }
+    .cp-lesson-panel__collapse-btn[data-collapsed="true"] svg { transform: rotate(180deg); }
+
+    .cp-lesson-panel__content {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--cp-space-4) var(--cp-space-4) var(--cp-space-6);
+      max-height: 460px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--cp-border) transparent;
+    }
+    .cp-lesson-panel__content::-webkit-scrollbar { width: 4px; }
+    .cp-lesson-panel__content::-webkit-scrollbar-track { background: transparent; }
+    .cp-lesson-panel__content::-webkit-scrollbar-thumb { background: var(--cp-border); border-radius: 4px; }
+
+    .cp-lesson-section {
+      margin-bottom: var(--cp-space-2);
+      border-radius: var(--cp-radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--cp-border-subtle);
+      transition: border-color var(--cp-transition-base);
+    }
+    .cp-lesson-section:hover { border-color: var(--cp-border); }
+    .cp-lesson-section__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--cp-space-3) var(--cp-space-4);
+      background: var(--cp-bg-tertiary);
+      cursor: pointer;
+      user-select: none;
+      transition: background var(--cp-transition-base);
+      border: none; width: 100%;
+      font-family: var(--cp-font-family);
+      color: inherit; text-align: left;
+    }
+    .cp-lesson-section__header:hover { background: var(--cp-bg-elevated); }
+    .cp-lesson-section__header-left { display: flex; align-items: center; gap: var(--cp-space-2); }
+    .cp-lesson-section__chevron {
+      width: 16px; height: 16px;
+      color: var(--cp-text-muted);
+      transition: transform var(--cp-transition-slow), color var(--cp-transition-base);
+      flex-shrink: 0;
+    }
+    .cp-lesson-section[data-open="true"] .cp-lesson-section__chevron { transform: rotate(180deg); color: var(--cp-primary-400); }
+    .cp-lesson-section__title {
+      font-size: var(--cp-text-xs);
+      font-weight: var(--cp-font-extra);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--cp-text-secondary);
+    }
+    .cp-lesson-section[data-open="true"] .cp-lesson-section__title { color: var(--cp-text-primary); }
+    .cp-lesson-section__count {
+      font-size: var(--cp-text-xs);
+      font-weight: var(--cp-font-bold);
+      color: var(--cp-text-muted);
+      background: var(--cp-bg-secondary);
+      padding: 2px var(--cp-space-2);
+      border-radius: var(--cp-radius-pill);
+      white-space: nowrap;
+    }
+    .cp-lesson-section__body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .cp-lesson-section[data-open="true"] .cp-lesson-section__body { max-height: 600px; }
+    .cp-lesson-section__body-inner {
+      padding: var(--cp-space-2) var(--cp-space-3) var(--cp-space-3);
+      display: flex; flex-direction: column; gap: var(--cp-space-1);
+    }
+
+    .cp-lesson-item {
+      display: flex; align-items: center; gap: var(--cp-space-3);
+      padding: var(--cp-space-3);
+      border-radius: var(--cp-radius-md);
+      cursor: pointer;
+      transition: background var(--cp-transition-base), transform var(--cp-transition-fast);
+      position: relative;
+      text-decoration: none; color: inherit;
+    }
+    .cp-lesson-item:hover { background: rgba(124, 58, 237, 0.06); transform: translateX(3px); }
+    [data-theme="dark"] .cp-lesson-item:hover { background: rgba(124, 58, 237, 0.1); }
+    .cp-lesson-item--active { background: rgba(124, 58, 237, 0.08); }
+    [data-theme="dark"] .cp-lesson-item--active { background: rgba(124, 58, 237, 0.12); }
+    .cp-lesson-item--active::before {
+      content: ''; position: absolute;
+      left: 0; top: 50%; transform: translateY(-50%);
+      width: 3px; height: 60%;
+      background: var(--cp-primary-500);
+      border-radius: var(--cp-radius-pill);
+    }
+
+    .cp-lesson-item__status {
+      width: 22px; height: 22px;
+      border-radius: var(--cp-radius-circle);
+      border: 2px solid var(--cp-border);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: all var(--cp-transition-base);
+    }
+    .cp-lesson-item:hover .cp-lesson-item__status { border-color: var(--cp-primary-400); }
+    .cp-lesson-item__status--completed { border-color: var(--cp-success) !important; background: var(--cp-success); }
+    .cp-lesson-item__status--completed svg { width: 12px; height: 12px; color: #fff; }
+    .cp-lesson-item__status--active { border-color: var(--cp-primary-500) !important; box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2); }
+    .cp-lesson-item__status--active::after {
+      content: ''; width: 8px; height: 8px;
+      border-radius: var(--cp-radius-circle);
+      background: var(--cp-primary-500);
+      animation: lessonPulse 2s ease-in-out infinite;
+    }
+    @keyframes lessonPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.8); }
+    }
+
+    .cp-lesson-item__text { flex: 1; min-width: 0; }
+    .cp-lesson-item__name {
+      font-size: var(--cp-text-sm); font-weight: var(--cp-font-semibold);
+      color: var(--cp-text-primary); line-height: 1.4;
+      transition: color var(--cp-transition-base);
+    }
+    .cp-lesson-item:hover .cp-lesson-item__name { color: var(--cp-primary-400); }
+    .cp-lesson-item--completed .cp-lesson-item__name { color: var(--cp-text-secondary); }
+    .cp-lesson-item__duration { font-size: var(--cp-text-xs); color: var(--cp-text-muted); margin-top: 1px; }
+
+    .cp-lesson-item__action {
+      width: 28px; height: 28px;
+      border-radius: var(--cp-radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--cp-text-muted);
+      transition: all var(--cp-transition-base);
+      flex-shrink: 0; opacity: 0;
+    }
+    .cp-lesson-item:hover .cp-lesson-item__action { opacity: 1; color: var(--cp-primary-400); }
+    .cp-lesson-item__action svg { width: 14px; height: 14px; }
+
+    .cp-lesson-panel__footer {
+      padding: var(--cp-space-4) var(--cp-space-6);
+      border-top: 1px solid var(--cp-border);
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--cp-bg-tertiary);
+    }
+    .cp-lesson-panel__xp {
+      display: inline-flex; align-items: center; gap: var(--cp-space-2);
+      font-size: var(--cp-text-sm); font-weight: var(--cp-font-extra); color: var(--cp-xp);
+    }
+    .cp-lesson-panel__xp svg { width: 18px; height: 18px; }
+    .cp-lesson-panel__streak {
+      display: inline-flex; align-items: center; gap: var(--cp-space-1);
+      font-size: var(--cp-text-sm); font-weight: var(--cp-font-bold); color: var(--cp-streak);
+    }
+
   </style>
 </head>
 <body>
@@ -1799,12 +2952,16 @@
 
       <div class="ds-sidebar__section-label">Gamificação</div>
       <a href="#gamificacao" data-section="gamificacao">Gamificação</a>
+      <a href="#tarefas" data-section="tarefas">Tarefas</a>
       <a href="#animacoes" data-section="animacoes">Animações</a>
       <a href="#loading" data-section="loading">Loading States</a>
       <a href="#toasts" data-section="toasts">Toasts</a>
 
       <div class="ds-sidebar__section-label">Utilitários</div>
       <a href="#gradientes" data-section="gradientes">Gradientes</a>
+
+      <div class="ds-sidebar__section-label">Páginas</div>
+      <a href="#indice-aulas" data-section="indice-aulas">Índice de Aulas</a>
     </nav>
   </aside>
 
@@ -2005,6 +3162,29 @@
           O toggle usa um <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">&lt;input type="checkbox"&gt;</code> oculto com <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">role="switch"</code> para acessibilidade.
         </p>
 
+        <h3>Search Input</h3>
+        <p class="desc" style="margin-bottom:var(--cp-space-4)">
+          Barra de busca com ícone, campo de texto e botão de envio em formato pill. Use <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">.cp-search</code> como wrapper e <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">.cp-search--lg</code> para a variante grande.
+        </p>
+        <div class="ds-preview" style="max-width:560px">
+          <!-- Default size -->
+          <div class="cp-search">
+            <svg class="cp-search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input class="cp-search__input" type="text" placeholder="O que você quer aprender hoje?" aria-label="Buscar" />
+            <button class="cp-search__btn" aria-label="Buscar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+          <!-- Large size -->
+          <div class="cp-search cp-search--lg" style="margin-top:var(--cp-space-4)">
+            <svg class="cp-search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input class="cp-search__input" type="text" placeholder="Buscar cursos, trilhas, desafios..." aria-label="Buscar" />
+            <button class="cp-search__btn" aria-label="Buscar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
         <h3>Input</h3>
         <div class="ds-preview" style="max-width:400px">
           <label class="cp-label" for="input-nome">Nome do curso</label>
@@ -2082,6 +3262,252 @@
           </div>
         </div>
 
+        <h3>Card de Curso Showcase</h3>
+        <p class="desc">
+          Cards verticais com imagem de destaque e revelação de detalhes ao passar o mouse. Ideal para catálogos de cursos e vitrines de conteúdo.
+        </p>
+        <div class="ds-preview" style="max-width:960px;display:flex;gap:var(--cp-space-6);flex-wrap:wrap;align-items:start">
+
+          <!-- Card 1 — IA Generativa -->
+          <div class="cp-card-showcase">
+            <div class="cp-card-showcase__image" style="background: linear-gradient(160deg, #7C3AED 0%, #C084FC 40%, #F9A8D4 70%, #FBBF24 100%);">
+              <div class="cp-card-showcase__image-inner">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" style="filter:drop-shadow(0 4px 20px rgba(0,0,0,0.3))">
+                  <circle cx="40" cy="40" r="32" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+                  <path d="M35 28L55 40L35 52V28Z" fill="white" fill-opacity="0.9"/>
+                </svg>
+              </div>
+            </div>
+            <div class="cp-card-showcase__overlay">
+              <span class="cp-card-showcase__overlay-title">IA Generativa para Iniciantes</span>
+            </div>
+            <div class="cp-card-showcase__body">
+              <span class="cp-card-showcase__tag">Inteligência Artificial</span>
+              <div class="cp-card-showcase__title">IA Generativa para Iniciantes</div>
+              <div class="cp-card-showcase__desc">Domine os fundamentos de IA generativa e crie projetos reais do zero ao deploy.</div>
+              <div class="cp-card-showcase__meta">
+                <span class="cp-card-showcase__pill">5 módulos</span>
+                <span class="cp-card-showcase__pill">42 aulas</span>
+              </div>
+              <button class="cp-card-showcase__cta">
+                <span class="cp-card-showcase__cta-icon">&#9654;</span>
+                ACESSAR
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 2 — Vibe Coding -->
+          <div class="cp-card-showcase">
+            <div class="cp-card-showcase__image" style="background: linear-gradient(145deg, #059669 0%, #06B6D4 45%, #3B82F6 100%);">
+              <div class="cp-card-showcase__image-inner">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" style="filter:drop-shadow(0 4px 20px rgba(0,0,0,0.3))">
+                  <rect x="16" y="22" width="48" height="36" rx="4" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+                  <text x="28" y="45" fill="white" font-family="monospace" font-size="14" opacity="0.9">&lt;/&gt;</text>
+                </svg>
+              </div>
+            </div>
+            <div class="cp-card-showcase__overlay">
+              <span class="cp-card-showcase__overlay-title">Vibe Coding com Claude</span>
+            </div>
+            <div class="cp-card-showcase__body">
+              <span class="cp-card-showcase__tag">Desenvolvimento</span>
+              <div class="cp-card-showcase__title">Vibe Coding com Claude</div>
+              <div class="cp-card-showcase__desc">Construa aplicações completas usando IA como co-piloto. Sem experiência prévia necessária.</div>
+              <div class="cp-card-showcase__meta">
+                <span class="cp-card-showcase__pill">8 módulos</span>
+                <span class="cp-card-showcase__pill">96 aulas</span>
+              </div>
+              <button class="cp-card-showcase__cta">
+                <span class="cp-card-showcase__cta-icon">&#9654;</span>
+                ACESSAR
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 3 — MicroSaaS -->
+          <div class="cp-card-showcase">
+            <div class="cp-card-showcase__image" style="background: linear-gradient(150deg, #DB2777 0%, #F97316 50%, #FBBF24 100%);">
+              <div class="cp-card-showcase__image-inner">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" style="filter:drop-shadow(0 4px 20px rgba(0,0,0,0.3))">
+                  <circle cx="40" cy="36" r="16" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+                  <path d="M32 52C32 52 36 48 40 48C44 48 48 52 48 52" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="40" cy="36" r="6" fill="white" fill-opacity="0.3"/>
+                  <path d="M24 58L56 58" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+            <div class="cp-card-showcase__overlay">
+              <span class="cp-card-showcase__overlay-title">Projetos completos com MicroSaaS</span>
+            </div>
+            <div class="cp-card-showcase__body">
+              <span class="cp-card-showcase__tag">SaaS</span>
+              <div class="cp-card-showcase__title">Projetos completos com MicroSaaS</div>
+              <div class="cp-card-showcase__desc">Construa MicroSaaS completos do zero ao deploy com stack moderna.</div>
+              <div class="cp-card-showcase__meta">
+                <span class="cp-card-showcase__pill">3 módulos</span>
+                <span class="cp-card-showcase__pill">74 aulas</span>
+              </div>
+              <button class="cp-card-showcase__cta">
+                <span class="cp-card-showcase__cta-icon">&#9654;</span>
+                ACESSAR
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <h3>Card de Módulo</h3>
+        <p class="desc">
+          Cards horizontais (16:9) com imagem de fundo e revelação de detalhes ao hover. Ideal para listar módulos dentro de um curso, com acesso direto e contagem de aulas.
+        </p>
+        <div class="ds-preview" style="max-width:1020px;display:flex;gap:var(--cp-space-6);flex-wrap:wrap;align-items:start">
+
+          <!-- Módulo 1 -->
+          <div class="cp-card-module">
+            <div class="cp-card-module__image" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);"></div>
+            <div class="cp-card-module__gradient"></div>
+            <span class="cp-card-module__default-title">Cursor IDE para Iniciantes</span>
+            <svg class="cp-card-module__icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            <div class="cp-card-module__body">
+              <div class="cp-card-module__title">Cursor IDE para Iniciantes</div>
+              <div class="cp-card-module__desc">Domine o editor que integra IA nativamente e acelere seu fluxo de desenvolvimento.</div>
+              <div class="cp-card-module__footer">
+                <button class="cp-card-module__cta">
+                  <span class="cp-card-module__cta-icon">&#9654;</span>
+                  Acessar
+                </button>
+                <span class="cp-card-module__count">18 aulas</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Módulo 2 -->
+          <div class="cp-card-module">
+            <div class="cp-card-module__image" style="background: linear-gradient(135deg, #1B1B2F 0%, #162447 40%, #1F4068 70%, #1B3B5A 100%);"></div>
+            <div class="cp-card-module__gradient"></div>
+            <span class="cp-card-module__default-title">Criando um Kanban de Tarefas no Cursor</span>
+            <svg class="cp-card-module__icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5"><rect x="3" y="3" width="7" height="18" rx="1.5"/><rect x="14" y="3" width="7" height="12" rx="1.5"/></svg>
+            <div class="cp-card-module__body">
+              <div class="cp-card-module__title">Criando um Kanban de Tarefas no Cursor</div>
+              <div class="cp-card-module__desc">Construa um Kanban de tarefas completo com IA no editor, do zero ao deploy.</div>
+              <div class="cp-card-module__footer">
+                <button class="cp-card-module__cta">
+                  <span class="cp-card-module__cta-icon">&#9654;</span>
+                  Acessar
+                </button>
+                <span class="cp-card-module__count">27 aulas</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Módulo 3 -->
+          <div class="cp-card-module">
+            <div class="cp-card-module__image" style="background: linear-gradient(135deg, #2D1B4E 0%, #4A1942 40%, #6B2D5B 70%, #893168 100%);"></div>
+            <div class="cp-card-module__gradient"></div>
+            <span class="cp-card-module__default-title">Deploy com Vercel e Supabase</span>
+            <svg class="cp-card-module__icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5"><path d="M12 2L2 19h20L12 2z"/><path d="M12 16v.01"/><path d="M12 10v3"/></svg>
+            <div class="cp-card-module__body">
+              <div class="cp-card-module__title">Deploy com Vercel e Supabase</div>
+              <div class="cp-card-module__desc">Aprenda a publicar suas aplicações na nuvem com deploy contínuo e backend serverless.</div>
+              <div class="cp-card-module__footer">
+                <button class="cp-card-module__cta">
+                  <span class="cp-card-module__cta-icon">&#9654;</span>
+                  Acessar
+                </button>
+                <span class="cp-card-module__count">14 aulas</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <h3>Card Hub</h3>
+        <p class="desc">
+          Cards de acesso a áreas ou comunidades. Imagem de destaque no topo, título, descrição e botão CTA. Suporta estado ativo com borda destacada via <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">.cp-card-hub--active</code>.
+        </p>
+        <div class="ds-preview" style="max-width:1100px;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--cp-space-6)">
+
+          <!-- Card 1 — Active -->
+          <div class="cp-card-hub cp-card-hub--active">
+            <div class="cp-card-hub__image" style="background:linear-gradient(135deg, #1E1B4B 0%, #312E81 40%, #4338CA 100%);display:flex;align-items:center;justify-content:center">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" style="filter:drop-shadow(0 4px 16px rgba(0,0,0,0.4))">
+                <rect x="8" y="14" width="48" height="36" rx="4" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+                <rect x="14" y="20" width="16" height="3" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+                <rect x="14" y="26" width="24" height="2" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <rect x="14" y="31" width="20" height="2" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <circle cx="44" cy="36" r="6" fill="rgba(167,139,250,0.6)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                <path d="M42 36L45 38L45 34Z" fill="white" fill-opacity="0.8"/>
+              </svg>
+            </div>
+            <div class="cp-card-hub__body">
+              <div class="cp-card-hub__title">Appmakers</div>
+              <div class="cp-card-hub__desc">Crie aplicativos web e mobile completos usando Vibe Coding e IA</div>
+              <button class="cp-card-hub__cta">
+                Acessar
+                <span class="cp-card-hub__cta-arrow">&rarr;</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="cp-card-hub">
+            <div class="cp-card-hub__image" style="background:linear-gradient(135deg, #1C1917 0%, #44403C 50%, #78716C 100%);display:flex;align-items:center;justify-content:center">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" style="filter:drop-shadow(0 4px 16px rgba(0,0,0,0.4))">
+                <circle cx="32" cy="32" r="20" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+                <path d="M24 32C24 32 28 26 32 26C36 26 40 32 40 32C40 32 36 38 32 38C28 38 24 32 24 32Z" fill="rgba(251,191,36,0.5)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+                <circle cx="32" cy="32" r="3" fill="white" fill-opacity="0.7"/>
+              </svg>
+            </div>
+            <div class="cp-card-hub__body">
+              <div class="cp-card-hub__title">Automakers</div>
+              <div class="cp-card-hub__desc">Construa agentes de IA e automações que executam tarefas e escalam operações</div>
+              <button class="cp-card-hub__cta">
+                Acessar
+                <span class="cp-card-hub__cta-arrow">&rarr;</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="cp-card-hub">
+            <div class="cp-card-hub__image" style="background:linear-gradient(135deg, #7C2D12 0%, #B45309 40%, #FBBF24 100%);display:flex;align-items:center;justify-content:center">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" style="filter:drop-shadow(0 4px 16px rgba(0,0,0,0.4))">
+                <path d="M32 12L44 22V42L32 52L20 42V22L32 12Z" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+                <path d="M32 20L38 25V35L32 40L26 35V25L32 20Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+                <circle cx="32" cy="30" r="4" fill="rgba(251,191,36,0.7)"/>
+              </svg>
+            </div>
+            <div class="cp-card-hub__body">
+              <div class="cp-card-hub__title">SaaS 7D</div>
+              <div class="cp-card-hub__desc">Transforme seu SaaS em uma máquina previsível de vendas que fatura 7 dígitos</div>
+              <button class="cp-card-hub__cta">
+                Acessar
+                <span class="cp-card-hub__cta-arrow">&rarr;</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="cp-card-hub">
+            <div class="cp-card-hub__image" style="background:linear-gradient(135deg, #0C4A6E 0%, #0284C7 40%, #38BDF8 100%);display:flex;align-items:center;justify-content:center">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" style="filter:drop-shadow(0 4px 16px rgba(0,0,0,0.4))">
+                <rect x="12" y="18" width="40" height="28" rx="3" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+                <path d="M18 34L26 28L32 32L40 24L46 30" stroke="rgba(56,189,248,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <circle cx="40" cy="24" r="2.5" fill="rgba(56,189,248,0.9)"/>
+              </svg>
+            </div>
+            <div class="cp-card-hub__body">
+              <div class="cp-card-hub__title">Tech 12K</div>
+              <div class="cp-card-hub__desc">Transforme seu conhecimento em uma carreira que paga R$12k/mês</div>
+              <button class="cp-card-hub__cta">
+                Acessar
+                <span class="cp-card-hub__cta-arrow">&rarr;</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
         <h3>Card de Aula</h3>
         <div class="ds-preview" style="max-width:420px;display:flex;flex-direction:column;gap:var(--cp-space-3)">
           <div class="cp-card-lesson cp-card-lesson--completed">
@@ -2114,6 +3540,104 @@
             <p style="font-size:var(--cp-text-lg);font-weight:var(--cp-font-bold);color:var(--cp-text-primary);margin-bottom:var(--cp-space-3)">Masterclass: Deploy com IA</p>
             <p style="font-size:var(--cp-text-sm);color:var(--cp-text-secondary)">Aula exclusiva para membros Pro. Aprenda a publicar projetos completos com zero infraestrutura manual.</p>
           </div>
+        </div>
+
+        <h3>Card de Trilha</h3>
+        <p class="desc" style="margin-bottom:var(--cp-space-4)">
+          Cards de trilha representam passos sequenciais em uma jornada de aprendizado. Suportam estados expandido/recolhido, e variantes para passo ativo, concluído e pendente.
+        </p>
+        <div class="ds-preview" style="max-width:560px;display:flex;flex-direction:column;gap:var(--cp-space-3)">
+
+          <!-- Passo 1: Ativo + Expandido -->
+          <div class="cp-card-trail cp-card-trail--active" data-open="true">
+            <div class="cp-card-trail__header">
+              <span class="cp-card-trail__step">1</span>
+              <div class="cp-card-trail__info">
+                <div class="cp-card-trail__title">Comece por aqui</div>
+                <div class="cp-card-trail__subtitle">Preencha sua ficha de matrícula</div>
+              </div>
+            </div>
+            <div class="cp-card-trail__body">
+              <div class="cp-card-trail__content">
+                <p class="cp-card-trail__desc">
+                  Antes de começar, o primeiro passo é preencher sua ficha de matrícula. Depois disso, vamos te mostrar o melhor caminho para aprender de forma prática e estratégica. Se surgir qualquer dúvida no meio do caminho, é só nos chamar!
+                </p>
+                <button class="cp-card-trail__cta">
+                  Preencher Ficha
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="cp-card-trail__footer" onclick="toggleTrailCard(this)">
+              <button class="cp-card-trail__toggle">
+                <span class="cp-card-trail__toggle-icon">&#9660;</span>
+                Recolher
+              </button>
+              <button class="cp-card-trail__complete-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+                Concluir
+              </button>
+            </div>
+          </div>
+
+          <!-- Passo 2: Pendente + Recolhido -->
+          <div class="cp-card-trail" data-open="false">
+            <div class="cp-card-trail__header">
+              <span class="cp-card-trail__step">2</span>
+              <div class="cp-card-trail__info">
+                <div class="cp-card-trail__title">Passo 2 (Lovable)</div>
+              </div>
+            </div>
+            <div class="cp-card-trail__body">
+              <div class="cp-card-trail__content">
+                <p class="cp-card-trail__desc">
+                  Nesta etapa, você vai aprender a usar o Lovable para construir interfaces incríveis sem precisar escrever código. Vamos criar juntos seu primeiro projeto!
+                </p>
+                <button class="cp-card-trail__cta">
+                  Iniciar Etapa
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="cp-card-trail__footer" onclick="toggleTrailCard(this)">
+              <button class="cp-card-trail__toggle">
+                <span class="cp-card-trail__toggle-icon">&#9660;</span>
+                Ver detalhes
+              </button>
+              <button class="cp-card-trail__complete-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+                Concluir
+              </button>
+            </div>
+          </div>
+
+          <!-- Passo 3: Concluído -->
+          <div class="cp-card-trail cp-card-trail--completed" data-open="false">
+            <div class="cp-card-trail__header">
+              <span class="cp-card-trail__step">&#10003;</span>
+              <div class="cp-card-trail__info">
+                <div class="cp-card-trail__title">Introdução à plataforma</div>
+              </div>
+            </div>
+            <div class="cp-card-trail__body">
+              <div class="cp-card-trail__content">
+                <p class="cp-card-trail__desc">
+                  Parabéns! Você completou a introdução à plataforma e já está pronto para avançar nas próximas etapas da trilha.
+                </p>
+              </div>
+            </div>
+            <div class="cp-card-trail__footer" onclick="toggleTrailCard(this)">
+              <button class="cp-card-trail__toggle">
+                <span class="cp-card-trail__toggle-icon">&#9660;</span>
+                Ver detalhes
+              </button>
+              <button class="cp-card-trail__complete-btn cp-card-trail__complete-btn--done">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+                Concluído
+              </button>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -2368,6 +3892,72 @@
       </section>
 
       <!-- ===================================================
+           TAREFAS
+      ==================================================== -->
+      <section id="tarefas" class="ds-section">
+        <h2>Tarefas</h2>
+        <p class="desc">
+          Lista de tarefas com progresso, checkboxes interativos e recompensas em XP. Cada tarefa pode estar pendente, em foco ou concluída.
+        </p>
+
+        <h3>Lista de Tarefas</h3>
+        <div class="ds-preview" style="max-width:560px">
+          <div class="cp-task-list">
+            <div class="cp-task-list__header">
+              <span class="cp-task-list__title">Tarefas</span>
+              <span class="cp-task-list__counter" id="task-counter">1/3 concluídas</span>
+            </div>
+            <div class="cp-task-list__progress">
+              <div class="cp-progress cp-progress--lg">
+                <div class="cp-progress__fill" id="task-progress-fill" style="width:33%"></div>
+              </div>
+            </div>
+            <div class="cp-task-list__items" id="task-list-items">
+              <div class="cp-task cp-task--completed" onclick="toggleTask(this)">
+                <span class="cp-task__check">
+                  <span class="cp-task__check-icon">&#10003;</span>
+                </span>
+                <span class="cp-task__text">Estou pronto para iniciar o modulo!</span>
+                <span class="cp-badge-xp cp-task__reward">&#9889; 10 XP</span>
+              </div>
+              <div class="cp-task" onclick="toggleTask(this)">
+                <span class="cp-task__check">
+                  <span class="cp-task__check-icon">&#10003;</span>
+                </span>
+                <span class="cp-task__text">Estou pronto para comecar o modulo!</span>
+                <span class="cp-badge-xp cp-task__reward">&#9889; 10 XP</span>
+              </div>
+              <div class="cp-task" onclick="toggleTask(this)">
+                <span class="cp-task__check">
+                  <span class="cp-task__check-icon">&#10003;</span>
+                </span>
+                <span class="cp-task__text">Versionei o projeto localmente e Enviei commits para o repositorio GitHub</span>
+                <span class="cp-badge-xp cp-task__reward">&#9889; 10 XP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Estados Individuais</h3>
+        <div class="ds-preview" style="max-width:560px;display:flex;flex-direction:column;gap:var(--cp-space-3)">
+          <div class="cp-task cp-task--completed">
+            <span class="cp-task__check">
+              <span class="cp-task__check-icon">&#10003;</span>
+            </span>
+            <span class="cp-task__text">Tarefa concluida</span>
+            <span class="cp-badge-xp cp-task__reward">&#9889; 20 XP</span>
+          </div>
+          <div class="cp-task">
+            <span class="cp-task__check">
+              <span class="cp-task__check-icon">&#10003;</span>
+            </span>
+            <span class="cp-task__text">Tarefa pendente</span>
+            <span class="cp-badge-xp cp-task__reward">&#9889; 15 XP</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================
            ANIMAÇÕES
       ==================================================== -->
       <section id="animacoes" class="ds-section">
@@ -2470,6 +4060,242 @@
         </div>
       </section>
 
+      <!-- =====================================================
+           Índice de Aulas
+      ====================================================== -->
+      <section id="indice-aulas" class="ds-section">
+        <h2>Índice de Aulas</h2>
+        <p class="desc">
+          Painel lateral de navegação de aulas dentro de um módulo. Exibe progresso, seções colapsáveis e estados de cada aula (concluída, ativa, pendente, bloqueada).
+        </p>
+
+        <div class="ds-preview" style="display:flex;justify-content:center;padding:var(--cp-space-8) var(--cp-space-4)">
+          <div class="cp-lesson-panel">
+            <!-- Header -->
+            <div class="cp-lesson-panel__header">
+              <div class="cp-lesson-panel__title-row">
+                <h3 class="cp-lesson-panel__title">Cursor IDE para Iniciantes</h3>
+                <button class="cp-lesson-panel__close" aria-label="Fechar painel">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Progress -->
+            <div class="cp-lesson-panel__progress">
+              <div class="cp-lesson-panel__progress-label">Progresso do Módulo</div>
+              <div class="cp-lesson-panel__progress-bar">
+                <div class="cp-lesson-panel__progress-fill" style="width:12%"></div>
+              </div>
+              <div class="cp-lesson-panel__progress-text"><strong>3</strong> de 25 aulas concluídas</div>
+            </div>
+
+            <!-- Toolbar -->
+            <div class="cp-lesson-panel__toolbar">
+              <button class="cp-lesson-panel__collapse-btn" data-collapsed="false" onclick="toggleLessonSections(this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+                <span>Recolher todas</span>
+              </button>
+            </div>
+
+            <!-- Scrollable lesson list -->
+            <div class="cp-lesson-panel__content">
+
+              <!-- Introdução -->
+              <div class="cp-lesson-section" data-open="true">
+                <button class="cp-lesson-section__header" onclick="toggleLessonSection(this.parentElement)">
+                  <div class="cp-lesson-section__header-left">
+                    <svg class="cp-lesson-section__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    <span class="cp-lesson-section__title">Introdução</span>
+                  </div>
+                  <span class="cp-lesson-section__count">1 aula</span>
+                </button>
+                <div class="cp-lesson-section__body">
+                  <div class="cp-lesson-section__body-inner">
+                    <a href="#" class="cp-lesson-item cp-lesson-item--completed" onclick="event.preventDefault()">
+                      <div class="cp-lesson-item__status cp-lesson-item__status--completed">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </div>
+                      <div class="cp-lesson-item__text">
+                        <div class="cp-lesson-item__name">O que vamos ver</div>
+                        <div class="cp-lesson-item__duration">3 min</div>
+                      </div>
+                      <div class="cp-lesson-item__action">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Stack e PRD -->
+              <div class="cp-lesson-section" data-open="true">
+                <button class="cp-lesson-section__header" onclick="toggleLessonSection(this.parentElement)">
+                  <div class="cp-lesson-section__header-left">
+                    <svg class="cp-lesson-section__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    <span class="cp-lesson-section__title">Stack e PRD</span>
+                  </div>
+                  <span class="cp-lesson-section__count">2 aulas</span>
+                </button>
+                <div class="cp-lesson-section__body">
+                  <div class="cp-lesson-section__body-inner">
+                    <a href="#" class="cp-lesson-item cp-lesson-item--completed" onclick="event.preventDefault()">
+                      <div class="cp-lesson-item__status cp-lesson-item__status--completed">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </div>
+                      <div class="cp-lesson-item__text">
+                        <div class="cp-lesson-item__name">Stack Tecnológica</div>
+                        <div class="cp-lesson-item__duration">8 min</div>
+                      </div>
+                      <div class="cp-lesson-item__action">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                      </div>
+                    </a>
+                    <a href="#" class="cp-lesson-item cp-lesson-item--active" onclick="event.preventDefault()">
+                      <div class="cp-lesson-item__status cp-lesson-item__status--active"></div>
+                      <div class="cp-lesson-item__text">
+                        <div class="cp-lesson-item__name">Criando PRD (Product Requirements)</div>
+                        <div class="cp-lesson-item__duration">12 min</div>
+                      </div>
+                      <div class="cp-lesson-item__action">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Design e Primeiros Testes -->
+              <div class="cp-lesson-section" data-open="true">
+                <button class="cp-lesson-section__header" onclick="toggleLessonSection(this.parentElement)">
+                  <div class="cp-lesson-section__header-left">
+                    <svg class="cp-lesson-section__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    <span class="cp-lesson-section__title">Design e Primeiros Testes</span>
+                  </div>
+                  <span class="cp-lesson-section__count">3 aulas</span>
+                </button>
+                <div class="cp-lesson-section__body">
+                  <div class="cp-lesson-section__body-inner">
+                    <a href="#" class="cp-lesson-item cp-lesson-item--completed" onclick="event.preventDefault()">
+                      <div class="cp-lesson-item__status cp-lesson-item__status--completed">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </div>
+                      <div class="cp-lesson-item__text">
+                        <div class="cp-lesson-item__name">Instalando Skill de Design</div>
+                        <div class="cp-lesson-item__duration">5 min</div>
+                      </div>
+                      <div class="cp-lesson-item__action">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                      </div>
+                    </a>
+                    <a href="#" class="cp-lesson-item" onclick="event.preventDefault()">
+                      <div class="cp-lesson-item__status"></div>
+                      <div class="cp-lesson-item__text">
+                        <div class="cp-lesson-item__name">Planejando o aplicativo</div>
+                        <div class="cp-lesson-item__duration">10 min</div>
+                      </div>
+                      <div class="cp-lesson-item__action">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                      </div>
+                    </a>
+                    <a href="#" class="cp-lesson-item" onclick="event.preventDefault()">
+                      <div class="cp-lesson-item__status"></div>
+                      <div class="cp-lesson-item__text">
+                        <div class="cp-lesson-item__name">Testando aplicativo com dados mockados</div>
+                        <div class="cp-lesson-item__duration">15 min</div>
+                      </div>
+                      <div class="cp-lesson-item__action">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Melhorias e Versionamento -->
+              <div class="cp-lesson-section" data-open="true">
+                <button class="cp-lesson-section__header" onclick="toggleLessonSection(this.parentElement)">
+                  <div class="cp-lesson-section__header-left">
+                    <svg class="cp-lesson-section__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    <span class="cp-lesson-section__title">Melhorias e Versionamento</span>
+                  </div>
+                  <span class="cp-lesson-section__count">2 aulas</span>
+                </button>
+                <div class="cp-lesson-section__body">
+                  <div class="cp-lesson-section__body-inner">
+                    <a href="#" class="cp-lesson-item" onclick="event.preventDefault()">
+                      <div class="cp-lesson-item__status"></div>
+                      <div class="cp-lesson-item__text">
+                        <div class="cp-lesson-item__name">Melhoria de design e fluxo do usuário</div>
+                        <div class="cp-lesson-item__duration">14 min</div>
+                      </div>
+                      <div class="cp-lesson-item__action">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                      </div>
+                    </a>
+                    <a href="#" class="cp-lesson-item" onclick="event.preventDefault()">
+                      <div class="cp-lesson-item__status"></div>
+                      <div class="cp-lesson-item__text">
+                        <div class="cp-lesson-item__name">Versionamento Git e Github</div>
+                        <div class="cp-lesson-item__duration">11 min</div>
+                      </div>
+                      <div class="cp-lesson-item__action">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Regras e Subagentes -->
+              <div class="cp-lesson-section" data-open="true">
+                <button class="cp-lesson-section__header" onclick="toggleLessonSection(this.parentElement)">
+                  <div class="cp-lesson-section__header-left">
+                    <svg class="cp-lesson-section__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    <span class="cp-lesson-section__title">Regras e Subagentes</span>
+                  </div>
+                  <span class="cp-lesson-section__count">2 aulas</span>
+                </button>
+                <div class="cp-lesson-section__body">
+                  <div class="cp-lesson-section__body-inner">
+                    <a href="#" class="cp-lesson-item" onclick="event.preventDefault()">
+                      <div class="cp-lesson-item__status"></div>
+                      <div class="cp-lesson-item__text">
+                        <div class="cp-lesson-item__name">Criando Rules de desenvolvimento</div>
+                        <div class="cp-lesson-item__duration">9 min</div>
+                      </div>
+                      <div class="cp-lesson-item__action">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                      </div>
+                    </a>
+                    <a href="#" class="cp-lesson-item" onclick="event.preventDefault()">
+                      <div class="cp-lesson-item__status"></div>
+                      <div class="cp-lesson-item__text">
+                        <div class="cp-lesson-item__name">Configurando Subagentes no Cursor</div>
+                        <div class="cp-lesson-item__duration">13 min</div>
+                      </div>
+                      <div class="cp-lesson-item__action">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /.cp-lesson-panel__content -->
+
+            <!-- Footer -->
+            <div class="cp-lesson-panel__footer">
+              <div class="cp-lesson-panel__xp">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                +360 XP disponível
+              </div>
+              <div class="cp-lesson-panel__streak">🔥 3 dias</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Modal overlay (hidden by default) -->
       <div id="demo-modal" class="cp-modal-overlay" style="display:none" onclick="if(event.target===this)this.style.display='none'" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="cp-modal" onclick="event.stopPropagation()">
@@ -2493,6 +4319,46 @@
        JAVASCRIPT
   ====================================================== -->
   <script>
+    // --- Task toggle ---
+    function toggleTask(taskEl) {
+      taskEl.classList.toggle('cp-task--completed');
+      const list = taskEl.closest('.cp-task-list');
+      if (!list) return;
+      const items = list.querySelectorAll('.cp-task');
+      const completed = list.querySelectorAll('.cp-task--completed').length;
+      const total = items.length;
+      const counter = list.querySelector('.cp-task-list__counter');
+      const fill = list.querySelector('.cp-progress__fill');
+      if (counter) counter.textContent = completed + '/' + total + ' concluidas';
+      if (fill) fill.style.width = Math.round((completed / total) * 100) + '%';
+    }
+
+    // --- Lesson section toggle ---
+    function toggleLessonSection(section) {
+      const isOpen = section.getAttribute('data-open') === 'true';
+      section.setAttribute('data-open', isOpen ? 'false' : 'true');
+    }
+
+    function toggleLessonSections(btn) {
+      const sections = document.querySelectorAll('.cp-lesson-section');
+      const isCollapsed = btn.getAttribute('data-collapsed') === 'true';
+      sections.forEach(s => s.setAttribute('data-open', isCollapsed ? 'true' : 'false'));
+      btn.setAttribute('data-collapsed', isCollapsed ? 'false' : 'true');
+      btn.querySelector('span').textContent = isCollapsed ? 'Recolher todas' : 'Expandir todas';
+    }
+
+    // --- Trail card toggle ---
+    function toggleTrailCard(headerEl) {
+      const card = headerEl.closest('.cp-card-trail');
+      const isOpen = card.getAttribute('data-open') === 'true';
+      card.setAttribute('data-open', isOpen ? 'false' : 'true');
+      const toggleBtn = card.querySelector('.cp-card-trail__toggle');
+      if (toggleBtn) {
+        const label = isOpen ? 'Ver detalhes' : 'Recolher';
+        toggleBtn.lastChild.textContent = label;
+      }
+    }
+
     // --- Theme toggle ---
     function toggleTheme() {
       const html = document.documentElement;
