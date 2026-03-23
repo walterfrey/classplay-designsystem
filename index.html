@@ -1,0 +1,4590 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Classplay Design System</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+       CSS Reset
+    ========================================================= */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* =========================================================
+       CSS Custom Properties — All Tokens
+    ========================================================= */
+    :root {
+      /* --- Primary color scale --- */
+      --cp-primary-50: #FAF5FF;
+      --cp-primary-100: #F3E8FF;
+      --cp-primary-200: #E9D5FF;
+      --cp-primary-300: #D8B4FE;
+      --cp-primary-400: #C084FC;
+      --cp-primary-500: #A855F7;
+      --cp-primary-600: #7C3AED;
+      --cp-primary-700: #6D28D9;
+      --cp-primary-800: #5B21B6;
+      --cp-primary-900: #4C1D95;
+
+      /* --- XP (amber) --- */
+      --cp-xp: #F59E0B;
+      --cp-xp-50: #FFFBEB;
+      --cp-xp-100: #FEF3C7;
+      --cp-xp-200: #FDE68A;
+      --cp-xp-300: #FCD34D;
+      --cp-xp-400: #FBBF24;
+      --cp-xp-500: #F59E0B;
+      --cp-xp-600: #D97706;
+      --cp-xp-700: #B45309;
+      --cp-xp-800: #92400E;
+      --cp-xp-900: #78350F;
+
+      /* --- Streak (orange) --- */
+      --cp-streak: #F97316;
+      --cp-streak-50: #FFF7ED;
+      --cp-streak-100: #FFEDD5;
+      --cp-streak-200: #FED7AA;
+      --cp-streak-300: #FDBA74;
+      --cp-streak-400: #FB923C;
+      --cp-streak-500: #F97316;
+      --cp-streak-600: #EA580C;
+      --cp-streak-700: #C2410C;
+      --cp-streak-800: #9A3412;
+      --cp-streak-900: #7C2D12;
+
+      /* --- Success (emerald) --- */
+      --cp-success: #10B981;
+      --cp-success-50: #ECFDF5;
+      --cp-success-100: #D1FAE5;
+      --cp-success-200: #A7F3D0;
+      --cp-success-300: #6EE7B7;
+      --cp-success-400: #34D399;
+      --cp-success-500: #10B981;
+      --cp-success-600: #059669;
+      --cp-success-700: #047857;
+      --cp-success-800: #065F46;
+      --cp-success-900: #064E3B;
+
+      /* --- Info (blue) --- */
+      --cp-info: #3B82F6;
+      --cp-info-50: #EFF6FF;
+      --cp-info-100: #DBEAFE;
+      --cp-info-200: #BFDBFE;
+      --cp-info-300: #93C5FD;
+      --cp-info-400: #60A5FA;
+      --cp-info-500: #3B82F6;
+      --cp-info-600: #2563EB;
+      --cp-info-700: #1D4ED8;
+      --cp-info-800: #1E40AF;
+      --cp-info-900: #1E3A8A;
+
+      /* --- Danger (red) --- */
+      --cp-danger: #EF4444;
+      --cp-danger-50: #FEF2F2;
+      --cp-danger-100: #FEE2E2;
+      --cp-danger-200: #FECACA;
+      --cp-danger-300: #FCA5A5;
+      --cp-danger-400: #F87171;
+      --cp-danger-500: #EF4444;
+      --cp-danger-600: #DC2626;
+      --cp-danger-700: #B91C1C;
+      --cp-danger-800: #991B1B;
+      --cp-danger-900: #7F1D1D;
+
+      /* --- Bonus (pink) --- */
+      --cp-bonus: #EC4899;
+      --cp-bonus-50: #FDF2F8;
+      --cp-bonus-100: #FCE7F3;
+      --cp-bonus-200: #FBCFE8;
+      --cp-bonus-300: #F9A8D4;
+      --cp-bonus-400: #F472B6;
+      --cp-bonus-500: #EC4899;
+      --cp-bonus-600: #DB2777;
+      --cp-bonus-700: #BE185D;
+      --cp-bonus-800: #9D174D;
+      --cp-bonus-900: #831843;
+
+      /* --- Level (cyan) --- */
+      --cp-level: #06B6D4;
+      --cp-level-50: #ECFEFF;
+      --cp-level-100: #CFFAFE;
+      --cp-level-200: #A5F3FC;
+      --cp-level-300: #67E8F9;
+      --cp-level-400: #22D3EE;
+      --cp-level-500: #06B6D4;
+      --cp-level-600: #0891B2;
+      --cp-level-700: #0E7490;
+      --cp-level-800: #155E75;
+      --cp-level-900: #164E63;
+
+      /* --- Font families --- */
+      --cp-font-family: 'Nunito', sans-serif;
+      --cp-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+      /* --- Typography scale --- */
+      --cp-text-xs: 0.75rem;
+      --cp-text-sm: 0.875rem;
+      --cp-text-base: 1rem;
+      --cp-text-lg: 1.125rem;
+      --cp-text-xl: 1.25rem;
+      --cp-text-2xl: 1.5rem;
+      --cp-text-3xl: 1.875rem;
+      --cp-text-4xl: 2.25rem;
+      --cp-text-display: 3rem;
+
+      /* --- Font weights --- */
+      --cp-font-regular: 400;
+      --cp-font-semibold: 600;
+      --cp-font-bold: 700;
+      --cp-font-extra: 800;
+      --cp-font-black: 900;
+
+      /* --- Spacing scale (4px base) --- */
+      --cp-space-1: 4px;
+      --cp-space-2: 8px;
+      --cp-space-3: 12px;
+      --cp-space-4: 16px;
+      --cp-space-5: 20px;
+      --cp-space-6: 24px;
+      --cp-space-8: 32px;
+      --cp-space-10: 40px;
+      --cp-space-12: 48px;
+      --cp-space-16: 64px;
+      --cp-space-20: 80px;
+
+      /* --- Border radius --- */
+      --cp-radius-sm: 6px;
+      --cp-radius-md: 8px;
+      --cp-radius-lg: 12px;
+      --cp-radius-xl: 16px;
+      --cp-radius-pill: 9999px;
+      --cp-radius-circle: 50%;
+
+      /* --- Shadows (depend on --cp-shadow-color set per theme) --- */
+      --cp-shadow-sm: 0 1px 2px var(--cp-shadow-color);
+      --cp-shadow-md: 0 4px 6px var(--cp-shadow-color);
+      --cp-shadow-lg: 0 10px 25px var(--cp-shadow-color);
+      --cp-shadow-xl: 0 20px 40px var(--cp-shadow-color);
+      --cp-shadow-3d: 0 4px 0px;
+      --cp-shadow-glow: 0 0 20px;
+
+      /* --- Transitions --- */
+      --cp-transition-fast: 0.1s ease;
+      --cp-transition-base: 0.2s ease;
+      --cp-transition-slow: 0.3s ease;
+      --cp-transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      --cp-transition-spring: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+      /* --- Z-index scale --- */
+      --cp-z-base: 0;
+      --cp-z-dropdown: 100;
+      --cp-z-sticky: 200;
+      --cp-z-overlay: 300;
+      --cp-z-modal: 400;
+      --cp-z-toast: 500;
+      --cp-z-confetti: 600;
+    }
+
+    /* =========================================================
+       Theme Variables — Dark
+    ========================================================= */
+    [data-theme="dark"] {
+      --cp-bg-primary: #131313;
+      --cp-bg-secondary: #1B1B1B;
+      --cp-bg-tertiary: #2A2A2A;
+      --cp-bg-elevated: #222222;
+      --cp-text-primary: #F0F0F0;
+      --cp-text-secondary: #A0A0A0;
+      --cp-text-muted: #666666;
+      --cp-border: #2A2A2A;
+      --cp-border-subtle: #1F1F1F;
+      --cp-shadow-color: rgba(0, 0, 0, 0.5);
+      --cp-overlay: rgba(13, 13, 13, 0.85);
+    }
+
+    /* =========================================================
+       Theme Variables — Light
+    ========================================================= */
+    [data-theme="light"] {
+      --cp-bg-primary: #FFFFFF;
+      --cp-bg-secondary: #FFFFFF;
+      --cp-bg-tertiary: #F7F7F7;
+      --cp-bg-elevated: #FFFFFF;
+      --cp-text-primary: #3C3C3C;
+      --cp-text-secondary: #777777;
+      --cp-text-muted: #AFAFAF;
+      --cp-border: #E5E5E5;
+      --cp-border-subtle: #F0F0F0;
+      --cp-shadow-color: rgba(0, 0, 0, 0.06);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+    }
+
+    /* =========================================================
+       Global Focus (Accessibility — spec 6.0)
+    ========================================================= */
+    :focus-visible {
+      outline: 2px solid var(--cp-primary-600);
+      outline-offset: 2px;
+    }
+    [data-theme="dark"] :focus-visible {
+      outline-color: var(--cp-primary-400);
+    }
+    :focus:not(:focus-visible) {
+      outline: none;
+    }
+
+    /* =========================================================
+       Reduced Motion (spec 8.6)
+    ========================================================= */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* =========================================================
+       Base Body
+    ========================================================= */
+    html {
+      height: 100%;
+      overflow: hidden;
+    }
+    body {
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-base);
+      color: var(--cp-text-primary);
+      background-color: var(--cp-bg-secondary);
+      line-height: 1.6;
+      height: 100%;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    /* =========================================================
+       Doc Site Layout — ds- prefix
+    ========================================================= */
+
+    /* Sidebar */
+    .ds-sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 240px;
+      height: 100vh;
+      background: var(--cp-bg-secondary);
+      border-right: 1px solid var(--cp-border);
+      overflow-y: auto;
+      overflow-x: hidden;
+      z-index: var(--cp-z-sticky);
+      display: flex;
+      flex-direction: column;
+      scrollbar-width: thin;
+      scrollbar-color: var(--cp-border) transparent;
+    }
+    .ds-sidebar::-webkit-scrollbar { width: 4px; }
+    .ds-sidebar::-webkit-scrollbar-track { background: transparent; }
+    .ds-sidebar::-webkit-scrollbar-thumb { background: var(--cp-border); border-radius: 4px; }
+    .ds-sidebar::-webkit-scrollbar-thumb:hover { background: var(--cp-text-muted); }
+
+    .ds-sidebar__logo {
+      padding: var(--cp-space-6);
+      border-bottom: 1px solid var(--cp-border);
+      flex-shrink: 0;
+    }
+
+    .ds-sidebar__logo-title {
+      font-size: var(--cp-text-lg);
+      font-weight: var(--cp-font-black);
+      color: var(--cp-text-primary);
+      letter-spacing: -0.3px;
+    }
+
+    .ds-sidebar__logo-subtitle {
+      font-size: var(--cp-text-xs);
+      font-weight: var(--cp-font-semibold);
+      color: var(--cp-primary-400);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 2px;
+    }
+
+    .ds-sidebar__logo-badge {
+      display: inline-block;
+      font-size: var(--cp-text-xs);
+      font-weight: var(--cp-font-bold);
+      color: #fff;
+      background: var(--cp-primary-600);
+      border-radius: var(--cp-radius-pill);
+      padding: 2px var(--cp-space-2);
+      margin-top: var(--cp-space-2);
+    }
+
+    .ds-sidebar__nav {
+      padding: var(--cp-space-4) 0;
+      flex: 1;
+    }
+
+    .ds-sidebar__section-label {
+      font-size: var(--cp-text-xs);
+      font-weight: var(--cp-font-bold);
+      color: var(--cp-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: var(--cp-space-4) var(--cp-space-6) var(--cp-space-2);
+    }
+
+    .ds-sidebar a {
+      display: block;
+      padding: var(--cp-space-2) var(--cp-space-6);
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-semibold);
+      color: var(--cp-text-secondary);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: background var(--cp-transition-base), color var(--cp-transition-base), border-color var(--cp-transition-base);
+    }
+
+    .ds-sidebar a:hover {
+      color: var(--cp-text-primary);
+      background: none;
+      border-left-color: var(--cp-border);
+    }
+
+    .ds-sidebar a.active {
+      color: var(--cp-primary-400);
+      border-left-color: var(--cp-primary-600);
+      background: none;
+    }
+
+    /* Header bar */
+    .ds-header {
+      position: fixed;
+      top: 0;
+      left: 240px;
+      right: 0;
+      height: 60px;
+      background: var(--cp-bg-secondary);
+      border-bottom: 1px solid var(--cp-border);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 var(--cp-space-8);
+      gap: var(--cp-space-3);
+      z-index: var(--cp-z-sticky);
+    }
+
+    /* Main content area */
+    .ds-main {
+      position: fixed;
+      top: 60px;
+      left: 240px;
+      right: 0;
+      bottom: 0;
+      background: var(--cp-bg-primary);
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: var(--cp-border) transparent;
+    }
+    .ds-main::-webkit-scrollbar { width: 6px; }
+    .ds-main::-webkit-scrollbar-track { background: var(--cp-bg-primary); }
+    .ds-main::-webkit-scrollbar-thumb { background: var(--cp-border); border-radius: 6px; }
+    .ds-main::-webkit-scrollbar-thumb:hover { background: var(--cp-text-muted); }
+
+    .ds-main__inner {
+      padding: var(--cp-space-6) var(--cp-space-8);
+    }
+
+    /* Section containers */
+    .ds-section {
+      margin-bottom: var(--cp-space-12);
+      scroll-margin-top: 20px;
+    }
+
+    .ds-section h2 {
+      font-size: var(--cp-text-3xl);
+      font-weight: var(--cp-font-black);
+      color: var(--cp-text-primary);
+      margin-bottom: var(--cp-space-2);
+      line-height: 1.2;
+    }
+
+    .ds-section h3 {
+      font-size: var(--cp-text-xl);
+      font-weight: var(--cp-font-bold);
+      color: var(--cp-text-primary);
+      margin-top: var(--cp-space-8);
+      margin-bottom: var(--cp-space-4);
+    }
+
+    .ds-section p.desc {
+      font-size: var(--cp-text-base);
+      color: var(--cp-text-secondary);
+      margin-bottom: var(--cp-space-6);
+      line-height: 1.7;
+    }
+
+    .ds-section-divider {
+      border: none;
+      border-top: 1px solid var(--cp-border);
+      margin-bottom: var(--cp-space-4);
+    }
+
+    /* Component preview container */
+    .ds-preview {
+      background: var(--cp-bg-secondary);
+      border: 1px solid var(--cp-border);
+      border-radius: var(--cp-radius-lg);
+      padding: var(--cp-space-8);
+      margin-bottom: var(--cp-space-4);
+    }
+
+    /* Code display */
+    .ds-code {
+      background: var(--cp-bg-tertiary);
+      border: 1px solid var(--cp-border);
+      border-radius: var(--cp-radius-md);
+      padding: var(--cp-space-6);
+      font-family: var(--cp-font-mono);
+      font-size: var(--cp-text-sm);
+      color: var(--cp-text-secondary);
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 1.6;
+      margin-bottom: var(--cp-space-6);
+    }
+
+    /* Color swatches grid */
+    .ds-swatches {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: var(--cp-space-3);
+    }
+
+    /* Individual swatch */
+    .ds-swatch {
+      cursor: pointer;
+      border-radius: var(--cp-radius-md);
+      overflow: hidden;
+      border: 1px solid var(--cp-border);
+      transition: transform var(--cp-transition-bounce);
+    }
+
+    .ds-swatch:hover {
+      transform: scale(1.06);
+    }
+
+    .ds-swatch__color {
+      height: 56px;
+    }
+
+    .ds-swatch__label {
+      padding: var(--cp-space-2) var(--cp-space-2);
+      background: var(--cp-bg-tertiary);
+      font-family: var(--cp-font-mono);
+      font-size: 10px;
+      color: var(--cp-text-muted);
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .ds-swatch__label strong {
+      display: block;
+      color: var(--cp-text-secondary);
+      font-size: var(--cp-text-xs);
+      font-family: var(--cp-font-family);
+      font-weight: var(--cp-font-bold);
+    }
+
+    /* Flex row helper */
+    .ds-flex {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--cp-space-4);
+    }
+
+    /* 2-column grid helper */
+    .ds-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--cp-space-6);
+    }
+
+    /* =========================================================
+       Header Buttons (doc-site UI)
+    ========================================================= */
+    .ds-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--cp-space-2);
+      padding: var(--cp-space-2) var(--cp-space-4);
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-bold);
+      border-radius: var(--cp-radius-md);
+      border: none;
+      cursor: pointer;
+      transition: background var(--cp-transition-base), color var(--cp-transition-base);
+      text-decoration: none;
+    }
+
+    .ds-btn--ghost {
+      background: transparent;
+      color: var(--cp-text-secondary);
+      border: 1px solid var(--cp-border);
+    }
+
+    .ds-btn--ghost:hover {
+      background: var(--cp-bg-tertiary);
+      color: var(--cp-text-primary);
+    }
+
+    .ds-btn--primary {
+      background: var(--cp-primary-600);
+      color: #fff;
+      box-shadow: 0 3px 0 var(--cp-primary-700);
+    }
+
+    .ds-btn--primary:hover {
+      background: var(--cp-primary-500);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 0 var(--cp-primary-700);
+    }
+
+    /* =========================================================
+       Empty state placeholder
+    ========================================================= */
+    .ds-empty {
+      text-align: center;
+      padding: var(--cp-space-16) var(--cp-space-8);
+      color: var(--cp-text-muted);
+    }
+
+    .ds-empty__icon {
+      font-size: 3rem;
+      margin-bottom: var(--cp-space-4);
+      display: block;
+    }
+
+    .ds-empty__title {
+      font-size: var(--cp-text-xl);
+      font-weight: var(--cp-font-bold);
+      color: var(--cp-text-secondary);
+      margin-bottom: var(--cp-space-2);
+    }
+
+    .ds-empty__desc {
+      font-size: var(--cp-text-sm);
+    }
+
+    /* =========================================================
+       Typography Section
+    ========================================================= */
+    .ds-type-row {
+      display: flex;
+      align-items: baseline;
+      gap: var(--cp-space-4);
+      padding: var(--cp-space-4) 0;
+      border-bottom: 1px solid var(--cp-border-subtle);
+    }
+    .ds-type-row:last-child { border-bottom: none; }
+
+    .ds-type-meta {
+      min-width: 180px;
+      flex-shrink: 0;
+    }
+    .ds-type-meta .token {
+      font-family: var(--cp-font-mono);
+      font-size: var(--cp-text-xs);
+      color: var(--cp-primary-400);
+    }
+    .ds-type-meta .px {
+      font-size: var(--cp-text-xs);
+      color: var(--cp-text-muted);
+      margin-top: 2px;
+    }
+    .ds-type-sample {
+      color: var(--cp-text-primary);
+    }
+
+    .ds-weight-row {
+      display: flex;
+      align-items: center;
+      gap: var(--cp-space-4);
+      padding: var(--cp-space-3) 0;
+      border-bottom: 1px solid var(--cp-border-subtle);
+    }
+    .ds-weight-row:last-child { border-bottom: none; }
+    .ds-weight-meta {
+      min-width: 180px;
+      flex-shrink: 0;
+      font-family: var(--cp-font-mono);
+      font-size: var(--cp-text-xs);
+      color: var(--cp-primary-400);
+    }
+    .ds-weight-val {
+      font-size: var(--cp-text-xs);
+      color: var(--cp-text-muted);
+    }
+
+    /* =========================================================
+       Spacing Section
+    ========================================================= */
+    .ds-space-row {
+      display: flex;
+      align-items: center;
+      gap: var(--cp-space-4);
+      padding: var(--cp-space-3) 0;
+      border-bottom: 1px solid var(--cp-border-subtle);
+    }
+    .ds-space-row:last-child { border-bottom: none; }
+    .ds-space-meta {
+      min-width: 160px;
+      flex-shrink: 0;
+    }
+    .ds-space-meta .token {
+      font-family: var(--cp-font-mono);
+      font-size: var(--cp-text-xs);
+      color: var(--cp-primary-400);
+    }
+    .ds-space-meta .px {
+      font-size: var(--cp-text-xs);
+      color: var(--cp-text-muted);
+    }
+    .ds-space-bar-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+    .ds-space-bar {
+      height: 24px;
+      background: var(--cp-primary-600);
+      border-radius: var(--cp-radius-sm);
+      opacity: 0.8;
+    }
+
+    /* =========================================================
+       Border Radius Section
+    ========================================================= */
+    .ds-radius-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--cp-space-6);
+    }
+    .ds-radius-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--cp-space-3);
+    }
+    .ds-radius-box {
+      width: 80px;
+      height: 80px;
+      background: var(--cp-primary-600);
+      opacity: 0.85;
+    }
+    .ds-radius-circle-box {
+      width: 80px;
+      height: 80px;
+      background: var(--cp-primary-600);
+      border-radius: 50%;
+      opacity: 0.85;
+    }
+    .ds-radius-pill-box {
+      width: 120px;
+      height: 44px;
+      background: var(--cp-primary-600);
+      border-radius: 9999px;
+      opacity: 0.85;
+    }
+    .ds-radius-label {
+      font-family: var(--cp-font-mono);
+      font-size: var(--cp-text-xs);
+      color: var(--cp-text-secondary);
+      text-align: center;
+    }
+    .ds-radius-label .px {
+      display: block;
+      color: var(--cp-text-muted);
+      font-size: 10px;
+    }
+
+    /* =========================================================
+       Shadows Section
+    ========================================================= */
+    .ds-shadows-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--cp-space-8);
+      align-items: flex-end;
+    }
+    .ds-shadow-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--cp-space-4);
+    }
+    .ds-shadow-box {
+      width: 120px;
+      height: 80px;
+      background: var(--cp-bg-elevated);
+      border: 1px solid var(--cp-border);
+      border-radius: var(--cp-radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--cp-font-mono);
+      font-size: var(--cp-text-xs);
+      color: var(--cp-text-muted);
+    }
+    .ds-shadow-label {
+      font-family: var(--cp-font-mono);
+      font-size: var(--cp-text-xs);
+      color: var(--cp-primary-400);
+      text-align: center;
+    }
+
+    /* =========================================================
+       Surface swatches
+    ========================================================= */
+    .ds-surface-swatch {
+      border-radius: var(--cp-radius-md);
+      overflow: hidden;
+      border: 1px solid var(--cp-border);
+    }
+    .ds-surface-swatch__color {
+      height: 48px;
+    }
+    .ds-surface-swatch__label {
+      padding: var(--cp-space-2);
+      background: var(--cp-bg-tertiary);
+      font-family: var(--cp-font-mono);
+      font-size: 10px;
+      color: var(--cp-text-muted);
+      text-align: center;
+      line-height: 1.4;
+    }
+    .ds-surface-swatch__label strong {
+      display: block;
+      color: var(--cp-text-secondary);
+      font-size: var(--cp-text-xs);
+      font-family: var(--cp-font-family);
+      font-weight: var(--cp-font-bold);
+    }
+    .ds-surface-panel {
+      background: var(--cp-bg-secondary);
+      border: 1px solid var(--cp-border);
+      border-radius: var(--cp-radius-lg);
+      padding: var(--cp-space-6);
+    }
+    .ds-surface-panel h4 {
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-bold);
+      color: var(--cp-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: var(--cp-space-4);
+    }
+    .ds-surface-panel .ds-swatches {
+      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    }
+
+    /* =========================================================
+       Button Components — cp-btn (spec 6.1)
+    ========================================================= */
+    .cp-btn {
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-base);
+      padding: var(--cp-space-3) var(--cp-space-6);
+      border: none;
+      border-radius: var(--cp-radius-md);
+      cursor: pointer;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--cp-space-2);
+      text-decoration: none;
+      line-height: 1;
+    }
+    .cp-btn[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+    .cp-btn--sm {
+      padding: var(--cp-space-2) var(--cp-space-4);
+      font-size: var(--cp-text-sm);
+    }
+    .cp-btn--lg {
+      padding: var(--cp-space-4) var(--cp-space-8);
+      font-size: var(--cp-text-lg);
+    }
+
+    .cp-btn-primary {
+      background: var(--cp-primary-600);
+      color: #FFFFFF;
+      font-weight: var(--cp-font-bold);
+      box-shadow: 0 4px 0 var(--cp-primary-700);
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+    .cp-btn-primary:hover {
+      background: var(--cp-primary-500);
+      transform: translateY(-1px);
+      box-shadow: 0 5px 0 var(--cp-primary-700);
+    }
+    .cp-btn-primary:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 var(--cp-primary-700);
+    }
+
+    .cp-btn-secondary {
+      background: transparent;
+      color: var(--cp-primary-600);
+      font-weight: var(--cp-font-bold);
+      border: 2px solid var(--cp-primary-600);
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .cp-btn-secondary:hover {
+      background: var(--cp-primary-100);
+      color: var(--cp-primary-700);
+    }
+    [data-theme="dark"] .cp-btn-secondary:hover {
+      background: rgba(124, 58, 237, 0.15);
+      color: var(--cp-primary-400);
+    }
+
+    .cp-btn-ghost {
+      background: transparent;
+      color: var(--cp-text-secondary);
+      font-weight: var(--cp-font-semibold);
+      font-size: var(--cp-text-sm);
+      padding: var(--cp-space-2) var(--cp-space-4);
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .cp-btn-ghost:hover {
+      background: var(--cp-bg-tertiary);
+      color: var(--cp-text-primary);
+    }
+
+    .cp-btn-success {
+      background: var(--cp-success);
+      color: #FFFFFF;
+      font-weight: var(--cp-font-bold);
+      box-shadow: 0 4px 0 var(--cp-success-700);
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+    .cp-btn-success:hover {
+      background: var(--cp-success-400);
+      transform: translateY(-1px);
+      box-shadow: 0 5px 0 var(--cp-success-700);
+    }
+    .cp-btn-success:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 var(--cp-success-700);
+    }
+
+    .cp-btn-danger {
+      background: var(--cp-danger);
+      color: #FFFFFF;
+      font-weight: var(--cp-font-bold);
+      box-shadow: 0 4px 0 var(--cp-danger-700);
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+    .cp-btn-danger:hover {
+      background: var(--cp-danger-400);
+      transform: translateY(-1px);
+      box-shadow: 0 5px 0 var(--cp-danger-700);
+    }
+    .cp-btn-danger:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 var(--cp-danger-700);
+    }
+
+    /* =========================================================
+       Form Components — cp-input, cp-label, cp-select,
+       cp-textarea, cp-toggle (spec 6.2)
+    ========================================================= */
+    .cp-input {
+      background: var(--cp-bg-tertiary);
+      color: var(--cp-text-primary);
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-base);
+      padding: var(--cp-space-3) var(--cp-space-4);
+      border: 2px solid var(--cp-border);
+      border-radius: var(--cp-radius-md);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      width: 100%;
+    }
+    .cp-input:focus {
+      border-color: var(--cp-primary-600);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+    }
+    .cp-input::placeholder {
+      color: var(--cp-text-muted);
+    }
+    .cp-input--error {
+      border-color: var(--cp-danger);
+    }
+    .cp-input--error:focus {
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+    }
+
+    .cp-label {
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-bold);
+      color: var(--cp-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--cp-space-2);
+      display: block;
+    }
+
+    .cp-select {
+      background: var(--cp-bg-tertiary);
+      color: var(--cp-text-primary);
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-base);
+      padding: var(--cp-space-3) var(--cp-space-4);
+      padding-right: var(--cp-space-10);
+      border: 2px solid var(--cp-border);
+      border-radius: var(--cp-radius-md);
+      appearance: none;
+      outline: none;
+      transition: border-color 0.2s ease;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237A6895' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 16px;
+      width: 100%;
+    }
+    .cp-select:focus {
+      border-color: var(--cp-primary-600);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+    }
+
+    .cp-textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .cp-toggle {
+      display: inline-flex;
+      cursor: pointer;
+    }
+    .cp-toggle input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .cp-toggle__track {
+      width: 48px;
+      height: 26px;
+      background: var(--cp-bg-tertiary);
+      border: 2px solid var(--cp-border);
+      border-radius: var(--cp-radius-pill);
+      position: relative;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .cp-toggle__track::after {
+      content: '';
+      width: 18px;
+      height: 18px;
+      background: var(--cp-text-muted);
+      border-radius: var(--cp-radius-circle);
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .cp-toggle input:checked + .cp-toggle__track {
+      background: var(--cp-primary-600);
+      border-color: var(--cp-primary-600);
+    }
+    .cp-toggle input:checked + .cp-toggle__track::after {
+      background: #FFFFFF;
+      transform: translateX(22px);
+    }
+    .cp-toggle input:focus-visible + .cp-toggle__track {
+      outline: 2px solid var(--cp-primary-600);
+      outline-offset: 2px;
+    }
+
+    /* =========================================================
+       6.3 Cards
+    ========================================================= */
+    .cp-card {
+      background: var(--cp-bg-secondary);
+      border: 1px solid var(--cp-border-subtle);
+      border-radius: var(--cp-radius-lg);
+      padding: var(--cp-space-6);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .cp-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--cp-shadow-lg);
+    }
+
+    .cp-card-course {
+      background: var(--cp-bg-secondary);
+      border: 1px solid var(--cp-border-subtle);
+      border-radius: var(--cp-radius-lg);
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .cp-card-course:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--cp-shadow-lg);
+    }
+    .cp-card-course__image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .cp-card-course__body {
+      padding: var(--cp-space-5);
+    }
+    .cp-card-course__title {
+      font-size: var(--cp-text-xl);
+      font-weight: var(--cp-font-bold);
+      color: var(--cp-text-primary);
+      margin-bottom: var(--cp-space-2);
+    }
+    .cp-card-course__meta {
+      font-size: var(--cp-text-sm);
+      color: var(--cp-text-secondary);
+    }
+    .cp-card-course__progress {
+      margin-top: var(--cp-space-4);
+    }
+
+    .cp-card-lesson {
+      background: var(--cp-bg-secondary);
+      border: 1px solid var(--cp-border-subtle);
+      border-radius: var(--cp-radius-md);
+      padding: var(--cp-space-4);
+      display: flex;
+      align-items: center;
+      gap: var(--cp-space-4);
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+    .cp-card-lesson:hover {
+      background: var(--cp-bg-tertiary);
+      transform: translateX(4px);
+    }
+    .cp-card-lesson--completed {
+      border-left: 3px solid var(--cp-success);
+    }
+    .cp-card-lesson--locked {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .cp-card-elevated {
+      background: var(--cp-bg-elevated);
+      border-radius: var(--cp-radius-xl);
+      padding: var(--cp-space-8);
+      box-shadow: var(--cp-shadow-xl);
+    }
+
+    /* =========================================================
+       6.4 Badges e Tags
+    ========================================================= */
+    .cp-badge-xp {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--cp-space-1);
+      background: var(--cp-xp);
+      color: var(--cp-xp-900);
+      font-family: var(--cp-font-family);
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-extra);
+      padding: var(--cp-space-1) var(--cp-space-3);
+      border-radius: var(--cp-radius-pill);
+    }
+    .cp-badge-streak {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--cp-space-1);
+      background: var(--cp-streak);
+      color: #FFFFFF;
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-extra);
+      padding: var(--cp-space-1) var(--cp-space-3);
+      border-radius: var(--cp-radius-pill);
+    }
+    .cp-badge-level {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--cp-space-1);
+      background: var(--cp-level);
+      color: #FFFFFF;
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-extra);
+      padding: var(--cp-space-1) var(--cp-space-3);
+      border-radius: var(--cp-radius-pill);
+    }
+    .cp-tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: var(--cp-text-xs);
+      font-weight: var(--cp-font-bold);
+      padding: var(--cp-space-1) var(--cp-space-2);
+      border-radius: var(--cp-radius-pill);
+      background: var(--cp-bg-tertiary);
+      color: var(--cp-text-secondary);
+    }
+
+    /* =========================================================
+       6.5 Barra de Progresso
+    ========================================================= */
+    .cp-progress {
+      width: 100%;
+      height: 8px;
+      background: var(--cp-bg-tertiary);
+      border-radius: var(--cp-radius-pill);
+      overflow: hidden;
+    }
+    .cp-progress__fill {
+      height: 100%;
+      border-radius: var(--cp-radius-pill);
+      background: linear-gradient(90deg, var(--cp-primary-600), var(--cp-streak));
+      transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .cp-progress--success .cp-progress__fill {
+      background: linear-gradient(90deg, var(--cp-success), var(--cp-success-300));
+    }
+    .cp-progress--xp .cp-progress__fill {
+      background: linear-gradient(90deg, var(--cp-xp), var(--cp-streak));
+    }
+    .cp-progress--lg {
+      height: 12px;
+    }
+
+    /* =========================================================
+       6.6 Avatar
+    ========================================================= */
+    .cp-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--cp-radius-circle);
+      object-fit: cover;
+      border: 2px solid var(--cp-border);
+    }
+    .cp-avatar--sm { width: 32px; height: 32px; }
+    .cp-avatar--lg { width: 56px; height: 56px; }
+    .cp-avatar--xl { width: 80px; height: 80px; border-width: 3px; }
+    .cp-avatar--bordered {
+      border-color: var(--cp-primary-600);
+      box-shadow: 0 0 0 2px var(--cp-bg-primary), 0 0 0 4px var(--cp-primary-600);
+    }
+
+    /* =========================================================
+       6.7 Sidebar component (used only in the demo preview)
+    ========================================================= */
+    .cp-sidebar-demo {
+      width: 200px;
+      background: var(--cp-bg-secondary);
+      border: 1px solid var(--cp-border-subtle);
+      border-radius: var(--cp-radius-lg);
+      padding: var(--cp-space-4) 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--cp-space-1);
+    }
+    .cp-sidebar-demo__item {
+      display: flex;
+      align-items: center;
+      gap: var(--cp-space-3);
+      padding: var(--cp-space-3) var(--cp-space-5);
+      color: var(--cp-text-secondary);
+      font-weight: var(--cp-font-semibold);
+      font-size: var(--cp-text-sm);
+      border-radius: 0 var(--cp-radius-md) var(--cp-radius-md) 0;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+      text-decoration: none;
+    }
+    .cp-sidebar-demo__item:hover {
+      background: var(--cp-bg-tertiary);
+      color: var(--cp-text-primary);
+    }
+    .cp-sidebar-demo__item--active {
+      background: rgba(124, 58, 237, 0.15);
+      color: var(--cp-primary-400);
+      font-weight: var(--cp-font-bold);
+      border-left: 3px solid var(--cp-primary-600);
+    }
+
+    /* =========================================================
+       6.8 Modal
+    ========================================================= */
+    .cp-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--cp-overlay);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: var(--cp-z-modal);
+      backdrop-filter: blur(4px);
+    }
+    .cp-modal {
+      background: var(--cp-bg-elevated);
+      border-radius: var(--cp-radius-xl);
+      padding: var(--cp-space-8);
+      max-width: 480px;
+      width: 90%;
+      box-shadow: var(--cp-shadow-xl);
+      animation: cp-modal-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes cp-modal-in {
+      from { opacity: 0; transform: scale(0.9) translateY(10px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* =========================================================
+       7. Gamification Components
+    ========================================================= */
+
+    /* 7.1 XP Panel */
+    .cp-xp-panel {
+      display: flex;
+      align-items: center;
+      gap: var(--cp-space-3);
+      background: var(--cp-bg-secondary);
+      border-radius: var(--cp-radius-lg);
+      padding: var(--cp-space-4);
+    }
+    .cp-xp-panel__number {
+      font-size: var(--cp-text-4xl);
+      font-weight: var(--cp-font-black);
+      color: var(--cp-xp);
+    }
+    .cp-xp-panel__label {
+      font-size: var(--cp-text-sm);
+      color: var(--cp-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* 7.2 Streak Counter */
+    .cp-streak-counter {
+      display: flex;
+      align-items: center;
+      gap: var(--cp-space-2);
+      padding: var(--cp-space-3) var(--cp-space-4);
+      background: linear-gradient(135deg, var(--cp-streak), var(--cp-streak-400));
+      border-radius: var(--cp-radius-lg);
+      color: #FFFFFF;
+    }
+    .cp-streak-counter__number {
+      font-size: var(--cp-text-3xl);
+      font-weight: var(--cp-font-black);
+    }
+    .cp-streak-counter__label {
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-bold);
+      opacity: 0.9;
+    }
+
+    /* 7.3 Achievement Badge */
+    .cp-achievement {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: var(--cp-space-2);
+    }
+    .cp-achievement__icon {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--cp-radius-circle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: var(--cp-shadow-md);
+    }
+    .cp-achievement__icon--bronze {
+      background: linear-gradient(135deg, #CD7F32, #E8A862);
+    }
+    .cp-achievement__icon--silver {
+      background: linear-gradient(135deg, #B0B0B0, #D4D4D4);
+    }
+    .cp-achievement__icon--gold {
+      background: linear-gradient(135deg, var(--cp-xp), var(--cp-xp-300));
+    }
+    .cp-achievement__icon--diamond {
+      background: linear-gradient(135deg, var(--cp-level), var(--cp-level-300));
+    }
+    .cp-achievement__icon--locked {
+      background: var(--cp-bg-tertiary);
+      opacity: 0.4;
+      filter: grayscale(1);
+    }
+    .cp-achievement__title {
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-bold);
+      color: var(--cp-text-primary);
+    }
+    .cp-achievement__description {
+      font-size: var(--cp-text-xs);
+      color: var(--cp-text-muted);
+    }
+
+    /* 7.4 Leaderboard */
+    .cp-leaderboard {
+      background: var(--cp-bg-secondary);
+      border-radius: var(--cp-radius-lg);
+      overflow: hidden;
+    }
+    .cp-leaderboard__item {
+      display: flex;
+      align-items: center;
+      gap: var(--cp-space-3);
+      padding: var(--cp-space-3) var(--cp-space-4);
+      border-bottom: 1px solid var(--cp-border-subtle);
+      transition: background 0.2s ease;
+    }
+    .cp-leaderboard__item:hover {
+      background: var(--cp-bg-tertiary);
+    }
+    .cp-leaderboard__rank {
+      font-size: var(--cp-text-lg);
+      font-weight: var(--cp-font-extra);
+      color: var(--cp-text-muted);
+      width: 32px;
+      text-align: center;
+    }
+    .cp-leaderboard__rank--1 { color: var(--cp-xp); }
+    .cp-leaderboard__rank--2 { color: #B0B0B0; }
+    .cp-leaderboard__rank--3 { color: #CD7F32; }
+    .cp-leaderboard__xp {
+      font-weight: var(--cp-font-bold);
+      color: var(--cp-xp);
+      margin-left: auto;
+    }
+    .cp-leaderboard__item--me {
+      background: rgba(124, 58, 237, 0.1);
+      border-left: 3px solid var(--cp-primary-600);
+    }
+
+    /* 7.5 Daily Missions */
+    .cp-mission {
+      display: flex;
+      align-items: center;
+      gap: var(--cp-space-3);
+      padding: var(--cp-space-3) var(--cp-space-4);
+      background: var(--cp-bg-secondary);
+      border-radius: var(--cp-radius-md);
+    }
+    .cp-mission__icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--cp-radius-circle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .cp-mission__icon--xp { background: var(--cp-xp-100); }
+    .cp-mission__icon--time { background: var(--cp-level-100); }
+    .cp-mission__icon--lesson { background: var(--cp-primary-100); }
+    [data-theme="dark"] .cp-mission__icon--xp { background: rgba(245, 158, 11, 0.15); }
+    [data-theme="dark"] .cp-mission__icon--time { background: rgba(6, 182, 212, 0.15); }
+    [data-theme="dark"] .cp-mission__icon--lesson { background: rgba(124, 58, 237, 0.15); }
+    .cp-mission__info {
+      flex: 1;
+    }
+    .cp-mission__title {
+      font-size: var(--cp-text-sm);
+      font-weight: var(--cp-font-bold);
+      color: var(--cp-text-primary);
+    }
+    .cp-mission__progress-bar {
+      margin-top: var(--cp-space-1);
+      height: 6px;
+      background: var(--cp-bg-tertiary);
+      border-radius: var(--cp-radius-pill);
+      overflow: hidden;
+    }
+    .cp-mission__progress-fill {
+      height: 100%;
+      border-radius: var(--cp-radius-pill);
+      background: var(--cp-success);
+      transition: width 0.4s ease;
+    }
+    .cp-mission__reward {
+      font-size: var(--cp-text-xs);
+      font-weight: var(--cp-font-bold);
+      color: var(--cp-xp);
+    }
+    .cp-mission--completed {
+      opacity: 0.6;
+    }
+    .cp-mission--completed .cp-mission__progress-fill {
+      background: var(--cp-success);
+      width: 100%;
+    }
+
+    /* 7.6 Level Indicator */
+    .cp-level-indicator {
+      display: flex;
+      align-items: center;
+      gap: var(--cp-space-3);
+    }
+    .cp-level-indicator__badge {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--cp-radius-circle);
+      background: linear-gradient(135deg, var(--cp-primary-600), var(--cp-level));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-size: var(--cp-text-xl);
+      font-weight: var(--cp-font-black);
+      box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+    }
+    .cp-level-indicator__xp-to-next {
+      font-size: var(--cp-text-sm);
+      color: var(--cp-text-muted);
+    }
+
+    /* =========================================================
+       8. Animations — Keyframes
+    ========================================================= */
+    @keyframes cp-bounce-in {
+      0%   { opacity: 0; transform: scale(0.3); }
+      50%  { transform: scale(1.1); }
+      70%  { transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes cp-slide-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes cp-pulse {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.05); }
+    }
+    @keyframes cp-shake {
+      0%, 100% { transform: translateX(0); }
+      20%       { transform: translateX(-8px); }
+      40%       { transform: translateX(8px); }
+      60%       { transform: translateX(-4px); }
+      80%       { transform: translateX(4px); }
+    }
+    @keyframes cp-glow {
+      0%, 100% { box-shadow: 0 0 5px rgba(124, 58, 237, 0.3); }
+      50%       { box-shadow: 0 0 20px rgba(124, 58, 237, 0.6); }
+    }
+    @keyframes cp-count-up {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes cp-confetti-fade {
+      0%   { opacity: 1; }
+      100% { opacity: 0; transform: translateY(-20px); }
+    }
+    @keyframes cp-spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    @keyframes cp-float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-6px); }
+    }
+    @keyframes cp-xp-flyup {
+      0%   { opacity: 1; transform: translateY(0) scale(1); }
+      50%  { opacity: 1; transform: translateY(-30px) scale(1.2); }
+      100% { opacity: 0; transform: translateY(-60px) scale(0.8); }
+    }
+    @keyframes cp-progress-fill {
+      0%   { width: 0%; }
+      80%  { width: calc(var(--target-width) + 2%); }
+      100% { width: var(--target-width); }
+    }
+    @keyframes cp-star-burst {
+      0%   { opacity: 0; transform: scale(0) rotate(0deg); }
+      50%  { opacity: 1; transform: scale(1.3) rotate(180deg); }
+      100% { opacity: 1; transform: scale(1) rotate(360deg); }
+    }
+
+    /* 8.3 Animation utility classes */
+    .cp-animate-bounce-in  { animation: cp-bounce-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .cp-animate-slide-up   { animation: cp-slide-up 0.3s ease-out; }
+    .cp-animate-pulse      { animation: cp-pulse 2s ease-in-out infinite; }
+    .cp-animate-shake      { animation: cp-shake 0.5s ease; }
+    .cp-animate-glow       { animation: cp-glow 2s ease-in-out infinite; }
+    .cp-animate-spin       { animation: cp-spin 1s linear infinite; }
+    .cp-animate-float      { animation: cp-float 3s ease-in-out infinite; }
+    .cp-animate-xp-flyup   { animation: cp-xp-flyup 1s ease-out forwards; }
+    .cp-animate-star-burst { animation: cp-star-burst 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+    /* 8.5 Confetti */
+    .cp-confetti-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: var(--cp-z-confetti);
+      overflow: hidden;
+    }
+    .cp-confetti-particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      animation: cp-confetti-fade 1.5s ease-out forwards;
+    }
+
+    /* =========================================================
+       6.11 Spinner / Loading
+    ========================================================= */
+    .cp-spinner {
+      width: 24px;
+      height: 24px;
+      border: 3px solid var(--cp-border);
+      border-top-color: var(--cp-primary-600);
+      border-radius: var(--cp-radius-circle);
+      animation: cp-spin 0.8s linear infinite;
+    }
+    .cp-spinner--sm { width: 16px; height: 16px; border-width: 2px; }
+    .cp-spinner--lg { width: 40px; height: 40px; border-width: 4px; }
+
+    .cp-skeleton {
+      background: var(--cp-bg-tertiary);
+      border-radius: var(--cp-radius-md);
+      animation: cp-skeleton-pulse 1.5s ease-in-out infinite;
+    }
+    .cp-skeleton--text {
+      height: 16px;
+      margin-bottom: var(--cp-space-2);
+    }
+    .cp-skeleton--title {
+      height: 24px;
+      width: 60%;
+      margin-bottom: var(--cp-space-3);
+    }
+    .cp-skeleton--avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--cp-radius-circle);
+    }
+    .cp-skeleton--card {
+      height: 200px;
+    }
+    @keyframes cp-skeleton-pulse {
+      0%, 100% { opacity: 1; }
+      50%        { opacity: 0.4; }
+    }
+
+    /* =========================================================
+       6.10 Toast / Notificação
+    ========================================================= */
+    .cp-toast-container {
+      position: fixed;
+      top: var(--cp-space-6);
+      right: var(--cp-space-6);
+      z-index: var(--cp-z-toast);
+      display: flex;
+      flex-direction: column;
+      gap: var(--cp-space-3);
+      pointer-events: none;
+    }
+    .cp-toast {
+      background: var(--cp-bg-elevated);
+      border-radius: var(--cp-radius-md);
+      padding: var(--cp-space-4) var(--cp-space-5);
+      box-shadow: var(--cp-shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--cp-space-3);
+      min-width: 300px;
+      max-width: 480px;
+      pointer-events: auto;
+      animation: cp-slide-up 0.3s ease-out;
+      border-left: 4px solid var(--cp-info);
+    }
+    .cp-toast--success { border-left-color: var(--cp-success); }
+    .cp-toast--danger  { border-left-color: var(--cp-danger); }
+    .cp-toast--xp      { border-left-color: var(--cp-xp); }
+    .cp-toast__message {
+      flex: 1;
+      font-size: var(--cp-text-sm);
+      color: var(--cp-text-primary);
+    }
+    .cp-toast__close {
+      background: none;
+      border: none;
+      color: var(--cp-text-muted);
+      cursor: pointer;
+      padding: var(--cp-space-1);
+      font-size: var(--cp-text-base);
+      line-height: 1;
+    }
+
+    /* =========================================================
+       11. Gradients & Patterns
+    ========================================================= */
+    .cp-gradient-hero-dark {
+      background: linear-gradient(135deg, #0F0A1A 0%, #1A1128 50%, #2D1F42 100%);
+    }
+    .cp-gradient-hero-light {
+      background: linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 50%, #E9D5FF 100%);
+    }
+    .cp-gradient-premium {
+      background: linear-gradient(135deg, var(--cp-primary-600), var(--cp-level));
+    }
+    .cp-gradient-streak {
+      background: linear-gradient(135deg, var(--cp-streak), var(--cp-streak-400));
+    }
+    .cp-gradient-xp {
+      background: linear-gradient(135deg, var(--cp-xp), var(--cp-xp-300));
+    }
+    .cp-gradient-levelup {
+      background: linear-gradient(135deg, var(--cp-primary-600), var(--cp-bonus), var(--cp-xp));
+    }
+    .cp-pattern-dots {
+      background-image: radial-gradient(var(--cp-border) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .cp-pattern-grid {
+      background-image:
+        linear-gradient(var(--cp-border-subtle) 1px, transparent 1px),
+        linear-gradient(90deg, var(--cp-border-subtle) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* =========================================================
+       9. Layout
+    ========================================================= */
+    .cp-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--cp-space-4);
+    }
+    .cp-container--narrow { max-width: 800px; }
+    .cp-container--wide   { max-width: 1400px; }
+
+    .cp-layout { min-height: 100vh; }
+    .cp-layout__main {
+      margin-left: 240px;
+      padding: var(--cp-space-8);
+    }
+    .cp-layout__content { max-width: 1200px; }
+    .cp-layout__aside {
+      width: 320px;
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: var(--cp-space-6);
+      border-left: 1px solid var(--cp-border-subtle);
+    }
+    .cp-layout--with-aside .cp-layout__main { margin-right: 320px; }
+
+    @media (max-width: 1023px) {
+      .cp-sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: var(--cp-z-overlay);
+      }
+      .cp-sidebar--open { transform: translateX(0); }
+      .cp-layout__main  { margin-left: 0; }
+      .cp-layout__aside { display: none; }
+      .cp-layout--with-aside .cp-layout__main { margin-right: 0; }
+    }
+
+    @media (max-width: 767px) {
+      .cp-layout__main { padding: var(--cp-space-4); }
+      .cp-card-course__image { height: 140px; }
+      .cp-modal { width: 95%; padding: var(--cp-space-5); }
+      .cp-modal .cp-xp-panel__number,
+      .cp-modal .cp-level-indicator__badge { font-size: var(--cp-text-3xl); }
+    }
+
+    .cp-sidebar-toggle { display: none; }
+    @media (max-width: 1023px) {
+      .cp-sidebar-toggle {
+        display: flex;
+        position: fixed;
+        top: var(--cp-space-4);
+        left: var(--cp-space-4);
+        z-index: var(--cp-z-overlay);
+        background: var(--cp-bg-elevated);
+        border: 1px solid var(--cp-border);
+        border-radius: var(--cp-radius-md);
+        padding: var(--cp-space-2);
+        cursor: pointer;
+        box-shadow: var(--cp-shadow-md);
+      }
+    }
+
+
+
+    /* =========================================================
+       6.9 Tooltip
+    ========================================================= */
+    .cp-tooltip {
+      position: relative;
+      display: inline-flex;
+    }
+    .cp-tooltip__content {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--cp-bg-elevated);
+      color: var(--cp-text-primary);
+      font-size: var(--cp-text-sm);
+      padding: var(--cp-space-2) var(--cp-space-3);
+      border-radius: var(--cp-radius-sm);
+      box-shadow: var(--cp-shadow-md);
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      border: 1px solid var(--cp-border-subtle);
+    }
+    .cp-tooltip:hover .cp-tooltip__content {
+      opacity: 1;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- =====================================================
+       SIDEBAR
+  ====================================================== -->
+  <aside class="ds-sidebar" aria-label="Navegação do Design System">
+    <div class="ds-sidebar__logo">
+      <div class="ds-sidebar__logo-title">Classplay DS</div>
+      <div class="ds-sidebar__logo-subtitle">Design System</div>
+      <span class="ds-sidebar__logo-badge">v1.0</span>
+    </div>
+
+    <nav class="ds-sidebar__nav" aria-label="Seções">
+      <div class="ds-sidebar__section-label">Fundações</div>
+      <a href="#cores" data-section="cores">Cores</a>
+      <a href="#tipografia" data-section="tipografia">Tipografia</a>
+      <a href="#espacamento" data-section="espacamento">Espaçamento</a>
+      <a href="#border-radius" data-section="border-radius">Border Radius</a>
+      <a href="#sombras" data-section="sombras">Sombras</a>
+
+      <div class="ds-sidebar__section-label">Componentes</div>
+      <a href="#botoes" data-section="botoes">Botões</a>
+      <a href="#formularios" data-section="formularios">Formulários</a>
+      <a href="#cards" data-section="cards">Cards</a>
+      <a href="#badges" data-section="badges">Badges &amp; Tags</a>
+      <a href="#progresso" data-section="progresso">Progresso</a>
+
+      <div class="ds-sidebar__section-label">Gamificação</div>
+      <a href="#gamificacao" data-section="gamificacao">Gamificação</a>
+      <a href="#animacoes" data-section="animacoes">Animações</a>
+      <a href="#loading" data-section="loading">Loading States</a>
+      <a href="#toasts" data-section="toasts">Toasts</a>
+
+      <div class="ds-sidebar__section-label">Utilitários</div>
+      <a href="#gradientes" data-section="gradientes">Gradientes</a>
+    </nav>
+  </aside>
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+  <header class="ds-header" aria-label="Barra de topo">
+    <button
+      class="cp-btn cp-btn-ghost"
+      id="theme-toggle"
+      onclick="toggleTheme()"
+      aria-label="Alternar tema claro/escuro"
+      title="Alternar tema"
+    >
+      <span id="theme-icon">☀️</span>
+      <span id="theme-label">Tema Claro</span>
+    </button>
+
+    <button
+      class="cp-btn cp-btn-primary cp-btn--sm"
+      onclick="downloadMarkdown()"
+      aria-label="Baixar especificação em Markdown"
+    >
+      ⬇ Download .md
+    </button>
+  </header>
+
+  <!-- =====================================================
+       MAIN CONTENT
+  ====================================================== -->
+  <main class="ds-main" id="main-content">
+    <div class="ds-main__inner">
+
+      <!-- ===================================================
+           CORES
+      ==================================================== -->
+      <section id="cores" class="ds-section">
+        <h2>Cores</h2>
+        <p class="desc">
+          Todas as variáveis usam o prefixo <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">--cp-</code> (Classplay).
+          Clique em qualquer swatch para copiar o valor hex para a área de transferência.
+        </p>
+
+        <h3>Primária (Roxo)</h3>
+        <div class="ds-swatches" id="primary-swatches"></div>
+
+        <h3>XP (Âmbar)</h3>
+        <div class="ds-swatches" id="xp-swatches"></div>
+
+        <h3>Streak (Laranja)</h3>
+        <div class="ds-swatches" id="streak-swatches"></div>
+
+        <h3>Success (Esmeralda)</h3>
+        <div class="ds-swatches" id="success-swatches"></div>
+
+        <h3>Info (Azul)</h3>
+        <div class="ds-swatches" id="info-swatches"></div>
+
+        <h3>Danger (Vermelho)</h3>
+        <div class="ds-swatches" id="danger-swatches"></div>
+
+        <h3>Bonus (Rosa)</h3>
+        <div class="ds-swatches" id="bonus-swatches"></div>
+
+        <h3>Level (Cyan)</h3>
+        <div class="ds-swatches" id="level-swatches"></div>
+
+        <h3>Superfícies</h3>
+        <p class="desc">
+          As cores de superfície são definidas por tema via <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">data-theme</code>.
+          Abaixo estão os valores de referência para cada modo.
+        </p>
+        <div class="ds-grid-2">
+          <div class="ds-surface-panel">
+            <h4>Dark Mode</h4>
+            <div class="ds-swatches" id="surface-dark-swatches"></div>
+          </div>
+          <div class="ds-surface-panel">
+            <h4>Light Mode</h4>
+            <div class="ds-swatches" id="surface-light-swatches"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           TIPOGRAFIA
+      ==================================================== -->
+      <section id="tipografia" class="ds-section">
+        <h2>Tipografia</h2>
+        <p class="desc">
+          Fonte principal: <strong>Nunito</strong> (400, 600, 700, 800, 900).
+          Fonte mono: <strong>JetBrains Mono</strong> (400, 700). Escala baseada em rem com raiz de 16px.
+        </p>
+
+        <h3>Escala</h3>
+        <div class="ds-preview" id="type-scale-preview"></div>
+
+        <h3>Pesos</h3>
+        <div class="ds-preview" id="type-weights-preview"></div>
+
+        <h3>Monospace</h3>
+        <div class="ds-preview">
+          <div style="font-family:var(--cp-font-mono);font-size:var(--cp-text-sm);color:var(--cp-text-primary);line-height:1.8;">
+            <span style="color:var(--cp-primary-400)">const</span> <span style="color:var(--cp-xp-400)">score</span> <span style="color:var(--cp-text-secondary)">=</span> <span style="color:var(--cp-success-400)">calculateXP</span><span style="color:var(--cp-text-secondary)">(</span><span style="color:var(--cp-streak-400)">streak</span><span style="color:var(--cp-text-secondary)">,</span> <span style="color:var(--cp-level-400)">level</span><span style="color:var(--cp-text-secondary)">);</span><br/>
+            <span style="color:var(--cp-info-400)">console</span><span style="color:var(--cp-text-secondary)">.</span><span style="color:var(--cp-success-400)">log</span><span style="color:var(--cp-text-secondary)">(</span><span style="color:var(--cp-bonus-400)">`Parabéns! +${score} XP`</span><span style="color:var(--cp-text-secondary)">);</span><br/>
+            <span style="color:var(--cp-primary-400)">// JetBrains Mono — fonte monospace do Classplay DS</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           ESPAÇAMENTO
+      ==================================================== -->
+      <section id="espacamento" class="ds-section">
+        <h2>Espaçamento</h2>
+        <p class="desc">
+          Escala de espaçamento baseada em múltiplos de 4px.
+          Tokens: <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">--cp-space-{n}</code>.
+        </p>
+        <div class="ds-preview" id="spacing-preview"></div>
+      </section>
+
+      <!-- ===================================================
+           BORDER RADIUS
+      ==================================================== -->
+      <section id="border-radius" class="ds-section">
+        <h2>Border Radius</h2>
+        <p class="desc">
+          Tokens: <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">--cp-radius-{name}</code>.
+        </p>
+        <div class="ds-preview">
+          <div class="ds-radius-grid" id="radius-preview"></div>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           SOMBRAS
+      ==================================================== -->
+      <section id="sombras" class="ds-section">
+        <h2>Sombras</h2>
+        <p class="desc">
+          Tokens: <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">--cp-shadow-{size}</code>.
+          A variável <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">--cp-shadow-color</code> é definida por tema.
+        </p>
+        <div class="ds-preview">
+          <div class="ds-shadows-grid" id="shadows-preview"></div>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           BOTÕES
+      ==================================================== -->
+      <section id="botoes" class="ds-section">
+        <h2>Botões</h2>
+        <p class="desc">
+          Todos os botões usam a classe base <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">.cp-btn</code> combinada com uma variante.
+          Botões primário, sucesso e perigo usam efeito 3D com <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">box-shadow</code> + <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">translateY</code>.
+        </p>
+
+        <h3>Primário (3D)</h3>
+        <div class="ds-preview ds-flex">
+          <button class="cp-btn cp-btn-primary cp-btn--sm">Pequeno</button>
+          <button class="cp-btn cp-btn-primary">Padrão</button>
+          <button class="cp-btn cp-btn-primary cp-btn--lg">Grande</button>
+          <button class="cp-btn cp-btn-primary" disabled>Desabilitado</button>
+        </div>
+
+        <h3>Secundário (Flat)</h3>
+        <div class="ds-preview ds-flex">
+          <button class="cp-btn cp-btn-secondary cp-btn--sm">Pequeno</button>
+          <button class="cp-btn cp-btn-secondary">Padrão</button>
+          <button class="cp-btn cp-btn-secondary cp-btn--lg">Grande</button>
+          <button class="cp-btn cp-btn-secondary" disabled>Desabilitado</button>
+        </div>
+
+        <h3>Ghost</h3>
+        <div class="ds-preview ds-flex">
+          <button class="cp-btn cp-btn-ghost">Padrão</button>
+          <button class="cp-btn cp-btn-ghost" disabled>Desabilitado</button>
+        </div>
+
+        <h3>Sucesso &amp; Perigo (3D)</h3>
+        <div class="ds-preview ds-flex">
+          <button class="cp-btn cp-btn-success">Concluir Lição</button>
+          <button class="cp-btn cp-btn-danger">Perder Vida</button>
+          <button class="cp-btn cp-btn-success" disabled>Sucesso Desabilitado</button>
+          <button class="cp-btn cp-btn-danger" disabled>Perigo Desabilitado</button>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           FORMULÁRIOS
+      ==================================================== -->
+      <section id="formularios" class="ds-section">
+        <h2>Formulários</h2>
+        <p class="desc">
+          Inputs, selects e textareas compartilham a mesma base visual.
+          O toggle usa um <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">&lt;input type="checkbox"&gt;</code> oculto com <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">role="switch"</code> para acessibilidade.
+        </p>
+
+        <h3>Input</h3>
+        <div class="ds-preview" style="max-width:400px">
+          <label class="cp-label" for="input-nome">Nome do curso</label>
+          <input class="cp-input" id="input-nome" type="text" placeholder="Ex: Introdução ao Vibe Coding" />
+          <label class="cp-label" for="input-email" style="margin-top:var(--cp-space-4)">Email (com erro)</label>
+          <input class="cp-input cp-input--error" id="input-email" type="email" placeholder="email@exemplo.com" value="email-invalido" />
+        </div>
+
+        <h3>Select</h3>
+        <div class="ds-preview" style="max-width:400px">
+          <label class="cp-label" for="select-categoria">Categoria</label>
+          <select class="cp-select" id="select-categoria">
+            <option value="">Selecione uma categoria</option>
+            <option value="ia">Inteligência Artificial</option>
+            <option value="codigo">Vibe Coding</option>
+          </select>
+        </div>
+
+        <h3>Textarea</h3>
+        <div class="ds-preview" style="max-width:400px">
+          <label class="cp-label" for="textarea-desc">Descrição</label>
+          <textarea class="cp-input cp-textarea" id="textarea-desc" placeholder="Descreva o curso em detalhes…"></textarea>
+        </div>
+
+        <h3>Toggle</h3>
+        <div class="ds-preview ds-flex">
+          <div style="display:flex;align-items:center;gap:var(--cp-space-3)">
+            <label class="cp-toggle">
+              <input type="checkbox" role="switch" aria-checked="false" aria-label="Notificações" />
+              <span class="cp-toggle__track"></span>
+            </label>
+            <span style="font-size:var(--cp-text-sm);color:var(--cp-text-secondary);font-weight:var(--cp-font-semibold)">Notificações</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:var(--cp-space-3)">
+            <label class="cp-toggle">
+              <input type="checkbox" role="switch" aria-checked="true" aria-label="Dark Mode" checked />
+              <span class="cp-toggle__track"></span>
+            </label>
+            <span style="font-size:var(--cp-text-sm);color:var(--cp-text-secondary);font-weight:var(--cp-font-semibold)">Dark Mode (ativo)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           CARDS
+      ==================================================== -->
+      <section id="cards" class="ds-section">
+        <h2>Cards</h2>
+        <p class="desc">
+          Cards são os contêineres de conteúdo do Classplay. Existem variantes para cursos, aulas, e conteúdo destacado.
+        </p>
+
+        <h3>Card Padrão</h3>
+        <div class="ds-preview" style="max-width:360px">
+          <div class="cp-card">
+            <p style="font-size:var(--cp-text-base);font-weight:var(--cp-font-bold);color:var(--cp-text-primary);margin-bottom:var(--cp-space-2)">Introdução ao Vibe Coding</p>
+            <p style="font-size:var(--cp-text-sm);color:var(--cp-text-secondary)">Aprenda a construir produtos digitais usando IA como co-piloto. Sem precisar de experiência anterior em programação.</p>
+          </div>
+        </div>
+
+        <h3>Card de Curso</h3>
+        <div class="ds-preview" style="max-width:320px">
+          <div class="cp-card-course">
+            <div class="cp-card-course__image" style="background:linear-gradient(135deg,var(--cp-primary-700),var(--cp-streak-600));display:flex;align-items:center;justify-content:center;font-size:3rem">⚡</div>
+            <div class="cp-card-course__body">
+              <div class="cp-card-course__title">IA Generativa na Prática</div>
+              <div class="cp-card-course__meta">12 aulas · 4h 30min</div>
+              <div class="cp-card-course__progress">
+                <div class="cp-progress">
+                  <div class="cp-progress__fill" style="width:65%"></div>
+                </div>
+                <p style="font-size:var(--cp-text-xs);color:var(--cp-text-muted);margin-top:var(--cp-space-1)">65% concluído</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Card de Aula</h3>
+        <div class="ds-preview" style="max-width:420px;display:flex;flex-direction:column;gap:var(--cp-space-3)">
+          <div class="cp-card-lesson cp-card-lesson--completed">
+            <span style="font-size:1.25rem">✅</span>
+            <div>
+              <p style="font-size:var(--cp-text-sm);font-weight:var(--cp-font-bold);color:var(--cp-text-primary)">Introdução à IA Generativa</p>
+              <p style="font-size:var(--cp-text-xs);color:var(--cp-text-muted)">8 min · Concluída</p>
+            </div>
+          </div>
+          <div class="cp-card-lesson">
+            <span style="font-size:1.25rem">▶️</span>
+            <div>
+              <p style="font-size:var(--cp-text-sm);font-weight:var(--cp-font-bold);color:var(--cp-text-primary)">Prompts que funcionam</p>
+              <p style="font-size:var(--cp-text-xs);color:var(--cp-text-muted)">12 min · Em andamento</p>
+            </div>
+          </div>
+          <div class="cp-card-lesson cp-card-lesson--locked">
+            <span style="font-size:1.25rem">🔒</span>
+            <div>
+              <p style="font-size:var(--cp-text-sm);font-weight:var(--cp-font-bold);color:var(--cp-text-primary)">Agents e Automações</p>
+              <p style="font-size:var(--cp-text-xs);color:var(--cp-text-muted)">15 min · Bloqueada</p>
+            </div>
+          </div>
+        </div>
+
+        <h3>Card Elevado</h3>
+        <div class="ds-preview" style="max-width:360px">
+          <div class="cp-card-elevated">
+            <p style="font-size:var(--cp-text-xs);font-weight:var(--cp-font-extra);color:var(--cp-primary-400);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:var(--cp-space-2)">Conteúdo Premium</p>
+            <p style="font-size:var(--cp-text-lg);font-weight:var(--cp-font-bold);color:var(--cp-text-primary);margin-bottom:var(--cp-space-3)">Masterclass: Deploy com IA</p>
+            <p style="font-size:var(--cp-text-sm);color:var(--cp-text-secondary)">Aula exclusiva para membros Pro. Aprenda a publicar projetos completos com zero infraestrutura manual.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           BADGES & TAGS
+      ==================================================== -->
+      <section id="badges" class="ds-section">
+        <h2>Badges &amp; Tags</h2>
+        <p class="desc">
+          Badges comunicam conquistas, progresso e métricas de gamificação. Tags categorizam conteúdo.
+        </p>
+
+        <div class="ds-preview ds-flex" style="flex-wrap:wrap;gap:var(--cp-space-3)">
+          <span class="cp-badge-xp">+120 XP</span>
+          <span class="cp-badge-streak">🔥 14 dias</span>
+          <span class="cp-badge-level">Nível 5</span>
+          <span class="cp-tag">IA</span>
+          <span class="cp-tag">Vibe Coding</span>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           PROGRESSO
+      ==================================================== -->
+      <section id="progresso" class="ds-section">
+        <h2>Progresso</h2>
+        <p class="desc">
+          Barras de progresso animadas com efeito bounce. A transição usa cubic-bezier para dar sensação de satisfação ao completar.
+        </p>
+
+        <h3>Padrão</h3>
+        <div class="ds-preview" style="display:flex;flex-direction:column;gap:var(--cp-space-4);max-width:480px">
+          <div>
+            <p style="font-size:var(--cp-text-xs);color:var(--cp-text-muted);margin-bottom:var(--cp-space-2)">35%</p>
+            <div class="cp-progress"><div class="cp-progress__fill" style="width:35%"></div></div>
+          </div>
+          <div>
+            <p style="font-size:var(--cp-text-xs);color:var(--cp-text-muted);margin-bottom:var(--cp-space-2)">65%</p>
+            <div class="cp-progress"><div class="cp-progress__fill" style="width:65%"></div></div>
+          </div>
+          <div>
+            <p style="font-size:var(--cp-text-xs);color:var(--cp-text-muted);margin-bottom:var(--cp-space-2)">100%</p>
+            <div class="cp-progress"><div class="cp-progress__fill" style="width:100%"></div></div>
+          </div>
+        </div>
+
+        <h3>Variantes</h3>
+        <div class="ds-preview" style="display:flex;flex-direction:column;gap:var(--cp-space-4);max-width:480px">
+          <div>
+            <p style="font-size:var(--cp-text-xs);color:var(--cp-text-muted);margin-bottom:var(--cp-space-2)">Sucesso — 80%</p>
+            <div class="cp-progress cp-progress--success"><div class="cp-progress__fill" style="width:80%"></div></div>
+          </div>
+          <div>
+            <p style="font-size:var(--cp-text-xs);color:var(--cp-text-muted);margin-bottom:var(--cp-space-2)">XP — 55%</p>
+            <div class="cp-progress cp-progress--xp"><div class="cp-progress__fill" style="width:55%"></div></div>
+          </div>
+          <div>
+            <p style="font-size:var(--cp-text-xs);color:var(--cp-text-muted);margin-bottom:var(--cp-space-2)">Large (12px) — 45%</p>
+            <div class="cp-progress cp-progress--lg"><div class="cp-progress__fill" style="width:45%"></div></div>
+          </div>
+        </div>
+
+        <h3>Avatar</h3>
+        <div class="ds-preview ds-flex" style="flex-wrap:wrap;align-items:flex-end;gap:var(--cp-space-6)">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:var(--cp-space-2)">
+            <div class="cp-avatar cp-avatar--sm" style="background:linear-gradient(135deg,var(--cp-primary-500),var(--cp-streak));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:var(--cp-font-bold);font-size:var(--cp-text-sm)">A</div>
+            <span style="font-size:var(--cp-text-xs);color:var(--cp-text-muted)">sm (32)</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:var(--cp-space-2)">
+            <div class="cp-avatar" style="background:linear-gradient(135deg,var(--cp-primary-500),var(--cp-streak));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:var(--cp-font-bold)">B</div>
+            <span style="font-size:var(--cp-text-xs);color:var(--cp-text-muted)">padrão (40)</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:var(--cp-space-2)">
+            <div class="cp-avatar cp-avatar--lg" style="background:linear-gradient(135deg,var(--cp-primary-500),var(--cp-streak));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:var(--cp-font-bold);font-size:var(--cp-text-xl)">C</div>
+            <span style="font-size:var(--cp-text-xs);color:var(--cp-text-muted)">lg (56)</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:var(--cp-space-2)">
+            <div class="cp-avatar cp-avatar--xl" style="background:linear-gradient(135deg,var(--cp-primary-500),var(--cp-streak));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:var(--cp-font-bold);font-size:var(--cp-text-2xl)">D</div>
+            <span style="font-size:var(--cp-text-xs);color:var(--cp-text-muted)">xl (80)</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:var(--cp-space-2)">
+            <div class="cp-avatar cp-avatar--lg cp-avatar--bordered" style="background:linear-gradient(135deg,var(--cp-success-400),var(--cp-level));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:var(--cp-font-bold);font-size:var(--cp-text-xl)">★</div>
+            <span style="font-size:var(--cp-text-xs);color:var(--cp-text-muted)">bordered</span>
+          </div>
+        </div>
+
+        <h3>Sidebar (componente — mockup)</h3>
+        <div class="ds-preview">
+          <div class="cp-sidebar-demo">
+            <a class="cp-sidebar-demo__item cp-sidebar-demo__item--active" href="#">🏠 Início</a>
+            <a class="cp-sidebar-demo__item" href="#">📚 Cursos</a>
+            <a class="cp-sidebar-demo__item" href="#">🏆 Conquistas</a>
+            <a class="cp-sidebar-demo__item" href="#">⚙️ Configurações</a>
+          </div>
+        </div>
+
+        <h3>Modal</h3>
+        <div class="ds-preview ds-flex">
+          <button class="cp-btn cp-btn-primary" onclick="document.getElementById('demo-modal').style.display='flex'" aria-label="Abrir modal de demonstração">Abrir Modal</button>
+        </div>
+
+        <h3>Tooltip</h3>
+        <div class="ds-preview ds-flex">
+          <span class="cp-tooltip">
+            <button class="cp-btn cp-btn-secondary">Passe o mouse aqui</button>
+            <span class="cp-tooltip__content">Dica de ferramenta</span>
+          </span>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           GAMIFICAÇÃO
+      ==================================================== -->
+      <section id="gamificacao" class="ds-section">
+        <h2>Gamificação</h2>
+        <p class="desc">
+          Componentes que comunicam progresso, recompensas e engajamento. O sistema de gamificação é o coração do Classplay.
+        </p>
+
+        <h3>Painel de XP</h3>
+        <div class="ds-preview" style="max-width:320px">
+          <div class="cp-xp-panel">
+            <span style="font-size:2rem">⚡</span>
+            <div>
+              <div class="cp-xp-panel__number">1.250</div>
+              <div class="cp-xp-panel__label">pontos de XP</div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Streak Counter</h3>
+        <div class="ds-preview ds-flex" style="flex-wrap:wrap">
+          <div class="cp-streak-counter">
+            <span style="font-size:1.5rem">🔥</span>
+            <div>
+              <div class="cp-streak-counter__number">14</div>
+              <div class="cp-streak-counter__label">dias seguidos</div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Conquistas</h3>
+        <div class="ds-preview">
+          <div style="display:flex;flex-wrap:wrap;gap:var(--cp-space-8);justify-content:center">
+            <div class="cp-achievement">
+              <div class="cp-achievement__icon cp-achievement__icon--bronze">🎯</div>
+              <div class="cp-achievement__title">Primeira Aula</div>
+              <div class="cp-achievement__description">Conclua sua 1ª aula</div>
+            </div>
+            <div class="cp-achievement">
+              <div class="cp-achievement__icon cp-achievement__icon--silver">📚</div>
+              <div class="cp-achievement__title">Dedicado</div>
+              <div class="cp-achievement__description">7 dias seguidos</div>
+            </div>
+            <div class="cp-achievement">
+              <div class="cp-achievement__icon cp-achievement__icon--gold">⭐</div>
+              <div class="cp-achievement__title">Mestre</div>
+              <div class="cp-achievement__description">Conclua um curso</div>
+            </div>
+            <div class="cp-achievement">
+              <div class="cp-achievement__icon cp-achievement__icon--diamond">💎</div>
+              <div class="cp-achievement__title">Lenda</div>
+              <div class="cp-achievement__description">30 dias seguidos</div>
+            </div>
+            <div class="cp-achievement">
+              <div class="cp-achievement__icon cp-achievement__icon--locked">🔒</div>
+              <div class="cp-achievement__title">???</div>
+              <div class="cp-achievement__description">Bloqueada</div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Leaderboard</h3>
+        <div class="ds-preview" style="max-width:400px">
+          <div class="cp-leaderboard">
+            <div class="cp-leaderboard__item">
+              <span class="cp-leaderboard__rank cp-leaderboard__rank--1">1</span>
+              <div class="cp-avatar cp-avatar--sm" style="background:linear-gradient(135deg,var(--cp-xp),var(--cp-streak));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:var(--cp-font-bold);font-size:var(--cp-text-xs)">A</div>
+              <span style="font-size:var(--cp-text-sm);font-weight:var(--cp-font-bold);color:var(--cp-text-primary)">Ana Lima</span>
+              <span class="cp-leaderboard__xp">3.840 XP</span>
+            </div>
+            <div class="cp-leaderboard__item">
+              <span class="cp-leaderboard__rank cp-leaderboard__rank--2">2</span>
+              <div class="cp-avatar cp-avatar--sm" style="background:linear-gradient(135deg,var(--cp-level),var(--cp-info));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:var(--cp-font-bold);font-size:var(--cp-text-xs)">C</div>
+              <span style="font-size:var(--cp-text-sm);font-weight:var(--cp-font-bold);color:var(--cp-text-primary)">Carlos Souza</span>
+              <span class="cp-leaderboard__xp">3.210 XP</span>
+            </div>
+            <div class="cp-leaderboard__item">
+              <span class="cp-leaderboard__rank cp-leaderboard__rank--3">3</span>
+              <div class="cp-avatar cp-avatar--sm" style="background:linear-gradient(135deg,var(--cp-bonus),var(--cp-primary-500));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:var(--cp-font-bold);font-size:var(--cp-text-xs)">M</div>
+              <span style="font-size:var(--cp-text-sm);font-weight:var(--cp-font-bold);color:var(--cp-text-primary)">Maria Costa</span>
+              <span class="cp-leaderboard__xp">2.980 XP</span>
+            </div>
+            <div class="cp-leaderboard__item cp-leaderboard__item--me">
+              <span class="cp-leaderboard__rank">4</span>
+              <div class="cp-avatar cp-avatar--sm" style="background:linear-gradient(135deg,var(--cp-primary-600),var(--cp-level));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:var(--cp-font-bold);font-size:var(--cp-text-xs)">V</div>
+              <span style="font-size:var(--cp-text-sm);font-weight:var(--cp-font-bold);color:var(--cp-primary-400)">Você</span>
+              <span class="cp-leaderboard__xp">1.250 XP</span>
+            </div>
+          </div>
+        </div>
+
+        <h3>Missões Diárias</h3>
+        <div class="ds-preview" style="max-width:480px;display:flex;flex-direction:column;gap:var(--cp-space-3)">
+          <div class="cp-mission">
+            <div class="cp-mission__icon cp-mission__icon--xp">⚡</div>
+            <div class="cp-mission__info">
+              <div class="cp-mission__title">Ganhar 100 XP hoje</div>
+              <div class="cp-mission__progress-bar">
+                <div class="cp-mission__progress-fill" style="width:60%"></div>
+              </div>
+            </div>
+            <div class="cp-mission__reward">+50 XP</div>
+          </div>
+          <div class="cp-mission">
+            <div class="cp-mission__icon cp-mission__icon--time">⏱</div>
+            <div class="cp-mission__info">
+              <div class="cp-mission__title">Estudar 30 minutos</div>
+              <div class="cp-mission__progress-bar">
+                <div class="cp-mission__progress-fill" style="width:30%"></div>
+              </div>
+            </div>
+            <div class="cp-mission__reward">+30 XP</div>
+          </div>
+          <div class="cp-mission cp-mission--completed">
+            <div class="cp-mission__icon cp-mission__icon--lesson">✅</div>
+            <div class="cp-mission__info">
+              <div class="cp-mission__title">Completar 1 aula</div>
+              <div class="cp-mission__progress-bar">
+                <div class="cp-mission__progress-fill" style="width:100%"></div>
+              </div>
+            </div>
+            <div class="cp-mission__reward">+20 XP</div>
+          </div>
+        </div>
+
+        <h3>Indicador de Nível</h3>
+        <div class="ds-preview" style="max-width:360px">
+          <div class="cp-level-indicator">
+            <div class="cp-level-indicator__badge">5</div>
+            <div>
+              <div style="font-size:var(--cp-text-base);font-weight:var(--cp-font-bold);color:var(--cp-text-primary)">Nível 5</div>
+              <div class="cp-level-indicator__xp-to-next">750 XP para o nível 6</div>
+              <div style="margin-top:var(--cp-space-2)">
+                <div class="cp-progress" style="width:200px">
+                  <div class="cp-progress__fill" style="width:62%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           ANIMAÇÕES
+      ==================================================== -->
+      <section id="animacoes" class="ds-section">
+        <h2>Animações</h2>
+        <p class="desc">
+          Demos interativas das animações disponíveis. Clique nos botões para ver cada animação em ação. Todas respeitam <code style="font-family:var(--cp-font-mono);color:var(--cp-primary-400)">prefers-reduced-motion</code>.
+        </p>
+
+        <h3>Demos de Animação</h3>
+        <div class="ds-preview ds-flex" style="flex-wrap:wrap">
+          <button class="cp-btn cp-btn-primary cp-btn--sm" onclick="demoAnimation(this,'cp-animate-bounce-in')">Bounce In</button>
+          <button class="cp-btn cp-btn-secondary cp-btn--sm" onclick="demoAnimation(this,'cp-animate-pulse')">Pulse</button>
+          <button class="cp-btn cp-btn-danger cp-btn--sm" onclick="demoAnimation(this,'cp-animate-shake')">Shake</button>
+          <button class="cp-btn cp-btn-success cp-btn--sm" onclick="demoAnimation(this,'cp-animate-glow')">Glow</button>
+          <button class="cp-btn cp-btn-ghost cp-btn--sm" onclick="demoAnimation(this,'cp-animate-float')">Float</button>
+          <button class="cp-btn cp-btn-primary cp-btn--sm" onclick="demoAnimation(this,'cp-animate-spin')">Spin</button>
+          <button class="cp-btn cp-btn-secondary cp-btn--sm" onclick="demoAnimation(this,'cp-animate-star-burst')">Star Burst</button>
+        </div>
+
+        <h3>XP Fly-Up</h3>
+        <div class="ds-preview" style="position:relative;min-height:80px;display:flex;align-items:center">
+          <button class="cp-btn cp-btn-primary" onclick="demoXPFlyup(this)">Ganhar +50 XP</button>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           LOADING STATES
+      ==================================================== -->
+      <section id="loading" class="ds-section">
+        <h2>Loading States</h2>
+        <p class="desc">
+          Spinners e skeletons para estados de carregamento. Use spinners para ações curtas e skeletons para carregamento de conteúdo.
+        </p>
+
+        <h3>Spinner</h3>
+        <div class="ds-preview ds-flex" style="align-items:center">
+          <div>
+            <div class="cp-spinner cp-spinner--sm"></div>
+            <p style="font-size:var(--cp-text-xs);color:var(--cp-text-muted);margin-top:var(--cp-space-2);text-align:center">sm (16px)</p>
+          </div>
+          <div>
+            <div class="cp-spinner"></div>
+            <p style="font-size:var(--cp-text-xs);color:var(--cp-text-muted);margin-top:var(--cp-space-2);text-align:center">padrão (24px)</p>
+          </div>
+          <div>
+            <div class="cp-spinner cp-spinner--lg"></div>
+            <p style="font-size:var(--cp-text-xs);color:var(--cp-text-muted);margin-top:var(--cp-space-2);text-align:center">lg (40px)</p>
+          </div>
+        </div>
+
+        <h3>Skeleton</h3>
+        <div class="ds-preview" style="max-width:420px">
+          <div style="display:flex;gap:var(--cp-space-3);align-items:flex-start;margin-bottom:var(--cp-space-6)">
+            <div class="cp-skeleton cp-skeleton--avatar"></div>
+            <div style="flex:1">
+              <div class="cp-skeleton cp-skeleton--title"></div>
+              <div class="cp-skeleton cp-skeleton--text"></div>
+              <div class="cp-skeleton cp-skeleton--text" style="width:75%"></div>
+            </div>
+          </div>
+          <div class="cp-skeleton cp-skeleton--card"></div>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           TOASTS
+      ==================================================== -->
+      <section id="toasts" class="ds-section">
+        <h2>Toasts</h2>
+        <p class="desc">
+          Notificações não-intrusivas que aparecem no canto superior direito. Desaparecem automaticamente após 4 segundos.
+        </p>
+
+        <div class="ds-preview ds-flex" style="flex-wrap:wrap">
+          <button class="cp-btn cp-btn-secondary cp-btn--sm" onclick="showToast('info')">Info</button>
+          <button class="cp-btn cp-btn-success cp-btn--sm" onclick="showToast('success')">Sucesso</button>
+          <button class="cp-btn cp-btn-danger cp-btn--sm" onclick="showToast('danger')">Erro</button>
+          <button class="cp-btn cp-btn-primary cp-btn--sm" onclick="showToast('xp')">+XP</button>
+        </div>
+      </section>
+
+      <!-- ===================================================
+           GRADIENTES
+      ==================================================== -->
+      <section id="gradientes" class="ds-section">
+        <h2>Gradientes &amp; Fundos</h2>
+        <p class="desc">
+          Classes utilitárias de gradientes pré-definidos para headers, cards destaque e contextos de gamificação. Padrões decorativos para backgrounds de seções.
+        </p>
+
+        <div class="ds-preview">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--cp-space-4)">
+            <div style="height:80px;border-radius:var(--cp-radius-lg);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:var(--cp-font-bold);font-size:var(--cp-text-sm)" class="cp-gradient-premium">Premium</div>
+            <div style="height:80px;border-radius:var(--cp-radius-lg);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:var(--cp-font-bold);font-size:var(--cp-text-sm)" class="cp-gradient-streak">🔥 Streak</div>
+            <div style="height:80px;border-radius:var(--cp-radius-lg);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:var(--cp-font-bold);font-size:var(--cp-text-sm)" class="cp-gradient-xp">⚡ XP</div>
+            <div style="height:80px;border-radius:var(--cp-radius-lg);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:var(--cp-font-bold);font-size:var(--cp-text-sm)" class="cp-gradient-levelup">Level Up!</div>
+            <div style="height:80px;border-radius:var(--cp-radius-lg);display:flex;align-items:center;justify-content:center;font-weight:var(--cp-font-bold);font-size:var(--cp-text-sm);color:var(--cp-text-muted);border:1px solid var(--cp-border)" class="cp-pattern-dots">Dots</div>
+            <div style="height:80px;border-radius:var(--cp-radius-lg);display:flex;align-items:center;justify-content:center;font-weight:var(--cp-font-bold);font-size:var(--cp-text-sm);color:var(--cp-text-muted);border:1px solid var(--cp-border)" class="cp-pattern-grid">Grid</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Modal overlay (hidden by default) -->
+      <div id="demo-modal" class="cp-modal-overlay" style="display:none" onclick="if(event.target===this)this.style.display='none'" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="cp-modal" onclick="event.stopPropagation()">
+          <p style="font-size:var(--cp-text-2xl);margin-bottom:var(--cp-space-1)">🏆</p>
+          <h3 id="modal-title" style="font-size:var(--cp-text-2xl);font-weight:var(--cp-font-black);color:var(--cp-text-primary);margin-bottom:var(--cp-space-3)">Level Up!</h3>
+          <p style="font-size:var(--cp-text-base);color:var(--cp-text-secondary);margin-bottom:var(--cp-space-6)">Parabéns! Você alcançou o <strong style="color:var(--cp-primary-400)">Nível 5</strong> e desbloqueou novos conteúdos exclusivos. Continue assim!</p>
+          <div style="display:flex;gap:var(--cp-space-3);justify-content:flex-end">
+            <button class="cp-btn cp-btn-ghost" onclick="document.getElementById('demo-modal').style.display='none'">Fechar</button>
+            <button class="cp-btn cp-btn-primary" onclick="document.getElementById('demo-modal').style.display='none'">Continuar aprendendo</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Toast container (fixed, portal) -->
+  <div class="cp-toast-container" id="toast-container"></div>
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+  <script>
+    // --- Theme toggle ---
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('cp-theme', next);
+      updateThemeIcon(next);
+    }
+
+    function updateThemeIcon(theme) {
+      const icon = document.getElementById('theme-icon');
+      const label = document.getElementById('theme-label');
+      if (theme === 'dark') {
+        icon.textContent = '☀️';
+        label.textContent = 'Tema Claro';
+      } else {
+        icon.textContent = '🌙';
+        label.textContent = 'Tema Escuro';
+      }
+    }
+
+    // --- Load saved theme from localStorage ---
+    (function initTheme() {
+      const saved = localStorage.getItem('cp-theme');
+      if (saved && (saved === 'dark' || saved === 'light')) {
+        document.documentElement.setAttribute('data-theme', saved);
+        updateThemeIcon(saved);
+      } else {
+        // Default: dark — already set via HTML attribute
+        updateThemeIcon('dark');
+      }
+    })();
+
+    // --- Scroll spy: highlight active sidebar link ---
+    (function initScrollSpy() {
+      const links = document.querySelectorAll('.ds-sidebar a[data-section]');
+      const sections = [];
+
+      links.forEach(link => {
+        const id = link.getAttribute('href').replace('#', '');
+        const el = document.getElementById(id);
+        if (el) sections.push({ id, el, link });
+      });
+
+      if (sections.length === 0) return;
+
+      function onScroll() {
+        const scrollY = window.scrollY + 80 + 10;
+        let active = sections[0];
+
+        sections.forEach(s => {
+          if (s.el.offsetTop <= scrollY) {
+            active = s;
+          }
+        });
+
+        links.forEach(l => l.classList.remove('active'));
+        if (active) active.link.classList.add('active');
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    // --- Copy swatch hex to clipboard ---
+    function copySwatch(hex) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(hex).then(() => {
+          showCopyToast(hex);
+        }).catch(() => {
+          fallbackCopy(hex);
+        });
+      } else {
+        fallbackCopy(hex);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showCopyToast(text);
+    }
+
+    function showCopyToast(hex) {
+      const existing = document.getElementById('cp-copy-toast');
+      if (existing) existing.remove();
+
+      const toast = document.createElement('div');
+      toast.id = 'cp-copy-toast';
+      toast.textContent = `Copiado: ${hex}`;
+      Object.assign(toast.style, {
+        position: 'fixed',
+        bottom: '24px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        background: 'var(--cp-primary-600)',
+        color: '#fff',
+        fontFamily: 'var(--cp-font-family)',
+        fontSize: 'var(--cp-text-sm)',
+        fontWeight: '700',
+        padding: '10px 20px',
+        borderRadius: 'var(--cp-radius-pill)',
+        zIndex: '9999',
+        boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
+        pointerEvents: 'none',
+        opacity: '1',
+        transition: 'opacity 0.3s ease',
+      });
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 1800);
+    }
+
+    // --- Download Markdown ---
+    function downloadMarkdown() {
+      const md = document.getElementById('markdown-content').textContent;
+      const blob = new Blob([md], { type: 'text/markdown' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'classplay-design-system.md';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // =========================================================
+    //  ANIMATION DEMOS
+    // =========================================================
+    function demoAnimation(btn, cls) {
+      btn.classList.remove(cls);
+      void btn.offsetWidth;
+      btn.classList.add(cls);
+      btn.addEventListener('animationend', function() {
+        btn.classList.remove(cls);
+      }, { once: true });
+    }
+
+    function demoXPFlyup(btn) {
+      var flyup = document.createElement('div');
+      flyup.textContent = '+50 XP';
+      flyup.style.cssText = 'position:absolute;color:var(--cp-xp);font-weight:900;font-size:1.5rem;pointer-events:none;';
+      flyup.classList.add('cp-animate-xp-flyup');
+      btn.parentElement.appendChild(flyup);
+      var rect = btn.getBoundingClientRect();
+      var parentRect = btn.parentElement.getBoundingClientRect();
+      flyup.style.left = (rect.left - parentRect.left + rect.width / 2 - 30) + 'px';
+      flyup.style.top  = (rect.top  - parentRect.top) + 'px';
+      flyup.addEventListener('animationend', function() { flyup.remove(); });
+    }
+
+    // =========================================================
+    //  TOAST
+    // =========================================================
+    function showToast(type) {
+      var messages = {
+        info:    'Nova aula disponível.',
+        success: 'Aula concluída!',
+        danger:  'Erro ao salvar.',
+        xp:      '+50 XP ganhos!'
+      };
+      var container = document.getElementById('toast-container');
+      var toast = document.createElement('div');
+      toast.className = 'cp-toast cp-toast--' + type;
+      toast.innerHTML =
+        '<span class="cp-toast__message">' + messages[type] + '</span>' +
+        '<button class="cp-toast__close" onclick="this.parentElement.remove()">✕</button>';
+      container.appendChild(toast);
+      setTimeout(function() {
+        if (toast.parentElement) toast.remove();
+      }, 4000);
+    }
+
+    // =========================================================
+    //  COLOR SWATCHES
+    // =========================================================
+
+    function renderSwatches(containerId, swatches) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = swatches.map(function(s) {
+        return '<div class="ds-swatch" onclick="copySwatch(\'' + s.hex + '\')" title="Clique para copiar ' + s.hex + '">' +
+          '<div class="ds-swatch__color" style="background:' + s.hex + '"></div>' +
+          '<div class="ds-swatch__label"><strong>' + s.scale + '</strong>' + s.hex + '</div>' +
+          '</div>';
+      }).join('');
+    }
+
+    // Primary (Roxo)
+    renderSwatches('primary-swatches', [
+      { scale: '50',  hex: '#FAF5FF' },
+      { scale: '100', hex: '#F3E8FF' },
+      { scale: '200', hex: '#E9D5FF' },
+      { scale: '300', hex: '#D8B4FE' },
+      { scale: '400', hex: '#C084FC' },
+      { scale: '500', hex: '#A855F7' },
+      { scale: '600', hex: '#7C3AED' },
+      { scale: '700', hex: '#6D28D9' },
+      { scale: '800', hex: '#5B21B6' },
+      { scale: '900', hex: '#4C1D95' }
+    ]);
+
+    // XP (Âmbar)
+    renderSwatches('xp-swatches', [
+      { scale: '50',  hex: '#FFFBEB' },
+      { scale: '100', hex: '#FEF3C7' },
+      { scale: '200', hex: '#FDE68A' },
+      { scale: '300', hex: '#FCD34D' },
+      { scale: '400', hex: '#FBBF24' },
+      { scale: '500', hex: '#F59E0B' },
+      { scale: '600', hex: '#D97706' },
+      { scale: '700', hex: '#B45309' },
+      { scale: '800', hex: '#92400E' },
+      { scale: '900', hex: '#78350F' }
+    ]);
+
+    // Streak (Laranja)
+    renderSwatches('streak-swatches', [
+      { scale: '50',  hex: '#FFF7ED' },
+      { scale: '100', hex: '#FFEDD5' },
+      { scale: '200', hex: '#FED7AA' },
+      { scale: '300', hex: '#FDBA74' },
+      { scale: '400', hex: '#FB923C' },
+      { scale: '500', hex: '#F97316' },
+      { scale: '600', hex: '#EA580C' },
+      { scale: '700', hex: '#C2410C' },
+      { scale: '800', hex: '#9A3412' },
+      { scale: '900', hex: '#7C2D12' }
+    ]);
+
+    // Success (Esmeralda)
+    renderSwatches('success-swatches', [
+      { scale: '50',  hex: '#ECFDF5' },
+      { scale: '100', hex: '#D1FAE5' },
+      { scale: '200', hex: '#A7F3D0' },
+      { scale: '300', hex: '#6EE7B7' },
+      { scale: '400', hex: '#34D399' },
+      { scale: '500', hex: '#10B981' },
+      { scale: '600', hex: '#059669' },
+      { scale: '700', hex: '#047857' },
+      { scale: '800', hex: '#065F46' },
+      { scale: '900', hex: '#064E3B' }
+    ]);
+
+    // Info (Azul)
+    renderSwatches('info-swatches', [
+      { scale: '50',  hex: '#EFF6FF' },
+      { scale: '100', hex: '#DBEAFE' },
+      { scale: '200', hex: '#BFDBFE' },
+      { scale: '300', hex: '#93C5FD' },
+      { scale: '400', hex: '#60A5FA' },
+      { scale: '500', hex: '#3B82F6' },
+      { scale: '600', hex: '#2563EB' },
+      { scale: '700', hex: '#1D4ED8' },
+      { scale: '800', hex: '#1E40AF' },
+      { scale: '900', hex: '#1E3A8A' }
+    ]);
+
+    // Danger (Vermelho)
+    renderSwatches('danger-swatches', [
+      { scale: '50',  hex: '#FEF2F2' },
+      { scale: '100', hex: '#FEE2E2' },
+      { scale: '200', hex: '#FECACA' },
+      { scale: '300', hex: '#FCA5A5' },
+      { scale: '400', hex: '#F87171' },
+      { scale: '500', hex: '#EF4444' },
+      { scale: '600', hex: '#DC2626' },
+      { scale: '700', hex: '#B91C1C' },
+      { scale: '800', hex: '#991B1B' },
+      { scale: '900', hex: '#7F1D1D' }
+    ]);
+
+    // Bonus (Rosa)
+    renderSwatches('bonus-swatches', [
+      { scale: '50',  hex: '#FDF2F8' },
+      { scale: '100', hex: '#FCE7F3' },
+      { scale: '200', hex: '#FBCFE8' },
+      { scale: '300', hex: '#F9A8D4' },
+      { scale: '400', hex: '#F472B6' },
+      { scale: '500', hex: '#EC4899' },
+      { scale: '600', hex: '#DB2777' },
+      { scale: '700', hex: '#BE185D' },
+      { scale: '800', hex: '#9D174D' },
+      { scale: '900', hex: '#831843' }
+    ]);
+
+    // Level (Cyan)
+    renderSwatches('level-swatches', [
+      { scale: '50',  hex: '#ECFEFF' },
+      { scale: '100', hex: '#CFFAFE' },
+      { scale: '200', hex: '#A5F3FC' },
+      { scale: '300', hex: '#67E8F9' },
+      { scale: '400', hex: '#22D3EE' },
+      { scale: '500', hex: '#06B6D4' },
+      { scale: '600', hex: '#0891B2' },
+      { scale: '700', hex: '#0E7490' },
+      { scale: '800', hex: '#155E75' },
+      { scale: '900', hex: '#164E63' }
+    ]);
+
+    // Surface — Dark Mode
+    (function renderSurfaceSwatches() {
+      var darkSwatches = [
+        { token: 'bg-primary',    hex: '#0F0A1A' },
+        { token: 'bg-secondary',  hex: '#1A1128' },
+        { token: 'bg-tertiary',   hex: '#2D1F42' },
+        { token: 'bg-elevated',   hex: '#251A38' },
+        { token: 'text-primary',  hex: '#F5F0FF' },
+        { token: 'text-secondary',hex: '#B8A0D4' },
+        { token: 'text-muted',    hex: '#7A6895' },
+        { token: 'border',        hex: '#2D1F42' }
+      ];
+      var lightSwatches = [
+        { token: 'bg-primary',    hex: '#FFFFFF' },
+        { token: 'bg-secondary',  hex: '#FAF5FF' },
+        { token: 'bg-tertiary',   hex: '#F3E8FF' },
+        { token: 'bg-elevated',   hex: '#FFFFFF' },
+        { token: 'text-primary',  hex: '#1A1128' },
+        { token: 'text-secondary',hex: '#6B5A82' },
+        { token: 'text-muted',    hex: '#9B8AB3' },
+        { token: 'border',        hex: '#E9D5FF' }
+      ];
+
+      function makeSurfaceHTML(swatches) {
+        return swatches.map(function(s) {
+          return '<div class="ds-surface-swatch" onclick="copySwatch(\'' + s.hex + '\')" title="Clique para copiar ' + s.hex + '" style="cursor:pointer">' +
+            '<div class="ds-surface-swatch__color" style="background:' + s.hex + ';border-bottom:1px solid rgba(255,255,255,0.08)"></div>' +
+            '<div class="ds-surface-swatch__label"><strong>' + s.token + '</strong>' + s.hex + '</div>' +
+            '</div>';
+        }).join('');
+      }
+
+      var darkContainer = document.getElementById('surface-dark-swatches');
+      var lightContainer = document.getElementById('surface-light-swatches');
+      if (darkContainer) darkContainer.innerHTML = makeSurfaceHTML(darkSwatches);
+      if (lightContainer) lightContainer.innerHTML = makeSurfaceHTML(lightSwatches);
+    })();
+
+    // =========================================================
+    //  TYPOGRAPHY
+    // =========================================================
+    (function renderTypography() {
+      var scale = [
+        { token: '--cp-text-xs',      px: '12px',  size: '0.75rem',  weight: 400, lh: 1.5 },
+        { token: '--cp-text-sm',      px: '14px',  size: '0.875rem', weight: 400, lh: 1.5 },
+        { token: '--cp-text-base',    px: '16px',  size: '1rem',     weight: 400, lh: 1.6 },
+        { token: '--cp-text-lg',      px: '18px',  size: '1.125rem', weight: 600, lh: 1.5 },
+        { token: '--cp-text-xl',      px: '20px',  size: '1.25rem',  weight: 600, lh: 1.4 },
+        { token: '--cp-text-2xl',     px: '24px',  size: '1.5rem',   weight: 700, lh: 1.3 },
+        { token: '--cp-text-3xl',     px: '30px',  size: '1.875rem', weight: 800, lh: 1.2 },
+        { token: '--cp-text-4xl',     px: '36px',  size: '2.25rem',  weight: 800, lh: 1.1 },
+        { token: '--cp-text-display', px: '48px',  size: '3rem',     weight: 900, lh: 1.0 }
+      ];
+
+      var html = scale.map(function(s) {
+        return '<div class="ds-type-row">' +
+          '<div class="ds-type-meta">' +
+            '<div class="token">' + s.token + '</div>' +
+            '<div class="px">' + s.px + ' / lh ' + s.lh + '</div>' +
+          '</div>' +
+          '<div class="ds-type-sample" style="font-size:' + s.size + ';font-weight:' + s.weight + ';line-height:' + s.lh + '">' +
+            'Classplay Design System' +
+          '</div>' +
+          '</div>';
+      }).join('');
+
+      var container = document.getElementById('type-scale-preview');
+      if (container) container.innerHTML = html;
+
+      // Weights
+      var weights = [
+        { token: '--cp-font-regular',  val: 400, name: 'Regular'  },
+        { token: '--cp-font-semibold', val: 600, name: 'SemiBold' },
+        { token: '--cp-font-bold',     val: 700, name: 'Bold'     },
+        { token: '--cp-font-extra',    val: 800, name: 'ExtraBold'},
+        { token: '--cp-font-black',    val: 900, name: 'Black'    }
+      ];
+
+      var wHtml = weights.map(function(w) {
+        return '<div class="ds-weight-row">' +
+          '<div class="ds-weight-meta">' + w.token + '<br><span class="ds-weight-val">' + w.val + ' — ' + w.name + '</span></div>' +
+          '<div style="font-size:var(--cp-text-xl);font-weight:' + w.val + ';color:var(--cp-text-primary)">' +
+            'Classplay Design System' +
+          '</div>' +
+          '</div>';
+      }).join('');
+
+      var wContainer = document.getElementById('type-weights-preview');
+      if (wContainer) wContainer.innerHTML = wHtml;
+    })();
+
+    // =========================================================
+    //  SPACING
+    // =========================================================
+    (function renderSpacing() {
+      var tokens = [
+        { token: '--cp-space-1',  px: 4  },
+        { token: '--cp-space-2',  px: 8  },
+        { token: '--cp-space-3',  px: 12 },
+        { token: '--cp-space-4',  px: 16 },
+        { token: '--cp-space-5',  px: 20 },
+        { token: '--cp-space-6',  px: 24 },
+        { token: '--cp-space-8',  px: 32 },
+        { token: '--cp-space-10', px: 40 },
+        { token: '--cp-space-12', px: 48 },
+        { token: '--cp-space-16', px: 64 },
+        { token: '--cp-space-20', px: 80 }
+      ];
+
+      var maxPx = 80;
+      var html = tokens.map(function(t) {
+        var widthPct = Math.round((t.px / maxPx) * 100);
+        return '<div class="ds-space-row">' +
+          '<div class="ds-space-meta">' +
+            '<div class="token">' + t.token + '</div>' +
+            '<div class="px">' + t.px + 'px</div>' +
+          '</div>' +
+          '<div class="ds-space-bar-wrap">' +
+            '<div class="ds-space-bar" style="width:' + widthPct + '%"></div>' +
+          '</div>' +
+          '</div>';
+      }).join('');
+
+      var container = document.getElementById('spacing-preview');
+      if (container) container.innerHTML = html;
+    })();
+
+    // =========================================================
+    //  BORDER RADIUS
+    // =========================================================
+    (function renderRadius() {
+      var radii = [
+        { token: '--cp-radius-sm',     label: 'sm',     value: '6px',    type: 'box'    },
+        { token: '--cp-radius-md',     label: 'md',     value: '8px',    type: 'box'    },
+        { token: '--cp-radius-lg',     label: 'lg',     value: '12px',   type: 'box'    },
+        { token: '--cp-radius-xl',     label: 'xl',     value: '16px',   type: 'box'    },
+        { token: '--cp-radius-pill',   label: 'pill',   value: '9999px', type: 'pill'   },
+        { token: '--cp-radius-circle', label: 'circle', value: '50%',    type: 'circle' }
+      ];
+
+      var html = radii.map(function(r) {
+        var shapeHtml;
+        if (r.type === 'circle') {
+          shapeHtml = '<div class="ds-radius-circle-box"></div>';
+        } else if (r.type === 'pill') {
+          shapeHtml = '<div class="ds-radius-pill-box"></div>';
+        } else {
+          shapeHtml = '<div class="ds-radius-box" style="border-radius:' + r.value + '"></div>';
+        }
+        return '<div class="ds-radius-item">' +
+          shapeHtml +
+          '<div class="ds-radius-label">' + r.token + '<span class="px">' + r.value + '</span></div>' +
+          '</div>';
+      }).join('');
+
+      var container = document.getElementById('radius-preview');
+      if (container) container.innerHTML = html;
+    })();
+
+    // =========================================================
+    //  SHADOWS
+    // =========================================================
+    (function renderShadows() {
+      var shadows = [
+        { token: '--cp-shadow-sm', label: 'shadow-sm', value: '0 1px 2px var(--cp-shadow-color)'    },
+        { token: '--cp-shadow-md', label: 'shadow-md', value: '0 4px 6px var(--cp-shadow-color)'    },
+        { token: '--cp-shadow-lg', label: 'shadow-lg', value: '0 10px 25px var(--cp-shadow-color)'  },
+        { token: '--cp-shadow-xl', label: 'shadow-xl', value: '0 20px 40px var(--cp-shadow-color)'  }
+      ];
+
+      var html = shadows.map(function(s) {
+        return '<div class="ds-shadow-item">' +
+          '<div class="ds-shadow-box" style="box-shadow:' + s.value + '">' + s.label + '</div>' +
+          '<div class="ds-shadow-label">' + s.token + '</div>' +
+          '</div>';
+      }).join('');
+
+      var container = document.getElementById('shadows-preview');
+      if (container) container.innerHTML = html;
+    })();
+  </script>
+
+<script type="text/plain" id="markdown-content">
+# Classplay Design System — Spec Completa
+
+## Visão Geral
+
+Design system completo para o Classplay, uma plataforma de LMS gamificada inspirada no Duolingo, voltada para adultos (35-45 anos) da Comunidade Sem Codar, focada em IA e vibe coding. O sistema prioriza sensação de evolução, interatividade satisfatória e riqueza visual sem parecer infantil.
+
+**Entregável:** Página HTML única autocontida documentando todo o design system com previews visuais, CSS custom properties, e botão para download do markdown completo.
+
+**Agnóstico de framework** — documentado em CSS custom properties puras, compatível com qualquer stack.
+
+---
+
+## 1. Cores
+
+Prefixo de todas as variáveis: `--cp-` (Classplay).
+
+### 1.1 Cor Primária — Roxo
+
+| Token | Hex | Uso |
+|---|---|---|
+| `--cp-primary-50` | `#FAF5FF` | Background sutil (light) |
+| `--cp-primary-100` | `#F3E8FF` | Hover backgrounds (light) |
+| `--cp-primary-200` | `#E9D5FF` | Borders (light) |
+| `--cp-primary-300` | `#D8B4FE` | Ícones inativos |
+| `--cp-primary-400` | `#C084FC` | Texto secundário (dark) |
+| `--cp-primary-500` | `#A855F7` | Hover estado de botões |
+| `--cp-primary-600` | `#7C3AED` | **Cor principal — botões, links, identidade** |
+| `--cp-primary-700` | `#6D28D9` | Sombra 3D dos botões |
+| `--cp-primary-800` | `#5B21B6` | Texto sobre backgrounds claros |
+| `--cp-primary-900` | `#4C1D95` | Backgrounds densos |
+
+### 1.2 Cores Funcionais de Gamificação
+
+Cada cor funcional tem escala completa (50-900). Tokens nomeados como `--cp-{cor}-{escala}`, ex: `--cp-xp-300`, `--cp-success-700`.
+
+| Token base | Hex (500) | Papel |
+|---|---|---|
+| `--cp-xp` | `#F59E0B` | XP, recompensas, moedas |
+| `--cp-streak` | `#F97316` | Streaks, energia, urgência |
+| `--cp-success` | `#10B981` | Conclusão, correto, progresso |
+| `--cp-info` | `#3B82F6` | Informação, dicas, links |
+| `--cp-danger` | `#EF4444` | Erros, alertas, vidas |
+| `--cp-bonus` | `#EC4899` | Bônus, eventos especiais |
+| `--cp-level` | `#06B6D4` | Níveis, rankings, divisões |
+
+**Escala completa de cada cor funcional:**
+
+| Escala | XP | Streak | Success | Info | Danger | Bonus | Level |
+|---|---|---|---|---|---|---|---|
+| 50 | `#FFFBEB` | `#FFF7ED` | `#ECFDF5` | `#EFF6FF` | `#FEF2F2` | `#FDF2F8` | `#ECFEFF` |
+| 100 | `#FEF3C7` | `#FFEDD5` | `#D1FAE5` | `#DBEAFE` | `#FEE2E2` | `#FCE7F3` | `#CFFAFE` |
+| 200 | `#FDE68A` | `#FED7AA` | `#A7F3D0` | `#BFDBFE` | `#FECACA` | `#FBCFE8` | `#A5F3FC` |
+| 300 | `#FCD34D` | `#FDBA74` | `#6EE7B7` | `#93C5FD` | `#FCA5A5` | `#F9A8D4` | `#67E8F9` |
+| 400 | `#FBBF24` | `#FB923C` | `#34D399` | `#60A5FA` | `#F87171` | `#F472B6` | `#22D3EE` |
+| 500 | `#F59E0B` | `#F97316` | `#10B981` | `#3B82F6` | `#EF4444` | `#EC4899` | `#06B6D4` |
+| 600 | `#D97706` | `#EA580C` | `#059669` | `#2563EB` | `#DC2626` | `#DB2777` | `#0891B2` |
+| 700 | `#B45309` | `#C2410C` | `#047857` | `#1D4ED8` | `#B91C1C` | `#BE185D` | `#0E7490` |
+| 800 | `#92400E` | `#9A3412` | `#065F46` | `#1E40AF` | `#991B1B` | `#9D174D` | `#155E75` |
+| 900 | `#78350F` | `#7C2D12` | `#064E3B` | `#1E3A8A` | `#7F1D1D` | `#831843` | `#164E63` |
+
+### 1.3 Superfícies (Tema Dark / Light)
+
+Aplicadas via `data-theme="dark"` ou `data-theme="light"` no `<html>`.
+
+```css
+[data-theme="dark"] {
+  --cp-bg-primary: #0F0A1A;
+  --cp-bg-secondary: #1A1128;
+  --cp-bg-tertiary: #2D1F42;
+  --cp-bg-elevated: #251A38;
+  --cp-text-primary: #F5F0FF;
+  --cp-text-secondary: #B8A0D4;
+  --cp-text-muted: #7A6895;
+  --cp-border: #2D1F42;
+  --cp-border-subtle: #1F1630;
+  --cp-shadow-color: rgba(0, 0, 0, 0.4);
+  --cp-overlay: rgba(15, 10, 26, 0.8);
+}
+
+[data-theme="light"] {
+  --cp-bg-primary: #FFFFFF;
+  --cp-bg-secondary: #FAF5FF;
+  --cp-bg-tertiary: #F3E8FF;
+  --cp-bg-elevated: #FFFFFF;
+  --cp-text-primary: #1A1128;
+  --cp-text-secondary: #6B5A82;
+  --cp-text-muted: #9B8AB3;
+  --cp-border: #E9D5FF;
+  --cp-border-subtle: #F3E8FF;
+  --cp-shadow-color: rgba(124, 58, 237, 0.08);
+  --cp-overlay: rgba(255, 255, 255, 0.8);
+}
+```
+
+### 1.4 Declaração Completa de Tokens de Cor
+
+Todas as cores devem ser declaradas em `:root` para ficarem disponíveis independente do tema:
+
+```css
+:root {
+  /* Primary scale */
+  --cp-primary-50: #FAF5FF;
+  --cp-primary-100: #F3E8FF;
+  --cp-primary-200: #E9D5FF;
+  --cp-primary-300: #D8B4FE;
+  --cp-primary-400: #C084FC;
+  --cp-primary-500: #A855F7;
+  --cp-primary-600: #7C3AED;
+  --cp-primary-700: #6D28D9;
+  --cp-primary-800: #5B21B6;
+  --cp-primary-900: #4C1D95;
+
+  /* XP (amber) */
+  --cp-xp: #F59E0B;
+  --cp-xp-50: #FFFBEB; --cp-xp-100: #FEF3C7; --cp-xp-200: #FDE68A;
+  --cp-xp-300: #FCD34D; --cp-xp-400: #FBBF24; --cp-xp-500: #F59E0B;
+  --cp-xp-600: #D97706; --cp-xp-700: #B45309; --cp-xp-800: #92400E;
+  --cp-xp-900: #78350F;
+
+  /* Streak (orange) */
+  --cp-streak: #F97316;
+  --cp-streak-50: #FFF7ED; --cp-streak-100: #FFEDD5; --cp-streak-200: #FED7AA;
+  --cp-streak-300: #FDBA74; --cp-streak-400: #FB923C; --cp-streak-500: #F97316;
+  --cp-streak-600: #EA580C; --cp-streak-700: #C2410C; --cp-streak-800: #9A3412;
+  --cp-streak-900: #7C2D12;
+
+  /* Success (emerald) */
+  --cp-success: #10B981;
+  --cp-success-50: #ECFDF5; --cp-success-100: #D1FAE5; --cp-success-200: #A7F3D0;
+  --cp-success-300: #6EE7B7; --cp-success-400: #34D399; --cp-success-500: #10B981;
+  --cp-success-600: #059669; --cp-success-700: #047857; --cp-success-800: #065F46;
+  --cp-success-900: #064E3B;
+
+  /* Info (blue) */
+  --cp-info: #3B82F6;
+  --cp-info-50: #EFF6FF; --cp-info-100: #DBEAFE; --cp-info-200: #BFDBFE;
+  --cp-info-300: #93C5FD; --cp-info-400: #60A5FA; --cp-info-500: #3B82F6;
+  --cp-info-600: #2563EB; --cp-info-700: #1D4ED8; --cp-info-800: #1E40AF;
+  --cp-info-900: #1E3A8A;
+
+  /* Danger (red) */
+  --cp-danger: #EF4444;
+  --cp-danger-50: #FEF2F2; --cp-danger-100: #FEE2E2; --cp-danger-200: #FECACA;
+  --cp-danger-300: #FCA5A5; --cp-danger-400: #F87171; --cp-danger-500: #EF4444;
+  --cp-danger-600: #DC2626; --cp-danger-700: #B91C1C; --cp-danger-800: #991B1B;
+  --cp-danger-900: #7F1D1D;
+
+  /* Bonus (pink) */
+  --cp-bonus: #EC4899;
+  --cp-bonus-50: #FDF2F8; --cp-bonus-100: #FCE7F3; --cp-bonus-200: #FBCFE8;
+  --cp-bonus-300: #F9A8D4; --cp-bonus-400: #F472B6; --cp-bonus-500: #EC4899;
+  --cp-bonus-600: #DB2777; --cp-bonus-700: #BE185D; --cp-bonus-800: #9D174D;
+  --cp-bonus-900: #831843;
+
+  /* Level (cyan) */
+  --cp-level: #06B6D4;
+  --cp-level-50: #ECFEFF; --cp-level-100: #CFFAFE; --cp-level-200: #A5F3FC;
+  --cp-level-300: #67E8F9; --cp-level-400: #22D3EE; --cp-level-500: #06B6D4;
+  --cp-level-600: #0891B2; --cp-level-700: #0E7490; --cp-level-800: #155E75;
+  --cp-level-900: #164E63;
+}
+```
+
+---
+
+## 2. Tipografia
+
+### 2.1 Font Families
+
+```css
+:root {
+  --cp-font-family: 'Nunito', sans-serif;
+  --cp-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+```
+
+Google Fonts import: `Nunito:wght@400;600;700;800;900` e `JetBrains+Mono:wght@400;700`
+
+### 2.2 Escala Tipográfica
+
+| Token | Tamanho | Line-height | Uso |
+|---|---|---|---|
+| `--cp-text-xs` | `12px` / `0.75rem` | 1.5 | Captions, labels pequenos |
+| `--cp-text-sm` | `14px` / `0.875rem` | 1.5 | Texto auxiliar, badges, metadata |
+| `--cp-text-base` | `16px` / `1rem` | 1.6 | Corpo de texto, parágrafos |
+| `--cp-text-lg` | `18px` / `1.125rem` | 1.5 | Subtítulos, nomes de módulo |
+| `--cp-text-xl` | `20px` / `1.25rem` | 1.4 | Títulos de card |
+| `--cp-text-2xl` | `24px` / `1.5rem` | 1.3 | Títulos de página |
+| `--cp-text-3xl` | `30px` / `1.875rem` | 1.2 | Headers principais |
+| `--cp-text-4xl` | `36px` / `2.25rem` | 1.1 | Números de destaque |
+| `--cp-text-display` | `48px` / `3rem` | 1.0 | Hero, números de conquista |
+
+### 2.3 Pesos
+
+Nunito não tem peso 500 (Medium). O peso 600 é SemiBold na fonte.
+
+| Token | Valor | Nome na fonte | Uso |
+|---|---|---|---|
+| `--cp-font-regular` | `400` | Regular | Corpo de texto |
+| `--cp-font-semibold` | `600` | SemiBold | Ênfase leve, labels |
+| `--cp-font-bold` | `700` | Bold | Títulos, botões, badges |
+| `--cp-font-extra` | `800` | ExtraBold | Números de XP, displays |
+| `--cp-font-black` | `900` | Black | Conquistas, hero numbers |
+
+---
+
+## 3. Espaçamento
+
+Escala baseada em múltiplos de 4px.
+
+```css
+:root {
+  --cp-space-1: 4px;
+  --cp-space-2: 8px;
+  --cp-space-3: 12px;
+  --cp-space-4: 16px;
+  --cp-space-5: 20px;
+  --cp-space-6: 24px;
+  --cp-space-8: 32px;
+  --cp-space-10: 40px;
+  --cp-space-12: 48px;
+  --cp-space-16: 64px;
+  --cp-space-20: 80px;
+}
+```
+
+---
+
+## 4. Border Radius
+
+Moderado (8-12px) como padrão, mais arredondado para badges e pills.
+
+```css
+:root {
+  --cp-radius-sm: 6px;
+  --cp-radius-md: 8px;
+  --cp-radius-lg: 12px;
+  --cp-radius-xl: 16px;
+  --cp-radius-pill: 9999px;
+  --cp-radius-circle: 50%;
+}
+```
+
+| Uso | Token |
+|---|---|
+| Inputs, pequenos elementos | `--cp-radius-sm` |
+| Cards, containers | `--cp-radius-md` a `--cp-radius-lg` |
+| Modais, seções grandes | `--cp-radius-xl` |
+| Badges, tags, botões pill | `--cp-radius-pill` |
+| Avatares, ícones circulares | `--cp-radius-circle` |
+
+---
+
+## 5. Sombras
+
+```css
+:root {
+  --cp-shadow-sm: 0 1px 2px var(--cp-shadow-color);
+  --cp-shadow-md: 0 4px 6px var(--cp-shadow-color);
+  --cp-shadow-lg: 0 10px 25px var(--cp-shadow-color);
+  --cp-shadow-xl: 0 20px 40px var(--cp-shadow-color);
+  --cp-shadow-3d: 0 4px 0px;  /* Combinado com cor específica */
+  --cp-shadow-glow: 0 0 20px;  /* Combinado com cor para efeito glow */
+}
+```
+
+---
+
+## 6. Componentes
+
+### 6.0 Focus Global (Acessibilidade)
+
+Todos os elementos interativos (botões, links, inputs, cards clicáveis, toggles, sidebar items) devem ter estilos de foco visíveis para navegação por teclado.
+
+```css
+/* Focus ring padrão para todos os elementos interativos */
+:focus-visible {
+  outline: 2px solid var(--cp-primary-600);
+  outline-offset: 2px;
+}
+
+/* Focus ring para elementos sobre fundos escuros */
+[data-theme="dark"] :focus-visible {
+  outline-color: var(--cp-primary-400);
+}
+
+/* Remove outline padrão (substitui pelo focus-visible acima) */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+```
+
+### 6.1 Botões
+
+Todos os botões compartilham propriedades base via `.cp-btn`:
+
+```css
+.cp-btn {
+  font-family: var(--cp-font-family);
+  font-size: var(--cp-text-base);
+  padding: var(--cp-space-3) var(--cp-space-6);
+  border: none;
+  border-radius: var(--cp-radius-md);
+  cursor: pointer;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cp-space-2);
+  text-decoration: none;
+  line-height: 1;
+}
+.cp-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+.cp-btn--sm {
+  padding: var(--cp-space-2) var(--cp-space-4);
+  font-size: var(--cp-text-sm);
+}
+.cp-btn--lg {
+  padding: var(--cp-space-4) var(--cp-space-8);
+  font-size: var(--cp-text-lg);
+}
+```
+
+**Primário (3D — para CTAs):**
+```css
+.cp-btn-primary {
+  background: var(--cp-primary-600);
+  color: #FFFFFF;
+  font-weight: var(--cp-font-bold);
+  box-shadow: 0 4px 0 var(--cp-primary-700);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.cp-btn-primary:hover {
+  background: var(--cp-primary-500);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 0 var(--cp-primary-700);
+}
+.cp-btn-primary:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--cp-primary-700);
+}
+```
+
+**Secundário (flat):**
+```css
+.cp-btn-secondary {
+  background: transparent;
+  color: var(--cp-primary-600);
+  font-weight: var(--cp-font-bold);
+  border: 2px solid var(--cp-primary-600);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.cp-btn-secondary:hover {
+  background: var(--cp-primary-100);
+  color: var(--cp-primary-700);
+}
+[data-theme="dark"] .cp-btn-secondary:hover {
+  background: rgba(124, 58, 237, 0.15);
+  color: var(--cp-primary-400);
+}
+```
+
+**Ghost (terciário):**
+```css
+.cp-btn-ghost {
+  background: transparent;
+  color: var(--cp-text-secondary);
+  font-weight: var(--cp-font-semibold);
+  font-size: var(--cp-text-sm);
+  padding: var(--cp-space-2) var(--cp-space-4);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.cp-btn-ghost:hover {
+  background: var(--cp-bg-tertiary);
+  color: var(--cp-text-primary);
+}
+```
+
+**Botão de Sucesso (3D — para ações de conclusão):**
+```css
+.cp-btn-success {
+  background: var(--cp-success);
+  color: #FFFFFF;
+  font-weight: var(--cp-font-bold);
+  box-shadow: 0 4px 0 var(--cp-success-700);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.cp-btn-success:hover {
+  background: var(--cp-success-400);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 0 var(--cp-success-700);
+}
+.cp-btn-success:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--cp-success-700);
+}
+```
+
+**Botão de Perigo (3D):**
+```css
+.cp-btn-danger {
+  background: var(--cp-danger);
+  color: #FFFFFF;
+  font-weight: var(--cp-font-bold);
+  box-shadow: 0 4px 0 var(--cp-danger-700);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.cp-btn-danger:hover {
+  background: var(--cp-danger-400);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 0 var(--cp-danger-700);
+}
+.cp-btn-danger:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--cp-danger-700);
+}
+```
+
+### 6.2 Formulários
+
+**Input de texto:**
+```css
+.cp-input {
+  background: var(--cp-bg-tertiary);
+  color: var(--cp-text-primary);
+  font-family: var(--cp-font-family);
+  font-size: var(--cp-text-base);
+  padding: var(--cp-space-3) var(--cp-space-4);
+  border: 2px solid var(--cp-border);
+  border-radius: var(--cp-radius-md);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+}
+.cp-input:focus {
+  border-color: var(--cp-primary-600);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+.cp-input::placeholder {
+  color: var(--cp-text-muted);
+}
+.cp-input--error {
+  border-color: var(--cp-danger);
+}
+.cp-input--error:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+```
+
+**Label:**
+```css
+.cp-label {
+  font-family: var(--cp-font-family);
+  font-size: var(--cp-text-sm);
+  font-weight: var(--cp-font-bold);
+  color: var(--cp-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--cp-space-2);
+  display: block;
+}
+```
+
+**Select:**
+```css
+.cp-select {
+  background: var(--cp-bg-tertiary);
+  color: var(--cp-text-primary);
+  font-family: var(--cp-font-family);
+  font-size: var(--cp-text-base);
+  padding: var(--cp-space-3) var(--cp-space-4);
+  padding-right: var(--cp-space-10);
+  border: 2px solid var(--cp-border);
+  border-radius: var(--cp-radius-md);
+  appearance: none;
+  outline: none;
+  transition: border-color 0.2s ease;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237A6895' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+.cp-select:focus {
+  border-color: var(--cp-primary-600);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+```
+
+**Textarea:**
+
+Aplicar classes `.cp-input .cp-textarea` juntas no elemento `<textarea>`. A classe `.cp-input` fornece os estilos base, `.cp-textarea` adiciona os específicos:
+
+```css
+.cp-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+```
+
+**Toggle:**
+
+O toggle deve ser implementado sobre um `<input type="checkbox">` com `role="switch"` e `aria-checked` para acessibilidade. A estrutura HTML recomendada:
+
+```html
+<label class="cp-toggle">
+  <input type="checkbox" role="switch" aria-checked="false">
+  <span class="cp-toggle__track"></span>
+</label>
+```
+
+```css
+.cp-toggle {
+  display: inline-flex;
+  cursor: pointer;
+}
+.cp-toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.cp-toggle__track {
+  width: 48px;
+  height: 26px;
+  background: var(--cp-bg-tertiary);
+  border: 2px solid var(--cp-border);
+  border-radius: var(--cp-radius-pill);
+  position: relative;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.cp-toggle__track::after {
+  content: '';
+  width: 18px;
+  height: 18px;
+  background: var(--cp-text-muted);
+  border-radius: var(--cp-radius-circle);
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.cp-toggle input:checked + .cp-toggle__track {
+  background: var(--cp-primary-600);
+  border-color: var(--cp-primary-600);
+}
+.cp-toggle input:checked + .cp-toggle__track::after {
+  background: #FFFFFF;
+  transform: translateX(22px);
+}
+.cp-toggle input:focus-visible + .cp-toggle__track {
+  outline: 2px solid var(--cp-primary-600);
+  outline-offset: 2px;
+}
+```
+
+### 6.3 Cards
+
+**Card padrão:**
+```css
+.cp-card {
+  background: var(--cp-bg-secondary);
+  border: 1px solid var(--cp-border-subtle);
+  border-radius: var(--cp-radius-lg);
+  padding: var(--cp-space-6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.cp-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--cp-shadow-lg);
+}
+```
+
+**Card de curso/módulo:**
+```css
+.cp-card-course {
+  background: var(--cp-bg-secondary);
+  border: 1px solid var(--cp-border-subtle);
+  border-radius: var(--cp-radius-lg);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.cp-card-course__image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+.cp-card-course__body {
+  padding: var(--cp-space-5);
+}
+.cp-card-course__title {
+  font-size: var(--cp-text-xl);
+  font-weight: var(--cp-font-bold);
+  color: var(--cp-text-primary);
+  margin-bottom: var(--cp-space-2);
+}
+.cp-card-course__meta {
+  font-size: var(--cp-text-sm);
+  color: var(--cp-text-secondary);
+}
+.cp-card-course__progress {
+  margin-top: var(--cp-space-4);
+}
+```
+
+**Card de aula (dentro de um módulo):**
+```css
+.cp-card-lesson {
+  background: var(--cp-bg-secondary);
+  border: 1px solid var(--cp-border-subtle);
+  border-radius: var(--cp-radius-md);
+  padding: var(--cp-space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--cp-space-4);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+.cp-card-lesson:hover {
+  background: var(--cp-bg-tertiary);
+  transform: translateX(4px);
+}
+.cp-card-lesson--completed {
+  border-left: 3px solid var(--cp-success);
+}
+.cp-card-lesson--locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+```
+
+**Card elevado (para conteúdo destacado):**
+```css
+.cp-card-elevated {
+  background: var(--cp-bg-elevated);
+  border-radius: var(--cp-radius-xl);
+  padding: var(--cp-space-8);
+  box-shadow: var(--cp-shadow-xl);
+}
+```
+
+### 6.4 Badges e Tags
+
+**Badge de XP:**
+```css
+.cp-badge-xp {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cp-space-1);
+  background: var(--cp-xp);
+  color: var(--cp-xp-900);
+  font-family: var(--cp-font-family);
+  font-size: var(--cp-text-sm);
+  font-weight: var(--cp-font-extra);
+  padding: var(--cp-space-1) var(--cp-space-3);
+  border-radius: var(--cp-radius-pill);
+}
+```
+
+**Badge de streak:**
+```css
+.cp-badge-streak {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cp-space-1);
+  background: var(--cp-streak);
+  color: #FFFFFF;
+  font-size: var(--cp-text-sm);
+  font-weight: var(--cp-font-extra);
+  padding: var(--cp-space-1) var(--cp-space-3);
+  border-radius: var(--cp-radius-pill);
+}
+```
+
+**Badge de nível:**
+```css
+.cp-badge-level {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cp-space-1);
+  background: var(--cp-level);
+  color: #FFFFFF;
+  font-size: var(--cp-text-sm);
+  font-weight: var(--cp-font-extra);
+  padding: var(--cp-space-1) var(--cp-space-3);
+  border-radius: var(--cp-radius-pill);
+}
+```
+
+**Tag genérica:**
+```css
+.cp-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--cp-text-xs);
+  font-weight: var(--cp-font-bold);
+  padding: var(--cp-space-1) var(--cp-space-2);
+  border-radius: var(--cp-radius-pill);
+  background: var(--cp-bg-tertiary);
+  color: var(--cp-text-secondary);
+}
+```
+
+### 6.5 Barra de Progresso
+
+```css
+.cp-progress {
+  width: 100%;
+  height: 8px;
+  background: var(--cp-bg-tertiary);
+  border-radius: var(--cp-radius-pill);
+  overflow: hidden;
+}
+.cp-progress__fill {
+  height: 100%;
+  border-radius: var(--cp-radius-pill);
+  background: linear-gradient(90deg, var(--cp-primary-600), var(--cp-streak));
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+/* Variantes */
+.cp-progress--success .cp-progress__fill {
+  background: linear-gradient(90deg, var(--cp-success), var(--cp-success-300));
+}
+.cp-progress--xp .cp-progress__fill {
+  background: linear-gradient(90deg, var(--cp-xp), var(--cp-streak));
+}
+.cp-progress--lg {
+  height: 12px;
+}
+```
+
+### 6.6 Avatar
+
+```css
+.cp-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--cp-radius-circle);
+  object-fit: cover;
+  border: 2px solid var(--cp-border);
+}
+.cp-avatar--sm { width: 32px; height: 32px; }
+.cp-avatar--lg { width: 56px; height: 56px; }
+.cp-avatar--xl { width: 80px; height: 80px; border-width: 3px; }
+.cp-avatar--bordered {
+  border-color: var(--cp-primary-600);
+  box-shadow: 0 0 0 2px var(--cp-bg-primary), 0 0 0 4px var(--cp-primary-600);
+}
+```
+
+### 6.7 Sidebar
+
+A sidebar usa `position: fixed` e o conteúdo principal usa `margin-left` para compensar. Não é um layout flex — é fixed + offset.
+
+```css
+.cp-sidebar {
+  width: 240px;
+  background: var(--cp-bg-secondary);
+  border-right: 1px solid var(--cp-border-subtle);
+  padding: var(--cp-space-4) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cp-space-1);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--cp-z-sticky);
+  overflow-y: auto;
+}
+.cp-sidebar__item {
+  display: flex;
+  align-items: center;
+  gap: var(--cp-space-3);
+  padding: var(--cp-space-3) var(--cp-space-5);
+  color: var(--cp-text-secondary);
+  font-weight: var(--cp-font-semibold);
+  font-size: var(--cp-text-base);
+  border-radius: 0 var(--cp-radius-md) var(--cp-radius-md) 0;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+}
+.cp-sidebar__item:hover {
+  background: var(--cp-bg-tertiary);
+  color: var(--cp-text-primary);
+}
+.cp-sidebar__item--active {
+  background: var(--cp-primary-50);
+  color: var(--cp-primary-600);
+  font-weight: var(--cp-font-bold);
+  border-left: 3px solid var(--cp-primary-600);
+}
+[data-theme="dark"] .cp-sidebar__item--active {
+  background: rgba(124, 58, 237, 0.15);
+}
+```
+
+### 6.8 Modal
+
+```css
+.cp-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--cp-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--cp-z-modal);
+  backdrop-filter: blur(4px);
+}
+.cp-modal {
+  background: var(--cp-bg-elevated);
+  border-radius: var(--cp-radius-xl);
+  padding: var(--cp-space-8);
+  max-width: 480px;
+  width: 90%;
+  box-shadow: var(--cp-shadow-xl);
+  animation: cp-modal-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes cp-modal-in {
+  from { opacity: 0; transform: scale(0.9) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+```
+
+### 6.9 Tooltip
+
+```css
+.cp-tooltip {
+  position: relative;
+}
+.cp-tooltip__content {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--cp-bg-elevated);
+  color: var(--cp-text-primary);
+  font-size: var(--cp-text-sm);
+  padding: var(--cp-space-2) var(--cp-space-3);
+  border-radius: var(--cp-radius-sm);
+  box-shadow: var(--cp-shadow-md);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.cp-tooltip:hover .cp-tooltip__content {
+  opacity: 1;
+}
+```
+
+### 6.10 Toast / Notificação
+
+```css
+.cp-toast-container {
+  position: fixed;
+  top: var(--cp-space-6);
+  right: var(--cp-space-6);
+  z-index: var(--cp-z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cp-space-3);
+  pointer-events: none;
+}
+.cp-toast {
+  background: var(--cp-bg-elevated);
+  border-radius: var(--cp-radius-md);
+  padding: var(--cp-space-4) var(--cp-space-5);
+  box-shadow: var(--cp-shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--cp-space-3);
+  min-width: 300px;
+  max-width: 480px;
+  pointer-events: auto;
+  animation: cp-slide-up 0.3s ease-out;
+  border-left: 4px solid var(--cp-info);
+}
+.cp-toast--success { border-left-color: var(--cp-success); }
+.cp-toast--danger { border-left-color: var(--cp-danger); }
+.cp-toast--xp { border-left-color: var(--cp-xp); }
+.cp-toast__message {
+  flex: 1;
+  font-size: var(--cp-text-sm);
+  color: var(--cp-text-primary);
+}
+.cp-toast__close {
+  background: none;
+  border: none;
+  color: var(--cp-text-muted);
+  cursor: pointer;
+  padding: var(--cp-space-1);
+}
+```
+
+### 6.11 Spinner / Loading
+
+```css
+.cp-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--cp-border);
+  border-top-color: var(--cp-primary-600);
+  border-radius: var(--cp-radius-circle);
+  animation: cp-spin 0.8s linear infinite;
+}
+.cp-spinner--sm { width: 16px; height: 16px; border-width: 2px; }
+.cp-spinner--lg { width: 40px; height: 40px; border-width: 4px; }
+```
+
+**Skeleton (placeholder de carregamento):**
+```css
+.cp-skeleton {
+  background: var(--cp-bg-tertiary);
+  border-radius: var(--cp-radius-md);
+  animation: cp-skeleton-pulse 1.5s ease-in-out infinite;
+}
+.cp-skeleton--text {
+  height: 16px;
+  margin-bottom: var(--cp-space-2);
+}
+.cp-skeleton--title {
+  height: 24px;
+  width: 60%;
+  margin-bottom: var(--cp-space-3);
+}
+.cp-skeleton--avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--cp-radius-circle);
+}
+.cp-skeleton--card {
+  height: 200px;
+}
+@keyframes cp-skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+```
+
+---
+
+## 7. Elementos de Gamificação
+
+### 7.1 Painel de XP
+
+```css
+.cp-xp-panel {
+  display: flex;
+  align-items: center;
+  gap: var(--cp-space-3);
+  background: var(--cp-bg-secondary);
+  border-radius: var(--cp-radius-lg);
+  padding: var(--cp-space-4);
+}
+.cp-xp-panel__number {
+  font-size: var(--cp-text-4xl);
+  font-weight: var(--cp-font-black);
+  color: var(--cp-xp);
+}
+.cp-xp-panel__label {
+  font-size: var(--cp-text-sm);
+  color: var(--cp-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+```
+
+### 7.2 Streak Counter
+
+```css
+.cp-streak-counter {
+  display: flex;
+  align-items: center;
+  gap: var(--cp-space-2);
+  padding: var(--cp-space-3) var(--cp-space-4);
+  background: linear-gradient(135deg, var(--cp-streak), var(--cp-streak-400));
+  border-radius: var(--cp-radius-lg);
+  color: #FFFFFF;
+}
+.cp-streak-counter__number {
+  font-size: var(--cp-text-3xl);
+  font-weight: var(--cp-font-black);
+}
+.cp-streak-counter__label {
+  font-size: var(--cp-text-sm);
+  font-weight: var(--cp-font-bold);
+  opacity: 0.9;
+}
+```
+
+### 7.3 Badge de Conquista
+
+```css
+.cp-achievement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--cp-space-2);
+}
+.cp-achievement__icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--cp-radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: var(--cp-shadow-md);
+}
+.cp-achievement__icon--bronze {
+  background: linear-gradient(135deg, #CD7F32, #E8A862);
+}
+.cp-achievement__icon--silver {
+  background: linear-gradient(135deg, #B0B0B0, #D4D4D4);
+}
+.cp-achievement__icon--gold {
+  background: linear-gradient(135deg, var(--cp-xp), var(--cp-xp-300));
+}
+.cp-achievement__icon--diamond {
+  background: linear-gradient(135deg, var(--cp-level), var(--cp-level-300));
+}
+.cp-achievement__icon--locked {
+  background: var(--cp-bg-tertiary);
+  opacity: 0.4;
+  filter: grayscale(1);
+}
+.cp-achievement__title {
+  font-size: var(--cp-text-sm);
+  font-weight: var(--cp-font-bold);
+  color: var(--cp-text-primary);
+}
+.cp-achievement__description {
+  font-size: var(--cp-text-xs);
+  color: var(--cp-text-muted);
+}
+```
+
+### 7.4 Leaderboard / Ranking
+
+```css
+.cp-leaderboard {
+  background: var(--cp-bg-secondary);
+  border-radius: var(--cp-radius-lg);
+  overflow: hidden;
+}
+.cp-leaderboard__item {
+  display: flex;
+  align-items: center;
+  gap: var(--cp-space-3);
+  padding: var(--cp-space-3) var(--cp-space-4);
+  border-bottom: 1px solid var(--cp-border-subtle);
+  transition: background 0.2s ease;
+}
+.cp-leaderboard__item:hover {
+  background: var(--cp-bg-tertiary);
+}
+.cp-leaderboard__rank {
+  font-size: var(--cp-text-lg);
+  font-weight: var(--cp-font-extra);
+  color: var(--cp-text-muted);
+  width: 32px;
+  text-align: center;
+}
+.cp-leaderboard__rank--1 { color: var(--cp-xp); }
+.cp-leaderboard__rank--2 { color: #B0B0B0; }
+.cp-leaderboard__rank--3 { color: #CD7F32; }
+.cp-leaderboard__xp {
+  font-weight: var(--cp-font-bold);
+  color: var(--cp-xp);
+  margin-left: auto;
+}
+.cp-leaderboard__item--me {
+  background: rgba(124, 58, 237, 0.1);
+  border-left: 3px solid var(--cp-primary-600);
+}
+```
+
+### 7.5 Missões Diárias
+
+```css
+.cp-mission {
+  display: flex;
+  align-items: center;
+  gap: var(--cp-space-3);
+  padding: var(--cp-space-3) var(--cp-space-4);
+  background: var(--cp-bg-secondary);
+  border-radius: var(--cp-radius-md);
+}
+.cp-mission__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--cp-radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+.cp-mission__icon--xp { background: var(--cp-xp-100); }
+.cp-mission__icon--time { background: var(--cp-level-100); }
+.cp-mission__icon--lesson { background: var(--cp-primary-100); }
+[data-theme="dark"] .cp-mission__icon--xp { background: rgba(245, 158, 11, 0.15); }
+[data-theme="dark"] .cp-mission__icon--time { background: rgba(6, 182, 212, 0.15); }
+[data-theme="dark"] .cp-mission__icon--lesson { background: rgba(124, 58, 237, 0.15); }
+.cp-mission__info {
+  flex: 1;
+}
+.cp-mission__title {
+  font-size: var(--cp-text-sm);
+  font-weight: var(--cp-font-bold);
+  color: var(--cp-text-primary);
+}
+.cp-mission__progress-bar {
+  margin-top: var(--cp-space-1);
+  height: 6px;
+  background: var(--cp-bg-tertiary);
+  border-radius: var(--cp-radius-pill);
+  overflow: hidden;
+}
+.cp-mission__progress-fill {
+  height: 100%;
+  border-radius: var(--cp-radius-pill);
+  background: var(--cp-success);
+  transition: width 0.4s ease;
+}
+.cp-mission__reward {
+  font-size: var(--cp-text-xs);
+  font-weight: var(--cp-font-bold);
+  color: var(--cp-xp);
+}
+.cp-mission--completed {
+  opacity: 0.6;
+}
+.cp-mission--completed .cp-mission__progress-fill {
+  background: var(--cp-success);
+  width: 100%;
+}
+```
+
+### 7.6 Nível / Level Up
+
+```css
+.cp-level-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--cp-space-3);
+}
+.cp-level-indicator__badge {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--cp-radius-circle);
+  background: linear-gradient(135deg, var(--cp-primary-600), var(--cp-level));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: var(--cp-text-xl);
+  font-weight: var(--cp-font-black);
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+}
+.cp-level-indicator__xp-to-next {
+  font-size: var(--cp-text-sm);
+  color: var(--cp-text-muted);
+}
+```
+
+---
+
+## 8. Animações e Micro-interações
+
+### 8.1 Transições Base
+
+```css
+:root {
+  --cp-transition-fast: 0.1s ease;
+  --cp-transition-base: 0.2s ease;
+  --cp-transition-slow: 0.3s ease;
+  --cp-transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --cp-transition-spring: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+```
+
+### 8.2 Keyframes
+
+```css
+/* Bounce in — para badges, conquistas, modais */
+@keyframes cp-bounce-in {
+  0% { opacity: 0; transform: scale(0.3); }
+  50% { transform: scale(1.1); }
+  70% { transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Slide up — para toasts, notificações */
+@keyframes cp-slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Pulse — para elementos que pedem atenção */
+@keyframes cp-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Shake — para erros */
+@keyframes cp-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+/* Glow pulse — para items especiais */
+@keyframes cp-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(124, 58, 237, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.6); }
+}
+
+/* Count up number — aplicado via JS */
+@keyframes cp-count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Confetti burst — partículas via JS, mas o container */
+@keyframes cp-confetti-fade {
+  0% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-20px); }
+}
+
+/* Spin — para loading */
+@keyframes cp-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Float — para items flutuantes decorativos */
+@keyframes cp-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* XP gain flyup */
+@keyframes cp-xp-flyup {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  50% { opacity: 1; transform: translateY(-30px) scale(1.2); }
+  100% { opacity: 0; transform: translateY(-60px) scale(0.8); }
+}
+
+/* Progress bar fill with overshoot */
+@keyframes cp-progress-fill {
+  0% { width: 0%; }
+  80% { width: calc(var(--target-width) + 2%); }
+  100% { width: var(--target-width); }
+}
+
+/* Star burst — para conquistas especiais */
+@keyframes cp-star-burst {
+  0% { opacity: 0; transform: scale(0) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.3) rotate(180deg); }
+  100% { opacity: 1; transform: scale(1) rotate(360deg); }
+}
+```
+
+### 8.3 Classes Utilitárias de Animação
+
+```css
+.cp-animate-bounce-in { animation: cp-bounce-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.cp-animate-slide-up { animation: cp-slide-up 0.3s ease-out; }
+.cp-animate-pulse { animation: cp-pulse 2s ease-in-out infinite; }
+.cp-animate-shake { animation: cp-shake 0.5s ease; }
+.cp-animate-glow { animation: cp-glow 2s ease-in-out infinite; }
+.cp-animate-spin { animation: cp-spin 1s linear infinite; }
+.cp-animate-float { animation: cp-float 3s ease-in-out infinite; }
+.cp-animate-xp-flyup { animation: cp-xp-flyup 1s ease-out forwards; }
+.cp-animate-star-burst { animation: cp-star-burst 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); }
+```
+
+### 8.4 Comportamento de Animação por Contexto
+
+| Evento | Animação | Duração |
+|---|---|---|
+| Ganhar XP | Número fly-up + badge pulse | 1s |
+| Completar aula | Barra progresso com overshoot + confetti | 1.5s |
+| Completar módulo | Confetti burst + badge bounce-in + glow | 2s |
+| Subir de nível | Star burst + shake na tela + modal bounce-in | 2.5s |
+| Streak mantido | Badge streak pulse + número count-up | 1s |
+| Erro/resposta errada | Input shake + flash vermelho | 0.5s |
+| Conquista desbloqueada | Badge bounce-in + glow + confetti | 2s |
+| Missão completa | Progress bar fill + badge pulse | 1s |
+| Hover em card | Translate Y(-2px) + shadow increase | 0.2s |
+| Click em botão 3D | Translate Y(3px) + shadow decrease | 0.1s |
+| Novo item no ranking | Slide up + highlight flash | 0.8s |
+
+### 8.5 Confetti (requer JS helper)
+
+O design system define a interface CSS, a implementação JS fica no consumer:
+
+```css
+.cp-confetti-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--cp-z-confetti);
+  overflow: hidden;
+}
+.cp-confetti-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  animation: cp-confetti-fade 1.5s ease-out forwards;
+}
+```
+
+Cores das partículas do confetti: usar as 7 cores funcionais de gamificação.
+
+### 8.6 Preferência de Movimento Reduzido
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## 9. Layout e Grid
+
+### 9.1 Container
+
+```css
+.cp-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--cp-space-4);
+}
+.cp-container--narrow {
+  max-width: 800px;
+}
+.cp-container--wide {
+  max-width: 1400px;
+}
+```
+
+### 9.2 Layout Principal (sidebar fixa + conteúdo)
+
+A sidebar é `position: fixed`. O conteúdo principal usa `margin-left` para compensar.
+
+```css
+.cp-layout {
+  min-height: 100vh;
+}
+.cp-layout__main {
+  margin-left: 240px;  /* largura da sidebar */
+  padding: var(--cp-space-8);
+}
+.cp-layout__content {
+  max-width: 1200px;
+}
+.cp-layout__aside {
+  width: 320px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: var(--cp-space-6);
+  border-left: 1px solid var(--cp-border-subtle);
+}
+/* Quando aside está presente, main compensa ambos os lados */
+.cp-layout--with-aside .cp-layout__main {
+  margin-right: 320px;
+}
+```
+
+### 9.3 Breakpoints
+
+Valores de referência (CSS custom properties não funcionam em `@media` queries — usar os valores diretamente nas media queries ou via preprocessador):
+
+| Token (referência) | Valor | Uso |
+|---|---|---|
+| `sm` | `640px` | Mobile landscape |
+| `md` | `768px` | Tablet |
+| `lg` | `1024px` | Desktop pequeno |
+| `xl` | `1280px` | Desktop |
+| `2xl` | `1536px` | Desktop grande |
+
+### 9.4 Comportamento Responsivo
+
+```css
+/* Tablet e menor: sidebar vira drawer */
+@media (max-width: 1023px) {
+  .cp-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: var(--cp-z-overlay);
+  }
+  .cp-sidebar--open {
+    transform: translateX(0);
+  }
+  .cp-layout__main {
+    margin-left: 0;
+  }
+  .cp-layout__aside {
+    display: none;  /* aside fica em modal ou abaixo do conteúdo no mobile */
+  }
+  .cp-layout--with-aside .cp-layout__main {
+    margin-right: 0;
+  }
+}
+
+/* Mobile: ajustes de espaçamento */
+@media (max-width: 767px) {
+  .cp-layout__main {
+    padding: var(--cp-space-4);
+  }
+  .cp-card-course__image {
+    height: 140px;
+  }
+  .cp-modal {
+    width: 95%;
+    padding: var(--cp-space-5);
+  }
+  .cp-modal .cp-xp-panel__number,
+  .cp-modal .cp-level-indicator__badge {
+    font-size: var(--cp-text-3xl);
+  }
+}
+
+/* Hamburger button (visível apenas quando sidebar é drawer) */
+.cp-sidebar-toggle {
+  display: none;
+}
+@media (max-width: 1023px) {
+  .cp-sidebar-toggle {
+    display: flex;
+    position: fixed;
+    top: var(--cp-space-4);
+    left: var(--cp-space-4);
+    z-index: var(--cp-z-overlay);
+    background: var(--cp-bg-elevated);
+    border: 1px solid var(--cp-border);
+    border-radius: var(--cp-radius-md);
+    padding: var(--cp-space-2);
+    cursor: pointer;
+    box-shadow: var(--cp-shadow-md);
+  }
+}
+```
+
+---
+
+## 10. Ícones
+
+O design system não impõe uma library de ícones específica. Recomendação: **Lucide Icons** (open source, consistente, boa cobertura).
+
+Convenções:
+- Tamanho padrão: 20px
+- Stroke width: 2px
+- Cor: herda via `currentColor`
+- Ícones de gamificação podem usar emoji como fallback (🔥 streak, ⚡ XP, 🏆 conquista, ⭐ favorito)
+
+---
+
+## 11. Imagens e Fundos
+
+### 11.1 Gradientes de Background
+
+```css
+/* Header/hero gradient - dark */
+.cp-gradient-hero-dark {
+  background: linear-gradient(135deg, #0F0A1A 0%, #1A1128 50%, #2D1F42 100%);
+}
+/* Header/hero gradient - light */
+.cp-gradient-hero-light {
+  background: linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 50%, #E9D5FF 100%);
+}
+/* Card premium/destaque */
+.cp-gradient-premium {
+  background: linear-gradient(135deg, var(--cp-primary-600), var(--cp-level));
+}
+/* Streak ativo */
+.cp-gradient-streak {
+  background: linear-gradient(135deg, var(--cp-streak), var(--cp-streak-400));
+}
+/* XP reward */
+.cp-gradient-xp {
+  background: linear-gradient(135deg, var(--cp-xp), var(--cp-xp-300));
+}
+/* Level up celebration */
+.cp-gradient-levelup {
+  background: linear-gradient(135deg, var(--cp-primary-600), var(--cp-bonus), var(--cp-xp));
+}
+```
+
+### 11.2 Padrões Decorativos
+
+Para backgrounds de seções, usar padrões sutis com opacidade baixa:
+
+```css
+/* Dot pattern */
+.cp-pattern-dots {
+  background-image: radial-gradient(var(--cp-border) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+/* Grid pattern */
+.cp-pattern-grid {
+  background-image:
+    linear-gradient(var(--cp-border-subtle) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cp-border-subtle) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+```
+
+### 11.3 Thumbnails de Curso
+
+Proporção recomendada: **16:9** (1280x720).
+Border radius: `var(--cp-radius-lg)`.
+Fallback: gradiente primário com ícone do curso centralizado.
+
+---
+
+## 12. Tokens Z-Index
+
+```css
+:root {
+  --cp-z-base: 0;
+  --cp-z-dropdown: 100;
+  --cp-z-sticky: 200;
+  --cp-z-overlay: 300;
+  --cp-z-modal: 400;
+  --cp-z-toast: 500;
+  --cp-z-confetti: 600;
+}
+```
+
+---
+
+## 13. Estrutura da Página de Documentação
+
+A página HTML do design system terá:
+
+1. **Header** com logo Classplay, toggle dark/light, botão download markdown
+2. **Sidebar de navegação** com links âncora para cada seção
+3. **Seções:**
+   - Cores (swatches interativos com cópia de valor ao clicar)
+   - Tipografia (preview de cada tamanho/peso)
+   - Espaçamento (visualização da escala)
+   - Border Radius (preview visual)
+   - Sombras (preview visual)
+   - Botões (todos os estados: default, hover, active, disabled)
+   - Formulários (inputs, selects, toggles)
+   - Cards (todas as variantes)
+   - Badges e Tags
+   - Gamificação (XP, streaks, achievements, leaderboard, missions, levels)
+   - Animações (demos interativas)
+   - Loading states (spinner, skeletons)
+   - Toasts / Notificações
+   - Layout e Grid
+   - Gradientes e Fundos
+4. **Botão de download** que gera o markdown completo do design system
+
+A página é autocontida — um único arquivo HTML sem dependências externas (exceto Google Fonts).
+
+---
+
+## 14. Resumo de Decisões
+
+| Decisão | Escolha |
+|---|---|
+| Público | Adultos 35-45, tech/IA |
+| Inspiração | Duolingo, mas maduro e profissional |
+| Cor primária | Roxo #7C3AED |
+| Paleta | Multi-cor com funções específicas (7 cores + escalas completas) |
+| Tipografia | Nunito (display) + JetBrains Mono (code) |
+| Botões | 3D para CTAs, flat para secundários |
+| Border radius | Moderado (8-12px) |
+| Animações | Ricas (confetti, bounce, shake, count-up) |
+| Gamificação | Pacote completo (XP, streaks, níveis, badges, ranking, missões) |
+| Temas | Dark + Light via CSS custom properties |
+| Framework | Agnóstico (CSS vars puras) |
+| Acessibilidade | Focus visible, reduced motion, semantic HTML |
+| Responsivo | Mobile-first com sidebar drawer em telas < 1024px |
+| Entregável | Página HTML única + markdown para download |
+
+</script>
+
+</body>
+</html>
