@@ -1,0 +1,4228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NXZ Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       NXZ DESIGN SYSTEM — CSS TOKENS & STYLES
+       ============================================================ */
+
+    /* ---- Reset ---- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ---- Design Tokens ---- */
+    :root {
+      /* Colors — source of truth: nxz-brain production site */
+      --nxz-background: #fafaf9;
+      --nxz-foreground: #000000;
+      --nxz-muted: #f6f5f4;
+      --nxz-muted-foreground: #707070;
+      --nxz-primary: #7430e8;
+      --nxz-primary-end: #b34de6;
+      --nxz-primary-foreground: #ffffff;
+      --nxz-secondary: #eeebf4;
+      --nxz-secondary-foreground: #4b248f;
+      --nxz-accent: #f6f5f4;
+      --nxz-accent-foreground: #000000;
+      --nxz-destructive: #dc2828;
+      --nxz-success: #2bab6f;
+      --nxz-warning: #f59f0a;
+      --nxz-card: #ffffff;
+      --nxz-card-foreground: #000000;
+      --nxz-popover: #ffffff;
+      --nxz-border: #cccccc;
+      --nxz-input: #cccccc;
+      --nxz-ring: #7430e8;
+      --nxz-warm-gray: #f6f5f4;
+      --nxz-pastel-purple: #f9f1ec;
+      --nxz-pastel-blue: hsl(206, 50%, 87%);
+      --nxz-pastel-green: hsl(72, 60%, 88%);
+      --nxz-pastel-amber: hsl(38, 45%, 95%);
+
+      /* Variation (for KPI indicators) */
+      --nxz-variation-positive: var(--nxz-success);
+      --nxz-variation-negative: var(--nxz-destructive);
+
+      /* Primary with opacity (for dashboard elements) */
+      --nxz-primary-10: hsl(262 80% 55% / 0.1);
+      --nxz-primary-20: hsl(262 80% 55% / 0.2);
+      --nxz-primary-50: hsl(262 80% 55% / 0.5);
+
+      /* Typography */
+      --nxz-font-heading: 'DM Serif Display', serif;
+      --nxz-font-body: 'Plus Jakarta Sans', sans-serif;
+      --nxz-font-mono: 'JetBrains Mono', monospace;
+
+      --nxz-text-xs: 0.75rem;
+      --nxz-leading-xs: 1rem;
+      --nxz-text-sm: 0.875rem;
+      --nxz-leading-sm: 1.25rem;
+      --nxz-text-base: 1rem;
+      --nxz-leading-base: 1.5rem;
+      --nxz-text-lg: 1.125rem;
+      --nxz-leading-lg: 1.625rem;
+      --nxz-text-xl: 1.25rem;
+      --nxz-leading-xl: 1.75rem;
+      --nxz-text-2xl: 1.5rem;
+      --nxz-leading-2xl: 1.8rem;
+      --nxz-text-3xl: 1.75rem;
+      --nxz-leading-3xl: 2.375rem;
+      --nxz-text-4xl: 2.5rem;
+      --nxz-leading-4xl: 2.8rem;
+      --nxz-text-5xl: 2.75rem;
+      --nxz-leading-5xl: 3.25rem;
+      --nxz-text-6xl: 4rem;
+      --nxz-leading-6xl: 1.1;
+      --nxz-text-7xl: 5.625rem;
+      --nxz-leading-7xl: 1;
+
+      /* Spacing (4px base) */
+      --nxz-space-1: 4px;
+      --nxz-space-2: 8px;
+      --nxz-space-3: 12px;
+      --nxz-space-4: 16px;
+      --nxz-space-5: 20px;
+      --nxz-space-6: 24px;
+      --nxz-space-8: 32px;
+      --nxz-space-10: 40px;
+      --nxz-space-12: 48px;
+      --nxz-space-14: 56px;
+      --nxz-space-16: 64px;
+      --nxz-space-20: 80px;
+      --nxz-space-24: 96px;
+      --nxz-space-28: 112px;
+      --nxz-space-32: 128px;
+      --nxz-space-36: 144px;
+      --nxz-space-40: 160px;
+
+      /* Radius */
+      --nxz-radius-xs: 4px;
+      --nxz-radius-sm: 6px;
+      --nxz-radius-md: 10px;
+      --nxz-radius-lg: 16px;
+      --nxz-radius-full: 9999px;
+
+      /* Shadows */
+      --nxz-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --nxz-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      --nxz-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+
+      /* Motion */
+      --nxz-motion-fast: 150ms;
+      --nxz-motion-normal: 300ms;
+      --nxz-motion-slow: 500ms;
+      --nxz-easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+      /* Density — aligned with production site */
+      --nxz-density-button-h: 40px;
+      --nxz-density-button-h-sm: 36px;
+      --nxz-density-button-h-lg: 48px;
+      --nxz-density-input-h: 48px;
+      --nxz-density-nav-h: 72px;
+      --nxz-density-gap: var(--nxz-space-4);
+    }
+
+    /* ---- Base ---- */
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--nxz-font-body);
+      font-size: var(--nxz-text-base);
+      line-height: var(--nxz-leading-base);
+      color: var(--nxz-foreground);
+      background: var(--nxz-background);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--nxz-font-heading);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    a {
+      color: var(--nxz-primary);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    code, pre {
+      font-family: var(--nxz-font-mono);
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ============================================================
+       DOCUMENTATION CHROME (ds- prefix)
+       ============================================================ */
+
+    /* ---- Sidebar ---- */
+    .ds-sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 260px;
+      height: 100vh;
+      background: var(--nxz-card);
+      border-right: 1px solid var(--nxz-border);
+      overflow-y: auto;
+      z-index: 100;
+      transition: transform var(--nxz-motion-normal) var(--nxz-easing);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ds-sidebar-brand {
+      padding: var(--nxz-space-6);
+      border-bottom: 1px solid var(--nxz-border);
+      flex-shrink: 0;
+    }
+
+    .ds-sidebar-brand h1 {
+      font-family: var(--nxz-font-heading);
+      font-size: var(--nxz-text-2xl);
+      color: var(--nxz-primary);
+      letter-spacing: -0.03em;
+    }
+
+    .nxz-logo {
+      font-family: var(--nxz-font-heading);
+      font-size: var(--nxz-text-3xl);
+      color: var(--nxz-foreground) !important;
+      letter-spacing: -0.03em;
+      display: inline-block;
+      text-transform: none !important;
+      font-variant: normal;
+    }
+
+    .ds-header .nxz-logo {
+      font-size: var(--nxz-text-xl);
+    }
+
+    .ds-sidebar-brand span:not(.nxz-logo) {
+      display: block;
+      font-family: var(--nxz-font-body);
+      font-size: var(--nxz-text-xs);
+      color: var(--nxz-muted-foreground);
+      font-weight: 500;
+      text-transform: none;
+      letter-spacing: 0.08em;
+    }
+
+    .ds-sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--nxz-space-3) 0;
+    }
+
+    .ds-sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: var(--nxz-space-3);
+      padding: var(--nxz-space-2) var(--nxz-space-6);
+      font-size: var(--nxz-text-sm);
+      font-weight: 500;
+      color: var(--nxz-muted-foreground);
+      text-decoration: none;
+      transition: all var(--nxz-motion-fast) var(--nxz-easing);
+      border-left: 3px solid transparent;
+    }
+
+    .ds-sidebar-nav a:hover {
+      color: var(--nxz-foreground);
+      background: var(--nxz-muted);
+      text-decoration: none;
+    }
+
+    .ds-sidebar-nav a.active {
+      color: var(--nxz-primary);
+      background: var(--nxz-secondary);
+      border-left-color: var(--nxz-primary);
+      font-weight: 600;
+    }
+
+    .ds-sidebar-nav .ds-nav-group {
+      padding: var(--nxz-space-3) var(--nxz-space-6) var(--nxz-space-1);
+      font-size: var(--nxz-text-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--nxz-muted-foreground);
+      opacity: 0.6;
+    }
+
+    /* ---- Header ---- */
+    .ds-header {
+      position: fixed;
+      top: 0;
+      left: 260px;
+      right: 0;
+      height: 56px;
+      background: var(--nxz-card);
+      border-bottom: 1px solid var(--nxz-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--nxz-space-8);
+      z-index: 90;
+    }
+
+    .ds-header-title {
+      font-family: var(--nxz-font-body);
+      font-size: var(--nxz-text-sm);
+      font-weight: 600;
+      color: var(--nxz-muted-foreground);
+    }
+
+    .ds-header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--nxz-space-3);
+    }
+
+    .ds-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--nxz-space-2);
+      color: var(--nxz-foreground);
+    }
+
+    .ds-hamburger svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* ---- Main ---- */
+    .ds-main {
+      margin-left: 260px;
+      margin-top: 56px;
+      min-height: calc(100vh - 56px);
+      padding: var(--nxz-space-10) var(--nxz-space-10) var(--nxz-space-20);
+      max-width: 1100px;
+    }
+
+    /* ---- Overlay ---- */
+    .ds-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 99;
+    }
+
+    /* ---- Section ---- */
+    .ds-section {
+      margin-bottom: var(--nxz-space-16);
+      scroll-margin-top: 80px;
+    }
+
+    .ds-section-title {
+      font-size: var(--nxz-text-4xl);
+      color: var(--nxz-foreground);
+      margin-bottom: var(--nxz-space-2);
+    }
+
+    .ds-section-desc {
+      font-size: var(--nxz-text-lg);
+      color: var(--nxz-muted-foreground);
+      margin-bottom: var(--nxz-space-8);
+      max-width: 680px;
+      line-height: var(--nxz-leading-lg);
+    }
+
+    .ds-subsection {
+      margin-bottom: var(--nxz-space-10);
+    }
+
+    .ds-subsection-title {
+      font-family: var(--nxz-font-body);
+      font-size: var(--nxz-text-xl);
+      font-weight: 700;
+      color: var(--nxz-foreground);
+      margin-bottom: var(--nxz-space-4);
+    }
+
+    .ds-subsection-desc {
+      font-size: var(--nxz-text-sm);
+      color: var(--nxz-muted-foreground);
+      margin-bottom: var(--nxz-space-4);
+    }
+
+    .ds-divider {
+      border: none;
+      border-top: 1px solid var(--nxz-border);
+      margin: var(--nxz-space-10) 0;
+    }
+
+    /* ---- Swatch Grid ---- */
+    .ds-swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: var(--nxz-space-4);
+    }
+
+    .ds-swatch {
+      border-radius: var(--nxz-radius-md);
+      overflow: hidden;
+      border: 1px solid var(--nxz-border);
+      cursor: pointer;
+      transition: transform var(--nxz-motion-fast) var(--nxz-easing), box-shadow var(--nxz-motion-fast) var(--nxz-easing);
+    }
+    .ds-swatch:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--nxz-shadow-md);
+    }
+
+    .ds-swatch-color {
+      height: 80px;
+      position: relative;
+    }
+
+    .ds-swatch-info {
+      padding: var(--nxz-space-3);
+      background: var(--nxz-card);
+    }
+
+    .ds-swatch-name {
+      font-size: var(--nxz-text-sm);
+      font-weight: 600;
+      color: var(--nxz-foreground);
+      margin-bottom: 2px;
+    }
+
+    .ds-swatch-value {
+      font-family: var(--nxz-font-mono);
+      font-size: var(--nxz-text-xs);
+      color: var(--nxz-muted-foreground);
+    }
+
+    .ds-swatch-copied {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      font-size: var(--nxz-text-sm);
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity var(--nxz-motion-fast);
+      pointer-events: none;
+    }
+    .ds-swatch-copied.show {
+      opacity: 1;
+    }
+
+    /* ---- Code Block ---- */
+    .ds-code {
+      background: hsl(0, 0%, 8%);
+      color: hsl(0, 0%, 90%);
+      padding: var(--nxz-space-4) var(--nxz-space-5);
+      border-radius: var(--nxz-radius-md);
+      font-family: var(--nxz-font-mono);
+      font-size: var(--nxz-text-sm);
+      line-height: 1.6;
+      overflow-x: auto;
+      margin-bottom: var(--nxz-space-6);
+      position: relative;
+    }
+
+    .ds-code-copy {
+      position: absolute;
+      top: var(--nxz-space-2);
+      right: var(--nxz-space-2);
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      padding: var(--nxz-space-1) var(--nxz-space-2);
+      border-radius: var(--nxz-radius-sm);
+      font-family: var(--nxz-font-mono);
+      font-size: var(--nxz-text-xs);
+      transition: all var(--nxz-motion-fast);
+    }
+    .ds-code-copy:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* ---- Demo Box ---- */
+    .ds-demo {
+      background: var(--nxz-card);
+      border: 1px solid var(--nxz-border);
+      border-radius: var(--nxz-radius-md);
+      padding: var(--nxz-space-8);
+      margin-bottom: var(--nxz-space-4);
+    }
+
+    .ds-demo-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--nxz-space-4);
+    }
+
+    .ds-demo-col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--nxz-space-4);
+    }
+
+    .ds-demo-label {
+      font-size: var(--nxz-text-xs);
+      font-weight: 600;
+      color: var(--nxz-muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: var(--nxz-space-2);
+    }
+
+    /* ---- Table ---- */
+    .ds-table-wrap {
+      overflow-x: auto;
+      margin-bottom: var(--nxz-space-6);
+    }
+
+    .ds-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--nxz-text-sm);
+    }
+
+    .ds-table th {
+      text-align: left;
+      padding: var(--nxz-space-3) var(--nxz-space-4);
+      border-bottom: 2px solid var(--nxz-border);
+      font-weight: 600;
+      color: var(--nxz-muted-foreground);
+      font-size: var(--nxz-text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .ds-table td {
+      padding: var(--nxz-space-3) var(--nxz-space-4);
+      border-bottom: 1px solid var(--nxz-muted);
+      vertical-align: middle;
+    }
+
+    .ds-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .ds-table .mono {
+      font-family: var(--nxz-font-mono);
+      font-size: var(--nxz-text-xs);
+      color: var(--nxz-primary);
+    }
+
+    /* ---- Toast ---- */
+    .ds-toast-container {
+      position: fixed;
+      bottom: var(--nxz-space-6);
+      right: var(--nxz-space-6);
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      gap: var(--nxz-space-2);
+    }
+
+    .ds-toast {
+      background: var(--nxz-foreground);
+      color: var(--nxz-primary-foreground);
+      padding: var(--nxz-space-3) var(--nxz-space-5);
+      border-radius: var(--nxz-radius-full);
+      font-size: var(--nxz-text-sm);
+      font-weight: 500;
+      animation: ds-toast-in 0.3s var(--nxz-easing);
+      box-shadow: var(--nxz-shadow-lg);
+    }
+
+    .ds-toast.removing {
+      animation: ds-toast-out 0.3s var(--nxz-easing) forwards;
+    }
+
+    @keyframes ds-toast-in {
+      from { opacity: 0; transform: translateY(12px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes ds-toast-out {
+      to { opacity: 0; transform: translateY(-8px) scale(0.95); }
+    }
+
+    /* ============================================================
+       NXZ COMPONENT CLASSES (nxz- prefix)
+       ============================================================ */
+
+    /* ---- Buttons ---- */
+    .nxz-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--nxz-space-2);
+      height: var(--nxz-density-button-h);
+      padding: 0 20px;
+      font-family: var(--nxz-font-body);
+      font-size: var(--nxz-text-sm);
+      font-weight: 500;
+      border-radius: var(--nxz-radius-full);
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all var(--nxz-motion-fast) var(--nxz-easing);
+      text-decoration: none;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .nxz-btn:focus-visible {
+      outline: 2px solid var(--nxz-ring);
+      outline-offset: 2px;
+    }
+
+    .nxz-btn-primary {
+      background: linear-gradient(to right, var(--nxz-primary), var(--nxz-primary-end));
+      color: var(--nxz-primary-foreground);
+      border-color: transparent;
+    }
+    .nxz-btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: var(--nxz-shadow-md);
+    }
+    .nxz-btn-primary:active {
+      transform: translateY(0);
+      box-shadow: none;
+      opacity: 1;
+    }
+
+    .nxz-btn-secondary {
+      background: transparent;
+      color: var(--nxz-primary);
+      border-color: var(--nxz-primary);
+    }
+    .nxz-btn-secondary:hover {
+      background: var(--nxz-secondary);
+      transform: translateY(-1px);
+    }
+    .nxz-btn-secondary:active {
+      transform: translateY(0);
+    }
+
+    .nxz-btn-ghost {
+      background: transparent;
+      color: var(--nxz-foreground);
+      border-color: transparent;
+    }
+    .nxz-btn-ghost:hover {
+      background: var(--nxz-muted);
+    }
+
+    .nxz-btn-dark {
+      background: var(--nxz-foreground);
+      color: var(--nxz-primary-foreground);
+      border-color: var(--nxz-foreground);
+    }
+    .nxz-btn-dark:hover {
+      background: hsl(0, 0%, 15%);
+      border-color: hsl(0, 0%, 15%);
+      transform: translateY(-1px);
+      box-shadow: var(--nxz-shadow-md);
+    }
+    .nxz-btn-dark:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    .nxz-btn-outline-light {
+      background: transparent;
+      color: var(--nxz-primary-foreground);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    .nxz-btn-outline-light:hover {
+      border-color: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nxz-btn-sm {
+      height: var(--nxz-density-button-h-sm);
+      padding: 0 16px;
+      font-size: var(--nxz-text-sm);
+    }
+
+    .nxz-btn-lg {
+      height: var(--nxz-density-button-h-lg);
+      padding: 0 32px;
+      font-size: var(--nxz-text-base);
+    }
+
+    .nxz-btn:disabled, .nxz-btn[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* ---- Card ---- */
+    .nxz-card {
+      background: var(--nxz-card);
+      border: 1px solid var(--nxz-border);
+      border-radius: var(--nxz-radius-lg);
+      overflow: hidden;
+      transition: transform var(--nxz-motion-fast) var(--nxz-easing), box-shadow var(--nxz-motion-fast) var(--nxz-easing);
+    }
+    .nxz-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--nxz-shadow-lg);
+    }
+
+    .nxz-card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .nxz-card-body {
+      padding: var(--nxz-space-6);
+    }
+
+    .nxz-card-title {
+      font-family: var(--nxz-font-heading);
+      font-size: var(--nxz-text-xl);
+      margin-bottom: var(--nxz-space-2);
+    }
+
+    .nxz-card-text {
+      font-size: var(--nxz-text-sm);
+      color: var(--nxz-muted-foreground);
+      line-height: var(--nxz-leading-sm);
+      margin-bottom: var(--nxz-space-4);
+    }
+
+    .nxz-card-meta {
+      font-size: var(--nxz-text-xs);
+      color: var(--nxz-muted-foreground);
+      font-weight: 500;
+    }
+
+    .nxz-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--nxz-space-6);
+    }
+
+    /* ---- Badge ---- */
+    .nxz-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      font-size: var(--nxz-text-xs);
+      font-weight: 600;
+      border-radius: var(--nxz-radius-full);
+      white-space: nowrap;
+    }
+
+    .nxz-badge-primary {
+      background: var(--nxz-primary);
+      color: var(--nxz-primary-foreground);
+    }
+
+    .nxz-badge-secondary {
+      background: var(--nxz-secondary);
+      color: var(--nxz-secondary-foreground);
+    }
+
+    .nxz-badge-success {
+      background: hsl(152, 60%, 90%);
+      color: hsl(152, 60%, 30%);
+    }
+
+    .nxz-badge-warning {
+      background: hsl(38, 80%, 90%);
+      color: hsl(38, 80%, 30%);
+    }
+
+    .nxz-badge-destructive {
+      background: hsl(0, 72%, 92%);
+      color: hsl(0, 72%, 40%);
+    }
+
+    .nxz-badge-outline {
+      background: transparent;
+      border: 1px solid var(--nxz-border);
+      color: var(--nxz-muted-foreground);
+    }
+
+    /* ---- Input / Form ---- */
+    .nxz-input {
+      display: block;
+      width: 100%;
+      height: var(--nxz-density-input-h);
+      padding: 0 var(--nxz-space-4);
+      font-family: var(--nxz-font-body);
+      font-size: var(--nxz-text-base);
+      color: var(--nxz-foreground);
+      background: var(--nxz-card);
+      border: 1px solid var(--nxz-input);
+      border-radius: var(--nxz-radius-md);
+      transition: border-color var(--nxz-motion-fast), box-shadow var(--nxz-motion-fast);
+      outline: none;
+    }
+    .nxz-input::placeholder {
+      color: var(--nxz-muted-foreground);
+    }
+    .nxz-input:focus {
+      border-color: var(--nxz-ring);
+      box-shadow: 0 0 0 3px hsl(262 80% 55% / 0.15);
+    }
+    .nxz-input:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .nxz-textarea {
+      display: block;
+      width: 100%;
+      min-height: 120px;
+      padding: var(--nxz-space-3) var(--nxz-space-4);
+      font-family: var(--nxz-font-body);
+      font-size: var(--nxz-text-base);
+      color: var(--nxz-foreground);
+      background: var(--nxz-card);
+      border: 1px solid var(--nxz-input);
+      border-radius: var(--nxz-radius-md);
+      resize: vertical;
+      outline: none;
+      transition: border-color var(--nxz-motion-fast), box-shadow var(--nxz-motion-fast);
+    }
+    .nxz-textarea:focus {
+      border-color: var(--nxz-ring);
+      box-shadow: 0 0 0 3px hsl(262 80% 55% / 0.15);
+    }
+
+    .nxz-select {
+      display: block;
+      width: 100%;
+      height: var(--nxz-density-input-h);
+      padding: 0 var(--nxz-space-10) 0 var(--nxz-space-4);
+      font-family: var(--nxz-font-body);
+      font-size: var(--nxz-text-base);
+      color: var(--nxz-foreground);
+      background: var(--nxz-card);
+      border: 1px solid var(--nxz-input);
+      border-radius: var(--nxz-radius-md);
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23707070' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      transition: border-color var(--nxz-motion-fast), box-shadow var(--nxz-motion-fast);
+    }
+    .nxz-select:focus {
+      border-color: var(--nxz-ring);
+      box-shadow: 0 0 0 3px hsl(262 80% 55% / 0.15);
+    }
+
+    .nxz-label {
+      display: block;
+      font-size: var(--nxz-text-sm);
+      font-weight: 600;
+      color: var(--nxz-foreground);
+      margin-bottom: var(--nxz-space-2);
+    }
+
+    .nxz-form-group {
+      margin-bottom: var(--nxz-space-5);
+    }
+
+    .nxz-form-hint {
+      font-size: var(--nxz-text-xs);
+      color: var(--nxz-muted-foreground);
+      margin-top: var(--nxz-space-1);
+    }
+
+    .nxz-form-error {
+      font-size: var(--nxz-text-xs);
+      color: var(--nxz-destructive);
+      margin-top: var(--nxz-space-1);
+    }
+
+    /* ---- Nav Header Mockup ---- */
+    .nxz-nav-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--nxz-density-nav-h);
+      padding: 0 var(--nxz-space-8);
+      background: var(--nxz-card);
+      border: 1px solid var(--nxz-border);
+      border-radius: var(--nxz-radius-lg);
+    }
+
+    .nxz-nav-logo {
+      font-family: var(--nxz-font-heading);
+      font-size: var(--nxz-text-2xl);
+      color: var(--nxz-foreground);
+      letter-spacing: -0.03em;
+    }
+
+    .nxz-nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--nxz-space-8);
+      list-style: none;
+    }
+
+    .nxz-nav-links a {
+      font-size: var(--nxz-text-sm);
+      font-weight: 500;
+      color: var(--nxz-muted-foreground);
+      text-decoration: none;
+      transition: color var(--nxz-motion-fast);
+    }
+    .nxz-nav-links a:hover {
+      color: var(--nxz-foreground);
+      text-decoration: none;
+    }
+
+    .nxz-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--nxz-space-3);
+    }
+
+    /* ---- Hero Section ---- */
+    .nxz-hero {
+      padding: var(--nxz-space-20) var(--nxz-space-8);
+      text-align: center;
+      background: var(--nxz-warm-gray);
+      border-radius: var(--nxz-radius-lg);
+      margin-bottom: var(--nxz-space-8);
+    }
+
+    .nxz-hero-overline {
+      font-size: var(--nxz-text-sm);
+      font-weight: 600;
+      color: var(--nxz-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--nxz-space-4);
+    }
+
+    .nxz-hero h2 {
+      font-size: var(--nxz-text-5xl);
+      line-height: var(--nxz-leading-5xl);
+      margin-bottom: var(--nxz-space-6);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .nxz-hero p {
+      font-size: var(--nxz-text-lg);
+      color: var(--nxz-muted-foreground);
+      max-width: 520px;
+      margin: 0 auto var(--nxz-space-8);
+      line-height: var(--nxz-leading-lg);
+    }
+
+    .nxz-hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--nxz-space-4);
+      flex-wrap: wrap;
+    }
+
+    /* ---- CTA Banner ---- */
+    .nxz-cta-banner {
+      background: var(--nxz-foreground);
+      color: var(--nxz-primary-foreground);
+      padding: var(--nxz-space-16) var(--nxz-space-8);
+      border-radius: var(--nxz-radius-lg);
+      text-align: center;
+    }
+
+    .nxz-cta-banner h3 {
+      color: var(--nxz-primary-foreground);
+      font-size: var(--nxz-text-4xl);
+      margin-bottom: var(--nxz-space-4);
+    }
+
+    .nxz-cta-banner p {
+      color: hsl(0, 0%, 70%);
+      font-size: var(--nxz-text-lg);
+      max-width: 500px;
+      margin: 0 auto var(--nxz-space-8);
+    }
+
+    .nxz-cta-banner .nxz-btn-primary {
+      background: linear-gradient(to right, var(--nxz-primary), var(--nxz-primary-end));
+      color: var(--nxz-primary-foreground);
+      border-color: transparent;
+    }
+    .nxz-cta-banner .nxz-btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    /* ---- Proof Bar ---- */
+    .nxz-proof-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--nxz-space-12);
+      padding: var(--nxz-space-8) var(--nxz-space-4);
+      flex-wrap: wrap;
+    }
+
+    .nxz-proof-item {
+      text-align: center;
+    }
+
+    .nxz-proof-number {
+      font-family: var(--nxz-font-mono);
+      font-size: var(--nxz-text-4xl);
+      font-weight: 600;
+      color: var(--nxz-primary);
+      line-height: 1;
+      margin-bottom: var(--nxz-space-1);
+    }
+
+    .nxz-proof-label {
+      font-size: var(--nxz-text-sm);
+      color: var(--nxz-muted-foreground);
+      font-weight: 500;
+    }
+
+    /* ---- Testimonial ---- */
+    .nxz-testimonial {
+      background: var(--nxz-pastel-purple);
+      border-radius: var(--nxz-radius-lg);
+      padding: var(--nxz-space-10) var(--nxz-space-8);
+      text-align: center;
+      max-width: 700px;
+    }
+
+    .nxz-testimonial-quote {
+      font-family: var(--nxz-font-heading);
+      font-size: var(--nxz-text-2xl);
+      line-height: var(--nxz-leading-2xl);
+      color: var(--nxz-foreground);
+      margin-bottom: var(--nxz-space-6);
+    }
+
+    .nxz-testimonial-author {
+      font-size: var(--nxz-text-sm);
+      font-weight: 600;
+      color: var(--nxz-foreground);
+    }
+
+    .nxz-testimonial-role {
+      font-size: var(--nxz-text-xs);
+      color: var(--nxz-muted-foreground);
+    }
+
+    /* ---- FAQ Accordion ---- */
+    .nxz-faq-list {
+      max-width: 700px;
+    }
+
+    .nxz-faq-item {
+      border-bottom: 1px solid var(--nxz-border);
+    }
+
+    .nxz-faq-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: var(--nxz-space-5) 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--nxz-font-body);
+      font-size: var(--nxz-text-base);
+      font-weight: 600;
+      color: var(--nxz-foreground);
+      text-align: left;
+    }
+
+    .nxz-faq-trigger:hover {
+      color: var(--nxz-primary);
+    }
+
+    .nxz-faq-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      transition: transform var(--nxz-motion-normal) var(--nxz-easing);
+      color: var(--nxz-muted-foreground);
+    }
+
+    .nxz-faq-item.open .nxz-faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .nxz-faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--nxz-motion-normal) var(--nxz-easing);
+    }
+
+    .nxz-faq-content-inner {
+      padding: 0 0 var(--nxz-space-5);
+      font-size: var(--nxz-text-sm);
+      color: var(--nxz-muted-foreground);
+      line-height: var(--nxz-leading-sm);
+    }
+
+    /* ---- Modal ---- */
+    .nxz-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--nxz-motion-normal), visibility var(--nxz-motion-normal);
+    }
+    .nxz-modal-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nxz-modal {
+      background: var(--nxz-card);
+      border-radius: var(--nxz-radius-lg);
+      padding: var(--nxz-space-8);
+      max-width: 480px;
+      width: 90%;
+      box-shadow: var(--nxz-shadow-lg);
+      transform: translateY(20px) scale(0.97);
+      transition: transform var(--nxz-motion-normal) var(--nxz-easing);
+    }
+    .nxz-modal-backdrop.open .nxz-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .nxz-modal-title {
+      font-family: var(--nxz-font-heading);
+      font-size: var(--nxz-text-xl);
+      margin-bottom: var(--nxz-space-3);
+    }
+
+    .nxz-modal-text {
+      font-size: var(--nxz-text-sm);
+      color: var(--nxz-muted-foreground);
+      margin-bottom: var(--nxz-space-6);
+      line-height: var(--nxz-leading-sm);
+    }
+
+    .nxz-modal-actions {
+      display: flex;
+      gap: var(--nxz-space-3);
+      justify-content: flex-end;
+    }
+
+    /* ---- Toast (component) ---- */
+    .nxz-toast-demo {
+      background: var(--nxz-card);
+      border: 1px solid var(--nxz-border);
+      border-radius: var(--nxz-radius-md);
+      padding: var(--nxz-space-4) var(--nxz-space-5);
+      display: flex;
+      align-items: center;
+      gap: var(--nxz-space-3);
+      box-shadow: var(--nxz-shadow-lg);
+      max-width: 380px;
+    }
+
+    .nxz-toast-demo-success {
+      border-left: 4px solid var(--nxz-success);
+    }
+
+    .nxz-toast-demo-warning {
+      border-left: 4px solid var(--nxz-warning);
+    }
+
+    .nxz-toast-demo-destructive {
+      border-left: 4px solid var(--nxz-destructive);
+    }
+
+    .nxz-toast-title {
+      font-size: var(--nxz-text-sm);
+      font-weight: 600;
+      color: var(--nxz-foreground);
+    }
+
+    .nxz-toast-desc {
+      font-size: var(--nxz-text-xs);
+      color: var(--nxz-muted-foreground);
+    }
+
+    /* ---- Spacing Scale Visual ---- */
+    .ds-spacing-row {
+      display: flex;
+      align-items: center;
+      gap: var(--nxz-space-4);
+      margin-bottom: var(--nxz-space-3);
+    }
+
+    .ds-spacing-label {
+      width: 100px;
+      font-family: var(--nxz-font-mono);
+      font-size: var(--nxz-text-xs);
+      color: var(--nxz-muted-foreground);
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .ds-spacing-bar {
+      height: 24px;
+      background: var(--nxz-primary);
+      border-radius: var(--nxz-radius-xs);
+      opacity: 0.7;
+      transition: opacity var(--nxz-motion-fast);
+    }
+    .ds-spacing-bar:hover {
+      opacity: 1;
+    }
+
+    .ds-spacing-value {
+      font-family: var(--nxz-font-mono);
+      font-size: var(--nxz-text-xs);
+      color: var(--nxz-muted-foreground);
+      flex-shrink: 0;
+      width: 50px;
+    }
+
+    /* ---- Radius Visual ---- */
+    .ds-radius-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--nxz-space-6);
+    }
+
+    .ds-radius-item {
+      text-align: center;
+    }
+
+    .ds-radius-box {
+      width: 80px;
+      height: 80px;
+      background: var(--nxz-secondary);
+      border: 2px solid var(--nxz-primary);
+      margin-bottom: var(--nxz-space-2);
+    }
+
+    .ds-radius-name {
+      font-size: var(--nxz-text-xs);
+      font-weight: 600;
+      color: var(--nxz-foreground);
+    }
+
+    .ds-radius-val {
+      font-family: var(--nxz-font-mono);
+      font-size: var(--nxz-text-xs);
+      color: var(--nxz-muted-foreground);
+    }
+
+    /* ---- Shadow Visual ---- */
+    .ds-shadow-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--nxz-space-8);
+    }
+
+    .ds-shadow-item {
+      text-align: center;
+    }
+
+    .ds-shadow-box {
+      width: 120px;
+      height: 120px;
+      background: var(--nxz-card);
+      border-radius: var(--nxz-radius-md);
+      margin-bottom: var(--nxz-space-3);
+    }
+
+    .ds-shadow-name {
+      font-size: var(--nxz-text-xs);
+      font-weight: 600;
+    }
+
+    /* ---- Motion Demo ---- */
+    .ds-motion-demo {
+      display: flex;
+      flex-direction: column;
+      gap: var(--nxz-space-6);
+    }
+
+    .ds-motion-row {
+      display: flex;
+      align-items: center;
+      gap: var(--nxz-space-4);
+    }
+
+    .ds-motion-label {
+      width: 120px;
+      flex-shrink: 0;
+    }
+
+    .ds-motion-track {
+      flex: 1;
+      height: 48px;
+      background: var(--nxz-muted);
+      border-radius: var(--nxz-radius-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ds-motion-ball {
+      width: 40px;
+      height: 40px;
+      background: var(--nxz-primary);
+      border-radius: var(--nxz-radius-full);
+      position: absolute;
+      top: 4px;
+      left: 4px;
+    }
+
+    .ds-motion-track:hover .ds-motion-ball {
+      left: calc(100% - 44px);
+    }
+
+    /* ---- Accessibility Section ---- */
+    .ds-a11y-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--nxz-space-4);
+    }
+
+    .ds-a11y-card {
+      background: var(--nxz-card);
+      border: 1px solid var(--nxz-border);
+      border-radius: var(--nxz-radius-md);
+      padding: var(--nxz-space-5);
+    }
+
+    .ds-a11y-card h4 {
+      font-family: var(--nxz-font-body);
+      font-size: var(--nxz-text-base);
+      font-weight: 700;
+      margin-bottom: var(--nxz-space-2);
+    }
+
+    .ds-a11y-card p {
+      font-size: var(--nxz-text-sm);
+      color: var(--nxz-muted-foreground);
+      line-height: var(--nxz-leading-sm);
+    }
+
+    /* ---- Density Section ---- */
+    .ds-density-table {
+      display: grid;
+      grid-template-columns: auto 1fr 1fr;
+      gap: 1px;
+      background: var(--nxz-border);
+      border-radius: var(--nxz-radius-md);
+      overflow: hidden;
+    }
+
+    .ds-density-cell {
+      background: var(--nxz-card);
+      padding: var(--nxz-space-3) var(--nxz-space-4);
+      font-size: var(--nxz-text-sm);
+    }
+
+    .ds-density-cell.header {
+      font-weight: 700;
+      color: var(--nxz-muted-foreground);
+      font-size: var(--nxz-text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ---- Footer ---- */
+    .nxz-footer {
+      background: var(--nxz-foreground);
+      color: var(--nxz-background);
+      padding: var(--nxz-space-16) var(--nxz-space-8) var(--nxz-space-8);
+      border-radius: 0;
+    }
+
+    .nxz-footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: var(--nxz-space-8);
+      max-width: 1200px;
+      margin: 0 auto var(--nxz-space-12);
+    }
+
+    .nxz-footer-brand p {
+      font-size: var(--nxz-text-sm);
+      color: rgba(255, 255, 255, 0.6);
+      line-height: var(--nxz-leading-sm);
+      margin-top: var(--nxz-space-4);
+    }
+
+    .nxz-footer-logo {
+      font-family: var(--nxz-font-heading);
+      font-size: var(--nxz-text-2xl);
+      color: var(--nxz-primary-foreground);
+      letter-spacing: -0.03em;
+    }
+
+    .nxz-footer-col h4 {
+      font-family: var(--nxz-font-body);
+      font-size: var(--nxz-text-sm);
+      font-weight: 600;
+      color: var(--nxz-primary-foreground);
+      margin-bottom: var(--nxz-space-4);
+    }
+
+    .nxz-footer-col a {
+      display: block;
+      font-size: var(--nxz-text-sm);
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      margin-bottom: var(--nxz-space-2);
+      transition: color var(--nxz-motion-fast);
+    }
+    .nxz-footer-col a:hover {
+      color: var(--nxz-primary-foreground);
+      text-decoration: none;
+    }
+
+    .nxz-footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: var(--nxz-space-6);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .nxz-footer-bottom p {
+      font-size: var(--nxz-text-xs);
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .nxz-footer-bottom-links {
+      display: flex;
+      gap: var(--nxz-space-6);
+    }
+
+    .nxz-footer-bottom-links a {
+      font-size: var(--nxz-text-xs);
+      color: rgba(255, 255, 255, 0.4);
+      text-decoration: none;
+      transition: color var(--nxz-motion-fast);
+    }
+    .nxz-footer-bottom-links a:hover {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+    }
+
+    /* ---- Steps ---- */
+    .nxz-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--nxz-space-8);
+    }
+
+    .nxz-step {
+      text-align: left;
+    }
+
+    .nxz-step-number {
+      font-family: var(--nxz-font-mono);
+      font-size: var(--nxz-text-sm);
+      font-weight: 700;
+      color: var(--nxz-primary);
+      margin-bottom: var(--nxz-space-4);
+    }
+
+    .nxz-step h3 {
+      font-family: var(--nxz-font-heading);
+      font-size: var(--nxz-text-xl);
+      margin-bottom: var(--nxz-space-2);
+    }
+
+    .nxz-step p {
+      font-size: var(--nxz-text-sm);
+      color: var(--nxz-muted-foreground);
+      line-height: var(--nxz-leading-sm);
+    }
+
+    /* ---- Section Background Alternation ---- */
+    .nxz-section-bg { padding: var(--nxz-space-24) var(--nxz-space-8); }
+    .nxz-section-bg--background { background: var(--nxz-background); }
+    .nxz-section-bg--warm-gray { background: var(--nxz-warm-gray); }
+    .nxz-section-bg--pastel { background: var(--nxz-pastel-purple); }
+    .nxz-section-bg--dark { background: var(--nxz-foreground); color: var(--nxz-background); }
+    .nxz-section-bg--dark h2,
+    .nxz-section-bg--dark h3 { color: var(--nxz-primary-foreground); }
+    .nxz-section-bg--dark p { color: rgba(255, 255, 255, 0.6); }
+
+    /* ---- Link Arrow ---- */
+    .nxz-link-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--nxz-space-2);
+      font-size: var(--nxz-text-sm);
+      font-weight: 500;
+      color: var(--nxz-primary);
+      text-decoration: none;
+      transition: gap var(--nxz-motion-fast) var(--nxz-easing);
+    }
+    .nxz-link-arrow:hover {
+      gap: var(--nxz-space-3);
+      text-decoration: none;
+    }
+
+    /* ============================================================
+       DASHBOARD COMPONENTS (nxz- prefix)
+       ============================================================ */
+
+    /* ---- Stat Card (KPI) ---- */
+    .nxz-stat-card {
+      background: var(--nxz-card);
+      border: 1px solid var(--nxz-border);
+      border-radius: var(--nxz-radius-md);
+      padding: var(--nxz-space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--nxz-space-2);
+      box-shadow: var(--nxz-shadow-sm);
+      transition: transform var(--nxz-motion-fast) var(--nxz-easing), box-shadow var(--nxz-motion-fast) var(--nxz-easing);
+    }
+    .nxz-stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--nxz-shadow-md);
+    }
+
+    .nxz-stat-card__header {
+      display: flex;
+      align-items: center;
+      gap: var(--nxz-space-3);
+    }
+
+    .nxz-stat-card__icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--nxz-radius-md);
+      background: var(--nxz-primary-10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .nxz-stat-card__icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--nxz-primary);
+    }
+
+    .nxz-stat-card__label {
+      font-size: var(--nxz-text-xs);
+      font-weight: 700;
+      color: var(--nxz-muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .nxz-stat-card__value {
+      font-family: var(--nxz-font-mono);
+      font-size: var(--nxz-text-2xl);
+      font-weight: 600;
+      color: var(--nxz-foreground);
+      line-height: 1;
+    }
+
+    .nxz-stat-card__comparison {
+      font-size: var(--nxz-text-xs);
+      color: var(--nxz-muted-foreground);
+      display: flex;
+      align-items: center;
+      gap: var(--nxz-space-1);
+    }
+
+    .nxz-stat-card__variation {
+      font-weight: 600;
+      font-family: var(--nxz-font-mono);
+    }
+    .nxz-stat-card__variation--positive {
+      color: var(--nxz-variation-positive);
+    }
+    .nxz-stat-card__variation--negative {
+      color: var(--nxz-variation-negative);
+    }
+
+    .nxz-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: var(--nxz-space-4);
+    }
+
+    /* ---- Chart Card ---- */
+    .nxz-chart-card {
+      background: var(--nxz-card);
+      border: 1px solid var(--nxz-border);
+      border-radius: var(--nxz-radius-md);
+      padding: var(--nxz-space-5);
+      box-shadow: var(--nxz-shadow-sm);
+    }
+
+    .nxz-chart-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--nxz-space-4);
+    }
+
+    .nxz-chart-card__title {
+      font-size: var(--nxz-text-xs);
+      font-weight: 700;
+      color: var(--nxz-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .nxz-chart-card__period {
+      font-size: var(--nxz-text-xs);
+      color: var(--nxz-muted-foreground);
+      font-weight: 500;
+    }
+
+    /* Bar chart (CSS-only) */
+    .nxz-bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: var(--nxz-space-2);
+      height: 140px;
+      padding-top: var(--nxz-space-2);
+    }
+
+    .nxz-bar-chart__col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--nxz-space-1);
+      height: 100%;
+      justify-content: flex-end;
+      position: relative;
+    }
+
+    .nxz-bar-chart__bar {
+      width: 100%;
+      background: var(--nxz-primary-20);
+      border-radius: var(--nxz-radius-xs) var(--nxz-radius-xs) 0 0;
+      transition: background var(--nxz-motion-fast) var(--nxz-easing);
+      min-height: 4px;
+      position: relative;
+      cursor: pointer;
+    }
+    .nxz-bar-chart__bar:hover {
+      background: var(--nxz-primary-50);
+    }
+
+    .nxz-bar-chart__bar-tooltip {
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--nxz-foreground);
+      color: var(--nxz-primary-foreground);
+      font-size: var(--nxz-text-xs);
+      font-family: var(--nxz-font-mono);
+      padding: 2px 8px;
+      border-radius: var(--nxz-radius-sm);
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--nxz-motion-fast);
+    }
+    .nxz-bar-chart__bar:hover .nxz-bar-chart__bar-tooltip {
+      opacity: 1;
+    }
+
+    .nxz-bar-chart__label {
+      font-size: 10px;
+      color: var(--nxz-muted-foreground);
+      font-weight: 500;
+    }
+
+    /* ---- Ranked List ---- */
+    .nxz-ranked-list {
+      background: var(--nxz-card);
+      border: 1px solid var(--nxz-border);
+      border-radius: var(--nxz-radius-md);
+      padding: var(--nxz-space-5);
+      box-shadow: var(--nxz-shadow-sm);
+    }
+
+    .nxz-ranked-list__header {
+      font-size: var(--nxz-text-xs);
+      font-weight: 700;
+      color: var(--nxz-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: var(--nxz-space-4);
+    }
+
+    .nxz-ranked-list__items {
+      display: flex;
+      flex-direction: column;
+      gap: var(--nxz-space-3);
+    }
+
+    .nxz-ranked-list__item {
+      display: flex;
+      align-items: center;
+      gap: var(--nxz-space-3);
+    }
+
+    .nxz-ranked-list__badge {
+      width: 24px;
+      height: 24px;
+      border-radius: var(--nxz-radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--nxz-text-xs);
+      font-weight: 700;
+      flex-shrink: 0;
+      background: var(--nxz-muted);
+      color: var(--nxz-muted-foreground);
+    }
+    .nxz-ranked-list__badge--primary {
+      background: var(--nxz-primary);
+      color: var(--nxz-primary-foreground);
+    }
+
+    .nxz-ranked-list__name {
+      flex: 1;
+      font-size: var(--nxz-text-sm);
+      font-weight: 500;
+      color: var(--nxz-foreground);
+    }
+
+    .nxz-ranked-list__value {
+      font-family: var(--nxz-font-mono);
+      font-size: var(--nxz-text-sm);
+      font-weight: 600;
+      color: var(--nxz-foreground);
+    }
+
+    /* ---- Dashboard Shell ---- */
+    .nxz-dashboard-shell {
+      background: var(--nxz-card);
+      border: 1px solid var(--nxz-border);
+      border-radius: var(--nxz-radius-lg);
+      overflow: hidden;
+      display: flex;
+      min-height: 420px;
+      box-shadow: var(--nxz-shadow-md);
+    }
+
+    .nxz-dashboard-sidebar {
+      width: 180px;
+      border-right: 1px solid var(--nxz-border);
+      background: var(--nxz-card);
+      padding: var(--nxz-space-4) 0;
+      flex-shrink: 0;
+    }
+
+    .nxz-dashboard-sidebar__group {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--nxz-muted-foreground);
+      opacity: 0.6;
+      padding: var(--nxz-space-3) var(--nxz-space-4) var(--nxz-space-1);
+    }
+
+    .nxz-dashboard-sidebar__item {
+      display: flex;
+      align-items: center;
+      gap: var(--nxz-space-2);
+      padding: var(--nxz-space-2) var(--nxz-space-4);
+      font-size: var(--nxz-text-xs);
+      font-weight: 500;
+      color: var(--nxz-muted-foreground);
+      cursor: pointer;
+      border-radius: 0;
+      transition: all var(--nxz-motion-fast);
+      text-decoration: none;
+    }
+    .nxz-dashboard-sidebar__item:hover {
+      color: var(--nxz-foreground);
+      background: var(--nxz-muted);
+      text-decoration: none;
+    }
+    .nxz-dashboard-sidebar__item--active {
+      color: var(--nxz-primary);
+      background: var(--nxz-primary-10);
+      font-weight: 600;
+    }
+    .nxz-dashboard-sidebar__item--active:hover {
+      background: var(--nxz-primary-10);
+      color: var(--nxz-primary);
+    }
+
+    .nxz-dashboard-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .nxz-dashboard-header {
+      height: 40px;
+      border-bottom: 1px solid var(--nxz-border);
+      padding: 0 var(--nxz-space-4);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--nxz-muted);
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+
+    .nxz-dashboard-header__title {
+      display: flex;
+      align-items: center;
+      gap: var(--nxz-space-2);
+      font-size: var(--nxz-text-xs);
+      font-weight: 600;
+      color: var(--nxz-foreground);
+    }
+
+    .nxz-dashboard-header__dot {
+      width: 10px;
+      height: 10px;
+      border-radius: var(--nxz-radius-xs);
+      background: var(--nxz-primary);
+    }
+
+    .nxz-dashboard-header__avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--nxz-radius-full);
+      background: var(--nxz-primary-10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nxz-dashboard-header__avatar svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--nxz-primary);
+    }
+
+    .nxz-dashboard-body {
+      flex: 1;
+      padding: var(--nxz-space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--nxz-space-5);
+      overflow: auto;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 768px) {
+      .ds-sidebar {
+        transform: translateX(-100%);
+      }
+      .ds-sidebar.open {
+        transform: translateX(0);
+      }
+      .ds-overlay.open {
+        display: block;
+      }
+      .ds-header {
+        left: 0;
+      }
+      .ds-main {
+        margin-left: 0;
+        padding: var(--nxz-space-6) var(--nxz-space-4) var(--nxz-space-16);
+      }
+      .ds-hamburger {
+        display: block;
+      }
+      .nxz-hero h2 {
+        font-size: var(--nxz-text-3xl);
+        line-height: var(--nxz-leading-3xl);
+      }
+      .nxz-proof-bar {
+        gap: var(--nxz-space-6);
+      }
+      .nxz-nav-links {
+        display: none;
+      }
+      .ds-swatch-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      }
+      .nxz-footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .nxz-footer-bottom {
+        flex-direction: column;
+        gap: var(--nxz-space-3);
+        text-align: center;
+      }
+      .nxz-dashboard-shell {
+        flex-direction: column;
+      }
+      .nxz-dashboard-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--nxz-border);
+        padding: var(--nxz-space-2) 0;
+        display: flex;
+        overflow-x: auto;
+        gap: 0;
+      }
+      .nxz-dashboard-sidebar__group {
+        display: none;
+      }
+      .nxz-dashboard-sidebar__item {
+        white-space: nowrap;
+        padding: var(--nxz-space-2) var(--nxz-space-3);
+      }
+      .nxz-stat-grid {
+        grid-template-columns: 1fr;
+      }
+      .nxz-bar-chart__label {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       SIDEBAR
+       ============================================================ -->
+  <aside class="ds-sidebar" id="sidebar">
+    <div class="ds-sidebar-brand">
+      <span class="nxz-logo">nxz.</span>
+      <span>Design System v2.0</span>
+    </div>
+    <nav class="ds-sidebar-nav" id="sidebar-nav">
+      <div class="ds-nav-group">Fundamentos</div>
+      <a href="#introducao">Introducao</a>
+      <a href="#cores">Cores</a>
+      <a href="#tipografia">Tipografia</a>
+      <a href="#espacamento">Espacamento</a>
+      <a href="#bordas">Bordas & Radius</a>
+      <a href="#sombras">Sombras</a>
+      <a href="#motion">Motion & Transicoes</a>
+
+      <div class="ds-nav-group">Componentes</div>
+      <a href="#botoes">Botoes</a>
+      <a href="#cards">Cards</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#navegacao">Navegacao</a>
+      <a href="#hero">Hero Sections</a>
+      <a href="#cta-banner">CTA Banner</a>
+      <a href="#proof-bar">Proof Bar</a>
+      <a href="#testimonial">Testimonial</a>
+      <a href="#faq">FAQ Accordion</a>
+      <a href="#formularios">Formularios</a>
+      <a href="#badges">Badges & Tags</a>
+      <a href="#feedback">Feedback</a>
+
+      <div class="ds-nav-group">Secoes de Pagina</div>
+      <a href="#steps">Steps</a>
+      <a href="#alternancia-bg">Alternancia de Fundo</a>
+      <a href="#footer">Footer</a>
+      <a href="#link-arrow">Link Arrow</a>
+
+      <div class="ds-nav-group">Guias</div>
+      <a href="#icones">Icones</a>
+      <a href="#acessibilidade">Acessibilidade</a>
+      <a href="#densidade">Densidade</a>
+    </nav>
+  </aside>
+
+  <!-- ============================================================
+       OVERLAY (mobile)
+       ============================================================ -->
+  <div class="ds-overlay" id="overlay" onclick="closeSidebar()"></div>
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header class="ds-header">
+    <div style="display:flex;align-items:center;gap:var(--nxz-space-3)">
+      <button class="ds-hamburger" onclick="toggleSidebar()" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <span class="nxz-logo">nxz.</span>
+      <span class="ds-header-title">Design System</span>
+    </div>
+    <div class="ds-header-actions">
+      <span style="font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);">v2.0.0</span>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main class="ds-main" id="main-content">
+
+    <!-- ==================== INTRODUCAO ==================== -->
+    <section class="ds-section" id="introducao">
+      <h2 class="ds-section-title">NXZ Design System</h2>
+      <p class="ds-section-desc">
+        Sistema de design para a plataforma NXZ — SaaS de gestao de franquias de food service. Inspirado no
+        minimalismo elegante do Square com tipografia serifada, CTAs em pill shape, cinzas quentes e
+        espacamento generoso ao estilo Google Antigravity.
+      </p>
+
+      <div class="ds-demo" style="background:var(--nxz-warm-gray);">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--nxz-space-6);">
+          <div>
+            <p class="ds-demo-label">Plataforma</p>
+            <p style="font-weight:600;">Web, Mobile-first</p>
+          </div>
+          <div>
+            <p class="ds-demo-label">Tema</p>
+            <p style="font-weight:600;">Light only (sem dark mode)</p>
+          </div>
+          <div>
+            <p class="ds-demo-label">Inspiracao</p>
+            <p style="font-weight:600;">Square + Google Antigravity</p>
+          </div>
+          <div>
+            <p class="ds-demo-label">Prefixo CSS</p>
+            <p style="font-weight:600;font-family:var(--nxz-font-mono);">--nxz-*</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection" style="margin-top:var(--nxz-space-8);">
+        <h3 class="ds-subsection-title">Principios de Design</h3>
+        <div class="ds-a11y-grid">
+          <div class="ds-a11y-card">
+            <h4>Clareza</h4>
+            <p>Hierarquia visual clara com tipografia serifada para headlines e sans-serif para corpo. Cada elemento tem um proposito definido.</p>
+          </div>
+          <div class="ds-a11y-card">
+            <h4>Espacamento Generoso</h4>
+            <p>Whitespace abundante entre secoes e componentes. O conteudo respira, criando uma experiencia premium e legivel.</p>
+          </div>
+          <div class="ds-a11y-card">
+            <h4>Consistencia</h4>
+            <p>Tokens centralizados garantem uniformidade visual em toda a plataforma. Pill shapes nos CTAs, cantos arredondados suaves nos cards.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== CORES ==================== -->
+    <section class="ds-section" id="cores">
+      <h2 class="ds-section-title">Cores</h2>
+      <p class="ds-section-desc">
+        Paleta de cores quentes com roxo vibrante como cor primaria. Clique em qualquer swatch para copiar o valor HSL.
+      </p>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Cores Principais</h3>
+        <div class="ds-swatch-grid" id="swatches-main"></div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Superficies & Bordas</h3>
+        <div class="ds-swatch-grid" id="swatches-surface"></div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Cores Semanticas</h3>
+        <div class="ds-swatch-grid" id="swatches-semantic"></div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Pasteis</h3>
+        <div class="ds-swatch-grid" id="swatches-pastel"></div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Uso em CSS</h3>
+        <div class="ds-code">
+          <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>/* Cor flat */
+.meu-componente {
+  background: var(--nxz-primary);
+  color: var(--nxz-primary-foreground);
+  border: 1px solid var(--nxz-border);
+}
+
+/* Gradient (botoes e CTAs) */
+.meu-botao {
+  background: linear-gradient(to right, var(--nxz-primary), var(--nxz-primary-end));
+  color: var(--nxz-primary-foreground);
+}
+
+.card {
+  background: var(--nxz-card);
+  color: var(--nxz-card-foreground);
+}</pre>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== TIPOGRAFIA ==================== -->
+    <section class="ds-section" id="tipografia">
+      <h2 class="ds-section-title">Tipografia</h2>
+      <p class="ds-section-desc">
+        Tres familias tipograficas: DM Serif Display para headlines, Plus Jakarta Sans para corpo e UI, JetBrains Mono para numeros e codigo.
+      </p>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Familias</h3>
+        <div class="ds-demo">
+          <div style="margin-bottom:var(--nxz-space-8);">
+            <p class="ds-demo-label">DM Serif Display — Headlines</p>
+            <p style="font-family:var(--nxz-font-heading);font-size:var(--nxz-text-4xl);letter-spacing:-0.02em;">Gestao inteligente para suas franquias</p>
+          </div>
+          <div style="margin-bottom:var(--nxz-space-8);">
+            <p class="ds-demo-label">Plus Jakarta Sans — Body</p>
+            <p style="font-family:var(--nxz-font-body);font-size:var(--nxz-text-lg);">Simplifique operacoes, controle custos e escale com confianca. A plataforma NXZ conecta todas as unidades da sua rede.</p>
+          </div>
+          <div>
+            <p class="ds-demo-label">JetBrains Mono — Numeros & Codigo</p>
+            <p style="font-family:var(--nxz-font-mono);font-size:var(--nxz-text-2xl);font-weight:600;color:var(--nxz-primary);">+42% | R$ 1.2M | 350 unidades</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Escala Tipografica</h3>
+        <div class="ds-demo">
+          <div id="type-scale-demo"></div>
+        </div>
+
+        <div class="ds-table-wrap">
+          <table class="ds-table">
+            <thead>
+              <tr>
+                <th>Token</th>
+                <th>Tamanho</th>
+                <th>Line Height</th>
+                <th>Uso</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="mono">--nxz-text-xs</td><td>0.75rem (12px)</td><td>1rem</td><td>Labels, captions</td></tr>
+              <tr><td class="mono">--nxz-text-sm</td><td>0.875rem (14px)</td><td>1.25rem</td><td>Botoes, meta</td></tr>
+              <tr><td class="mono">--nxz-text-base</td><td>1rem (16px)</td><td>1.5rem</td><td>Corpo de texto</td></tr>
+              <tr><td class="mono">--nxz-text-lg</td><td>1.125rem (18px)</td><td>1.625rem</td><td>Subtitulos</td></tr>
+              <tr><td class="mono">--nxz-text-xl</td><td>1.25rem (20px)</td><td>1.75rem</td><td>Card titles</td></tr>
+              <tr><td class="mono">--nxz-text-2xl</td><td>1.5rem (24px)</td><td>1.8rem</td><td>Section titles</td></tr>
+              <tr><td class="mono">--nxz-text-3xl</td><td>1.75rem (28px)</td><td>2.375rem</td><td>Page headings</td></tr>
+              <tr><td class="mono">--nxz-text-4xl</td><td>2.5rem (40px)</td><td>2.8rem</td><td>Hero H2</td></tr>
+              <tr><td class="mono">--nxz-text-5xl</td><td>2.75rem (44px)</td><td>3.25rem</td><td>Hero H1</td></tr>
+              <tr><td class="mono">--nxz-text-6xl</td><td>4rem (64px)</td><td>1.1</td><td>Display</td></tr>
+              <tr><td class="mono">--nxz-text-7xl</td><td>5.625rem (90px)</td><td>1</td><td>Hero display</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Tokens de Fonte</h3>
+        <div class="ds-code">
+          <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>:root {
+  --nxz-font-heading: 'DM Serif Display', serif;
+  --nxz-font-body: 'Plus Jakarta Sans', sans-serif;
+  --nxz-font-mono: 'JetBrains Mono', monospace;
+}
+
+h1, h2 {
+  font-family: var(--nxz-font-heading);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}</pre>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== ESPACAMENTO ==================== -->
+    <section class="ds-section" id="espacamento">
+      <h2 class="ds-section-title">Espacamento</h2>
+      <p class="ds-section-desc">
+        Escala de espacamento baseada em multiplos de 4px. Tokens variam de space-1 (4px) a space-40 (160px) para construir layouts com ritmo visual consistente.
+      </p>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Escala Visual</h3>
+        <div id="spacing-visual"></div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Uso em CSS</h3>
+        <div class="ds-code">
+          <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>.card {
+  padding: var(--nxz-space-6);       /* 24px */
+  margin-bottom: var(--nxz-space-8); /* 32px */
+  gap: var(--nxz-space-4);           /* 16px */
+}
+
+.section {
+  padding: var(--nxz-space-20) var(--nxz-space-8); /* 80px 32px */
+}</pre>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== BORDAS & RADIUS ==================== -->
+    <section class="ds-section" id="bordas">
+      <h2 class="ds-section-title">Bordas & Radius</h2>
+      <p class="ds-section-desc">
+        Cinco niveis de arredondamento, de sutil (xs) a completamente circular (full) para pill shapes.
+      </p>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Radius Scale</h3>
+        <div class="ds-demo">
+          <div class="ds-radius-grid">
+            <div class="ds-radius-item">
+              <div class="ds-radius-box" style="border-radius:var(--nxz-radius-xs);"></div>
+              <p class="ds-radius-name">xs</p>
+              <p class="ds-radius-val">4px</p>
+            </div>
+            <div class="ds-radius-item">
+              <div class="ds-radius-box" style="border-radius:var(--nxz-radius-sm);"></div>
+              <p class="ds-radius-name">sm</p>
+              <p class="ds-radius-val">6px</p>
+            </div>
+            <div class="ds-radius-item">
+              <div class="ds-radius-box" style="border-radius:var(--nxz-radius-md);"></div>
+              <p class="ds-radius-name">md</p>
+              <p class="ds-radius-val">10px</p>
+            </div>
+            <div class="ds-radius-item">
+              <div class="ds-radius-box" style="border-radius:var(--nxz-radius-lg);"></div>
+              <p class="ds-radius-name">lg</p>
+              <p class="ds-radius-val">16px</p>
+            </div>
+            <div class="ds-radius-item">
+              <div class="ds-radius-box" style="border-radius:var(--nxz-radius-full);"></div>
+              <p class="ds-radius-name">full</p>
+              <p class="ds-radius-val">9999px</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Borda Padrao</h3>
+        <div class="ds-demo">
+          <div style="display:flex;gap:var(--nxz-space-6);flex-wrap:wrap;align-items:center;">
+            <div style="width:120px;height:80px;border:1px solid var(--nxz-border);border-radius:var(--nxz-radius-md);display:flex;align-items:center;justify-content:center;">
+              <span style="font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);">1px solid</span>
+            </div>
+            <div style="width:120px;height:80px;border:2px solid var(--nxz-primary);border-radius:var(--nxz-radius-md);display:flex;align-items:center;justify-content:center;">
+              <span style="font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);">2px primary</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-code">
+          <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>/* Bordas */
+border: 1px solid var(--nxz-border);
+border-radius: var(--nxz-radius-md);
+
+/* Pill shape (botoes, badges) */
+border-radius: var(--nxz-radius-full);
+
+/* Cards */
+border-radius: var(--nxz-radius-lg);</pre>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== SOMBRAS ==================== -->
+    <section class="ds-section" id="sombras">
+      <h2 class="ds-section-title">Sombras</h2>
+      <p class="ds-section-desc">
+        Tres niveis de elevacao para criar profundidade. Sombras suaves que complementam o visual clean da plataforma.
+      </p>
+
+      <div class="ds-demo">
+        <div class="ds-shadow-grid">
+          <div class="ds-shadow-item">
+            <div class="ds-shadow-box" style="box-shadow:var(--nxz-shadow-sm);"></div>
+            <p class="ds-shadow-name">shadow-sm</p>
+            <p style="font-family:var(--nxz-font-mono);font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);margin-top:4px;">Inputs, badges</p>
+          </div>
+          <div class="ds-shadow-item">
+            <div class="ds-shadow-box" style="box-shadow:var(--nxz-shadow-md);"></div>
+            <p class="ds-shadow-name">shadow-md</p>
+            <p style="font-family:var(--nxz-font-mono);font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);margin-top:4px;">Cards, dropdowns</p>
+          </div>
+          <div class="ds-shadow-item">
+            <div class="ds-shadow-box" style="box-shadow:var(--nxz-shadow-lg);"></div>
+            <p class="ds-shadow-name">shadow-lg</p>
+            <p style="font-family:var(--nxz-font-mono);font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);margin-top:4px;">Modals, toasts</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-code">
+        <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>--nxz-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+--nxz-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+--nxz-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+                 0 4px 6px -4px rgba(0, 0, 0, 0.1);</pre>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== MOTION ==================== -->
+    <section class="ds-section" id="motion">
+      <h2 class="ds-section-title">Motion & Transicoes</h2>
+      <p class="ds-section-desc">
+        Tres velocidades de animacao com easing consistente. Passe o mouse sobre as faixas para ver cada velocidade em acao.
+      </p>
+
+      <div class="ds-demo">
+        <div class="ds-motion-demo">
+          <div class="ds-motion-row">
+            <div class="ds-motion-label">
+              <p style="font-weight:600;font-size:var(--nxz-text-sm);">Fast</p>
+              <p style="font-family:var(--nxz-font-mono);font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);">150ms</p>
+            </div>
+            <div class="ds-motion-track">
+              <div class="ds-motion-ball" style="transition:left var(--nxz-motion-fast) var(--nxz-easing);"></div>
+            </div>
+          </div>
+          <div class="ds-motion-row">
+            <div class="ds-motion-label">
+              <p style="font-weight:600;font-size:var(--nxz-text-sm);">Normal</p>
+              <p style="font-family:var(--nxz-font-mono);font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);">300ms</p>
+            </div>
+            <div class="ds-motion-track">
+              <div class="ds-motion-ball" style="transition:left var(--nxz-motion-normal) var(--nxz-easing);"></div>
+            </div>
+          </div>
+          <div class="ds-motion-row">
+            <div class="ds-motion-label">
+              <p style="font-weight:600;font-size:var(--nxz-text-sm);">Slow</p>
+              <p style="font-family:var(--nxz-font-mono);font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);">500ms</p>
+            </div>
+            <div class="ds-motion-track">
+              <div class="ds-motion-ball" style="transition:left var(--nxz-motion-slow) var(--nxz-easing);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-code">
+        <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>--nxz-motion-fast: 150ms;   /* Hover, focus, micro-interactions */
+--nxz-motion-normal: 300ms; /* Dropdowns, accordions, modals */
+--nxz-motion-slow: 500ms;   /* Page transitions, hero anims */
+--nxz-easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+/* Uso */
+transition: all var(--nxz-motion-fast) var(--nxz-easing);</pre>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== BOTOES ==================== -->
+    <section class="ds-section" id="botoes">
+      <h2 class="ds-section-title">Botoes</h2>
+      <p class="ds-section-desc">
+        Cinco variantes de botao com formato pill (border-radius full). O Primary usa gradient roxo. Tamanhos SM (36px), default (40px) e LG (48px).
+      </p>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Variantes</h3>
+        <div class="ds-demo">
+          <div class="ds-demo-row">
+            <button class="nxz-btn nxz-btn-primary">Primary</button>
+            <button class="nxz-btn nxz-btn-secondary">Secondary</button>
+            <button class="nxz-btn nxz-btn-ghost">Ghost</button>
+            <button class="nxz-btn nxz-btn-dark">Dark</button>
+          </div>
+          <div class="ds-demo-row" style="margin-top:var(--nxz-space-4);background:var(--nxz-foreground);padding:var(--nxz-space-4);border-radius:var(--nxz-radius-md);">
+            <button class="nxz-btn nxz-btn-primary">Primary (dark bg)</button>
+            <button class="nxz-btn nxz-btn-outline-light">Outline Light</button>
+          </div>
+        </div>
+        <div class="ds-code">
+          <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>&lt;button class="nxz-btn nxz-btn-primary"&gt;Primary&lt;/button&gt;
+&lt;button class="nxz-btn nxz-btn-secondary"&gt;Secondary&lt;/button&gt;
+&lt;button class="nxz-btn nxz-btn-ghost"&gt;Ghost&lt;/button&gt;
+&lt;button class="nxz-btn nxz-btn-dark"&gt;Dark&lt;/button&gt;
+&lt;!-- Para fundos escuros --&gt;
+&lt;button class="nxz-btn nxz-btn-outline-light"&gt;Outline Light&lt;/button&gt;</pre>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Tamanhos</h3>
+        <div class="ds-demo">
+          <div class="ds-demo-row">
+            <button class="nxz-btn nxz-btn-primary nxz-btn-sm">Small</button>
+            <button class="nxz-btn nxz-btn-primary">Default</button>
+            <button class="nxz-btn nxz-btn-primary nxz-btn-lg">Large</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Estados</h3>
+        <div class="ds-demo">
+          <div class="ds-demo-row">
+            <button class="nxz-btn nxz-btn-primary">Normal</button>
+            <button class="nxz-btn nxz-btn-primary" disabled>Disabled</button>
+          </div>
+          <div class="ds-demo-row" style="margin-top:var(--nxz-space-4);">
+            <button class="nxz-btn nxz-btn-secondary">Normal</button>
+            <button class="nxz-btn nxz-btn-secondary" disabled>Disabled</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Com Icone</h3>
+        <div class="ds-demo">
+          <div class="ds-demo-row">
+            <button class="nxz-btn nxz-btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              Comecar agora
+            </button>
+            <button class="nxz-btn nxz-btn-dark">
+              Falar com vendas
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Specs do Botao</h3>
+        <div class="ds-table-wrap">
+          <table class="ds-table">
+            <thead>
+              <tr><th>Propriedade</th><th>Primary</th><th>Secondary</th><th>Ghost</th><th>Dark</th><th>Outline Light</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Background</td><td class="mono">gradient (primary → primary-end)</td><td class="mono">transparent</td><td class="mono">transparent</td><td class="mono">--nxz-foreground</td><td class="mono">transparent</td></tr>
+              <tr><td>Color</td><td class="mono">white</td><td class="mono">--nxz-primary</td><td class="mono">--nxz-foreground</td><td class="mono">white</td><td class="mono">white</td></tr>
+              <tr><td>Border</td><td class="mono">none</td><td class="mono">2px primary</td><td class="mono">none</td><td class="mono">foreground</td><td class="mono">2px rgba(255,255,255,0.3)</td></tr>
+              <tr><td>Radius</td><td class="mono" colspan="5">9999px (pill)</td></tr>
+              <tr><td>Padding</td><td class="mono" colspan="5">0 20px</td></tr>
+              <tr><td>Font Size</td><td class="mono" colspan="5">14px (text-sm)</td></tr>
+              <tr><td>Font Weight</td><td class="mono" colspan="5">500 (medium)</td></tr>
+              <tr><td>Height (default)</td><td class="mono" colspan="5">40px</td></tr>
+              <tr><td>Height SM</td><td class="mono" colspan="5">36px</td></tr>
+              <tr><td>Height LG</td><td class="mono" colspan="5">48px</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== CARDS ==================== -->
+    <section class="ds-section" id="cards">
+      <h2 class="ds-section-title">Cards</h2>
+      <p class="ds-section-desc">
+        Cards com cantos arredondados (radius-lg), borda sutil e efeito de elevacao no hover. Tres padroes: Product, Service e Case.
+      </p>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Product Card</h3>
+        <div class="nxz-card-grid">
+          <div class="nxz-card">
+            <div style="height:200px;background:var(--nxz-pastel-purple);display:flex;align-items:center;justify-content:center;">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--nxz-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div class="nxz-card-body">
+              <p class="nxz-card-meta" style="margin-bottom:var(--nxz-space-1);">PLATAFORMA</p>
+              <h3 class="nxz-card-title">Dashboard Central</h3>
+              <p class="nxz-card-text">Visao completa de todas as unidades em tempo real. KPIs, alertas e relatorios em um unico painel.</p>
+              <button class="nxz-btn nxz-btn-secondary nxz-btn-sm">Saiba mais</button>
+            </div>
+          </div>
+
+          <div class="nxz-card">
+            <div style="height:200px;background:var(--nxz-pastel-blue);display:flex;align-items:center;justify-content:center;">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="hsl(206, 50%, 50%)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="nxz-card-body">
+              <p class="nxz-card-meta" style="margin-bottom:var(--nxz-space-1);">AUTOMACAO</p>
+              <h3 class="nxz-card-title">Gestao de Estoque</h3>
+              <p class="nxz-card-text">Controle automatizado de insumos com alertas de reposicao e integracao com fornecedores.</p>
+              <button class="nxz-btn nxz-btn-secondary nxz-btn-sm">Saiba mais</button>
+            </div>
+          </div>
+
+          <div class="nxz-card">
+            <div style="height:200px;background:var(--nxz-pastel-green);display:flex;align-items:center;justify-content:center;">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="hsl(152, 60%, 42%)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div class="nxz-card-body">
+              <p class="nxz-card-meta" style="margin-bottom:var(--nxz-space-1);">ANALYTICS</p>
+              <h3 class="nxz-card-title">Performance</h3>
+              <p class="nxz-card-text">Metricas de vendas, ticket medio e satisfacao do cliente por unidade, regiao e periodo.</p>
+              <button class="nxz-btn nxz-btn-secondary nxz-btn-sm">Saiba mais</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Service Card (horizontal)</h3>
+        <div class="ds-demo">
+          <div style="display:flex;gap:var(--nxz-space-6);align-items:center;flex-wrap:wrap;">
+            <div style="width:80px;height:80px;background:var(--nxz-pastel-amber);border-radius:var(--nxz-radius-lg);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="hsl(38, 92%, 40%)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div style="flex:1;min-width:200px;">
+              <h4 style="font-family:var(--nxz-font-heading);font-size:var(--nxz-text-xl);margin-bottom:var(--nxz-space-1);">Gestao de Equipes</h4>
+              <p style="font-size:var(--nxz-text-sm);color:var(--nxz-muted-foreground);line-height:var(--nxz-leading-sm);">Escalas, ponto digital e avaliacao de desempenho integrados em uma unica ferramenta.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Case Card</h3>
+        <div class="ds-demo">
+          <div style="max-width:500px;">
+            <div class="nxz-card" style="overflow:visible;">
+              <div style="background:var(--nxz-warm-gray);padding:var(--nxz-space-8);border-radius:var(--nxz-radius-lg) var(--nxz-radius-lg) 0 0;">
+                <span class="nxz-badge nxz-badge-primary" style="margin-bottom:var(--nxz-space-3);">Case de Sucesso</span>
+                <h3 style="font-family:var(--nxz-font-heading);font-size:var(--nxz-text-2xl);margin-bottom:var(--nxz-space-3);">Rede Sabor & Arte</h3>
+                <p style="font-size:var(--nxz-text-sm);color:var(--nxz-muted-foreground);line-height:var(--nxz-leading-sm);">Reduziu custos operacionais em 23% e aumentou o ticket medio em 15% apos implementar o NXZ em 45 unidades.</p>
+              </div>
+              <div style="display:flex;gap:var(--nxz-space-8);padding:var(--nxz-space-6);flex-wrap:wrap;">
+                <div>
+                  <p style="font-family:var(--nxz-font-mono);font-size:var(--nxz-text-2xl);font-weight:600;color:var(--nxz-primary);">-23%</p>
+                  <p style="font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);">Custos operacionais</p>
+                </div>
+                <div>
+                  <p style="font-family:var(--nxz-font-mono);font-size:var(--nxz-text-2xl);font-weight:600;color:var(--nxz-success);">+15%</p>
+                  <p style="font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);">Ticket medio</p>
+                </div>
+                <div>
+                  <p style="font-family:var(--nxz-font-mono);font-size:var(--nxz-text-2xl);font-weight:600;color:var(--nxz-foreground);">45</p>
+                  <p style="font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);">Unidades</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-code">
+        <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>&lt;div class="nxz-card"&gt;
+  &lt;img class="nxz-card-img" src="..." alt="..."&gt;
+  &lt;div class="nxz-card-body"&gt;
+    &lt;h3 class="nxz-card-title"&gt;Titulo&lt;/h3&gt;
+    &lt;p class="nxz-card-text"&gt;Descricao...&lt;/p&gt;
+    &lt;button class="nxz-btn nxz-btn-secondary nxz-btn-sm"&gt;Acao&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== DASHBOARD ==================== -->
+    <section class="ds-section" id="dashboard">
+      <h2 class="ds-section-title">Dashboard</h2>
+      <p class="ds-section-desc">
+        Componentes para paineis administrativos: cards de KPI, graficos, listas ranqueadas e o shell do dashboard completo. Extraidos do painel real do NXZ.
+      </p>
+
+      <!-- Stat Cards -->
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Stat Card (KPI)</h3>
+        <p class="ds-subsection-desc">Cards de metricas com icone, valor em destaque e indicador de variacao. Usados no topo do dashboard para KPIs principais.</p>
+        <div class="ds-demo">
+          <div class="nxz-stat-grid">
+            <div class="nxz-stat-card">
+              <div class="nxz-stat-card__header">
+                <div class="nxz-stat-card__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                </div>
+                <span class="nxz-stat-card__label">Hoje vs Meta</span>
+              </div>
+              <span class="nxz-stat-card__value">92%</span>
+              <div class="nxz-stat-card__comparison">
+                <span class="nxz-stat-card__variation nxz-stat-card__variation--positive">R$ 8.4K</span>
+                <span>vs mes ant.</span>
+              </div>
+            </div>
+
+            <div class="nxz-stat-card">
+              <div class="nxz-stat-card__header">
+                <div class="nxz-stat-card__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <span class="nxz-stat-card__label">CMV Dia</span>
+              </div>
+              <span class="nxz-stat-card__value">27.8%</span>
+              <div class="nxz-stat-card__comparison">
+                <span class="nxz-stat-card__variation nxz-stat-card__variation--positive">-1.2pp</span>
+                <span>vs mes ant.</span>
+              </div>
+            </div>
+
+            <div class="nxz-stat-card">
+              <div class="nxz-stat-card__header">
+                <div class="nxz-stat-card__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                </div>
+                <span class="nxz-stat-card__label">Tempo Preparo</span>
+              </div>
+              <span class="nxz-stat-card__value">7 min</span>
+              <div class="nxz-stat-card__comparison">
+                <span class="nxz-stat-card__variation nxz-stat-card__variation--positive">-18%</span>
+                <span>vs mes ant.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart Card -->
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Chart Card (Barras)</h3>
+        <p class="ds-subsection-desc">Container padrao para graficos. Demo com bar chart CSS-only que replica o "Faturamento por Hora" do painel real.</p>
+        <div class="ds-demo" style="max-width:600px;">
+          <div class="nxz-chart-card">
+            <div class="nxz-chart-card__header">
+              <span class="nxz-chart-card__title">Faturamento por Hora</span>
+              <span class="nxz-chart-card__period">Hoje</span>
+            </div>
+            <div class="nxz-bar-chart">
+              <div class="nxz-bar-chart__col">
+                <div class="nxz-bar-chart__bar" style="height:40%;">
+                  <span class="nxz-bar-chart__bar-tooltip">R$ 1.2K</span>
+                </div>
+                <span class="nxz-bar-chart__label">10h</span>
+              </div>
+              <div class="nxz-bar-chart__col">
+                <div class="nxz-bar-chart__bar" style="height:65%;">
+                  <span class="nxz-bar-chart__bar-tooltip">R$ 2.0K</span>
+                </div>
+                <span class="nxz-bar-chart__label">11h</span>
+              </div>
+              <div class="nxz-bar-chart__col">
+                <div class="nxz-bar-chart__bar" style="height:100%;">
+                  <span class="nxz-bar-chart__bar-tooltip">R$ 3.1K</span>
+                </div>
+                <span class="nxz-bar-chart__label">12h</span>
+              </div>
+              <div class="nxz-bar-chart__col">
+                <div class="nxz-bar-chart__bar" style="height:85%;">
+                  <span class="nxz-bar-chart__bar-tooltip">R$ 2.6K</span>
+                </div>
+                <span class="nxz-bar-chart__label">13h</span>
+              </div>
+              <div class="nxz-bar-chart__col">
+                <div class="nxz-bar-chart__bar" style="height:50%;">
+                  <span class="nxz-bar-chart__bar-tooltip">R$ 1.5K</span>
+                </div>
+                <span class="nxz-bar-chart__label">14h</span>
+              </div>
+              <div class="nxz-bar-chart__col">
+                <div class="nxz-bar-chart__bar" style="height:35%;">
+                  <span class="nxz-bar-chart__bar-tooltip">R$ 1.1K</span>
+                </div>
+                <span class="nxz-bar-chart__label">15h</span>
+              </div>
+              <div class="nxz-bar-chart__col">
+                <div class="nxz-bar-chart__bar" style="height:45%;">
+                  <span class="nxz-bar-chart__bar-tooltip">R$ 1.4K</span>
+                </div>
+                <span class="nxz-bar-chart__label">16h</span>
+              </div>
+              <div class="nxz-bar-chart__col">
+                <div class="nxz-bar-chart__bar" style="height:70%;">
+                  <span class="nxz-bar-chart__bar-tooltip">R$ 2.2K</span>
+                </div>
+                <span class="nxz-bar-chart__label">17h</span>
+              </div>
+              <div class="nxz-bar-chart__col">
+                <div class="nxz-bar-chart__bar" style="height:90%;">
+                  <span class="nxz-bar-chart__bar-tooltip">R$ 2.8K</span>
+                </div>
+                <span class="nxz-bar-chart__label">18h</span>
+              </div>
+              <div class="nxz-bar-chart__col">
+                <div class="nxz-bar-chart__bar" style="height:95%;">
+                  <span class="nxz-bar-chart__bar-tooltip">R$ 2.9K</span>
+                </div>
+                <span class="nxz-bar-chart__label">19h</span>
+              </div>
+              <div class="nxz-bar-chart__col">
+                <div class="nxz-bar-chart__bar" style="height:60%;">
+                  <span class="nxz-bar-chart__bar-tooltip">R$ 1.8K</span>
+                </div>
+                <span class="nxz-bar-chart__label">20h</span>
+              </div>
+              <div class="nxz-bar-chart__col">
+                <div class="nxz-bar-chart__bar" style="height:25%;">
+                  <span class="nxz-bar-chart__bar-tooltip">R$ 0.8K</span>
+                </div>
+                <span class="nxz-bar-chart__label">21h</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ranked List -->
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Ranked List (Curva ABC)</h3>
+        <p class="ds-subsection-desc">Lista ranqueada com badges numerados. O item #1 recebe destaque com a cor primaria. Ideal para Curva ABC, top produtos, etc.</p>
+        <div class="ds-demo" style="max-width:400px;">
+          <div class="nxz-ranked-list">
+            <div class="nxz-ranked-list__header">Curva ABC (Hoje)</div>
+            <div class="nxz-ranked-list__items">
+              <div class="nxz-ranked-list__item">
+                <span class="nxz-ranked-list__badge nxz-ranked-list__badge--primary">1</span>
+                <span class="nxz-ranked-list__name">Burger Duplo</span>
+                <span class="nxz-ranked-list__value">R$ 4.5K</span>
+              </div>
+              <div class="nxz-ranked-list__item">
+                <span class="nxz-ranked-list__badge">2</span>
+                <span class="nxz-ranked-list__name">Combo Familia</span>
+                <span class="nxz-ranked-list__value">R$ 3.0K</span>
+              </div>
+              <div class="nxz-ranked-list__item">
+                <span class="nxz-ranked-list__badge">3</span>
+                <span class="nxz-ranked-list__name">X-Bacon</span>
+                <span class="nxz-ranked-list__value">R$ 2.1K</span>
+              </div>
+              <div class="nxz-ranked-list__item">
+                <span class="nxz-ranked-list__badge">4</span>
+                <span class="nxz-ranked-list__name">Acai 500ml</span>
+                <span class="nxz-ranked-list__value">R$ 1.8K</span>
+              </div>
+              <div class="nxz-ranked-list__item">
+                <span class="nxz-ranked-list__badge">5</span>
+                <span class="nxz-ranked-list__name">Fritas Grande</span>
+                <span class="nxz-ranked-list__value">R$ 1.2K</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Shell -->
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Dashboard Shell</h3>
+        <p class="ds-subsection-desc">Layout completo do painel admin com sidebar de navegacao, header e area de conteudo. Replica a estrutura do painel NXZ real.</p>
+        <div class="ds-demo" style="padding:0;overflow:hidden;border-radius:var(--nxz-radius-lg);">
+          <div class="nxz-dashboard-shell">
+            <!-- Sidebar -->
+            <div class="nxz-dashboard-sidebar">
+              <div class="nxz-dashboard-sidebar__group">Visoes</div>
+              <a class="nxz-dashboard-sidebar__item nxz-dashboard-sidebar__item--active">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                Vendas
+              </a>
+              <a class="nxz-dashboard-sidebar__item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                Producao
+              </a>
+              <a class="nxz-dashboard-sidebar__item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                Estoque
+              </a>
+              <a class="nxz-dashboard-sidebar__item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                Caixa
+              </a>
+              <a class="nxz-dashboard-sidebar__item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                CMV
+              </a>
+              <div class="nxz-dashboard-sidebar__group">Config</div>
+              <a class="nxz-dashboard-sidebar__item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                Ajustes da Rede
+              </a>
+            </div>
+
+            <!-- Content -->
+            <div class="nxz-dashboard-content">
+              <div class="nxz-dashboard-header">
+                <div class="nxz-dashboard-header__title">
+                  <span class="nxz-dashboard-header__dot"></span>
+                  Loja Centro — Visao Vendas
+                </div>
+                <div class="nxz-dashboard-header__avatar">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+              </div>
+
+              <div class="nxz-dashboard-body">
+                <!-- KPI row -->
+                <div class="nxz-stat-grid" style="grid-template-columns:repeat(3,1fr);">
+                  <div class="nxz-stat-card" style="box-shadow:none;">
+                    <div class="nxz-stat-card__header">
+                      <div class="nxz-stat-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                      </div>
+                      <span class="nxz-stat-card__label">Hoje vs Meta</span>
+                    </div>
+                    <span class="nxz-stat-card__value">92%</span>
+                    <div class="nxz-stat-card__comparison">
+                      <span class="nxz-stat-card__variation nxz-stat-card__variation--positive">R$ 8.4K</span>
+                      <span>vs mes ant.</span>
+                    </div>
+                  </div>
+                  <div class="nxz-stat-card" style="box-shadow:none;">
+                    <div class="nxz-stat-card__header">
+                      <div class="nxz-stat-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                      </div>
+                      <span class="nxz-stat-card__label">CMV Dia</span>
+                    </div>
+                    <span class="nxz-stat-card__value">27.8%</span>
+                    <div class="nxz-stat-card__comparison">
+                      <span class="nxz-stat-card__variation nxz-stat-card__variation--positive">-1.2pp</span>
+                      <span>vs mes ant.</span>
+                    </div>
+                  </div>
+                  <div class="nxz-stat-card" style="box-shadow:none;">
+                    <div class="nxz-stat-card__header">
+                      <div class="nxz-stat-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                      </div>
+                      <span class="nxz-stat-card__label">Tempo Preparo</span>
+                    </div>
+                    <span class="nxz-stat-card__value">7 min</span>
+                    <div class="nxz-stat-card__comparison">
+                      <span class="nxz-stat-card__variation nxz-stat-card__variation--positive">-18%</span>
+                      <span>vs mes ant.</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Chart + Ranked side by side -->
+                <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:var(--nxz-space-4);">
+                  <div class="nxz-chart-card" style="box-shadow:none;">
+                    <div class="nxz-chart-card__header">
+                      <span class="nxz-chart-card__title">Faturamento por Hora</span>
+                      <span class="nxz-chart-card__period">Hoje</span>
+                    </div>
+                    <div class="nxz-bar-chart" style="height:120px;">
+                      <div class="nxz-bar-chart__col"><div class="nxz-bar-chart__bar" style="height:40%;"><span class="nxz-bar-chart__bar-tooltip">R$ 1.2K</span></div><span class="nxz-bar-chart__label">10h</span></div>
+                      <div class="nxz-bar-chart__col"><div class="nxz-bar-chart__bar" style="height:65%;"><span class="nxz-bar-chart__bar-tooltip">R$ 2.0K</span></div><span class="nxz-bar-chart__label">11h</span></div>
+                      <div class="nxz-bar-chart__col"><div class="nxz-bar-chart__bar" style="height:100%;"><span class="nxz-bar-chart__bar-tooltip">R$ 3.1K</span></div><span class="nxz-bar-chart__label">12h</span></div>
+                      <div class="nxz-bar-chart__col"><div class="nxz-bar-chart__bar" style="height:85%;"><span class="nxz-bar-chart__bar-tooltip">R$ 2.6K</span></div><span class="nxz-bar-chart__label">13h</span></div>
+                      <div class="nxz-bar-chart__col"><div class="nxz-bar-chart__bar" style="height:50%;"><span class="nxz-bar-chart__bar-tooltip">R$ 1.5K</span></div><span class="nxz-bar-chart__label">14h</span></div>
+                      <div class="nxz-bar-chart__col"><div class="nxz-bar-chart__bar" style="height:35%;"><span class="nxz-bar-chart__bar-tooltip">R$ 1.1K</span></div><span class="nxz-bar-chart__label">15h</span></div>
+                      <div class="nxz-bar-chart__col"><div class="nxz-bar-chart__bar" style="height:70%;"><span class="nxz-bar-chart__bar-tooltip">R$ 2.2K</span></div><span class="nxz-bar-chart__label">17h</span></div>
+                      <div class="nxz-bar-chart__col"><div class="nxz-bar-chart__bar" style="height:90%;"><span class="nxz-bar-chart__bar-tooltip">R$ 2.8K</span></div><span class="nxz-bar-chart__label">18h</span></div>
+                      <div class="nxz-bar-chart__col"><div class="nxz-bar-chart__bar" style="height:95%;"><span class="nxz-bar-chart__bar-tooltip">R$ 2.9K</span></div><span class="nxz-bar-chart__label">19h</span></div>
+                      <div class="nxz-bar-chart__col"><div class="nxz-bar-chart__bar" style="height:60%;"><span class="nxz-bar-chart__bar-tooltip">R$ 1.8K</span></div><span class="nxz-bar-chart__label">20h</span></div>
+                    </div>
+                  </div>
+                  <div class="nxz-ranked-list" style="box-shadow:none;">
+                    <div class="nxz-ranked-list__header">Curva ABC (Hoje)</div>
+                    <div class="nxz-ranked-list__items">
+                      <div class="nxz-ranked-list__item">
+                        <span class="nxz-ranked-list__badge nxz-ranked-list__badge--primary">1</span>
+                        <span class="nxz-ranked-list__name">Burger Duplo</span>
+                        <span class="nxz-ranked-list__value">R$ 4.5K</span>
+                      </div>
+                      <div class="nxz-ranked-list__item">
+                        <span class="nxz-ranked-list__badge">2</span>
+                        <span class="nxz-ranked-list__name">Combo Familia</span>
+                        <span class="nxz-ranked-list__value">R$ 3.0K</span>
+                      </div>
+                      <div class="nxz-ranked-list__item">
+                        <span class="nxz-ranked-list__badge">3</span>
+                        <span class="nxz-ranked-list__name">X-Bacon</span>
+                        <span class="nxz-ranked-list__value">R$ 2.1K</span>
+                      </div>
+                      <div class="nxz-ranked-list__item">
+                        <span class="nxz-ranked-list__badge">4</span>
+                        <span class="nxz-ranked-list__name">Acai 500ml</span>
+                        <span class="nxz-ranked-list__value">R$ 1.8K</span>
+                      </div>
+                      <div class="nxz-ranked-list__item">
+                        <span class="nxz-ranked-list__badge">5</span>
+                        <span class="nxz-ranked-list__name">Fritas Grande</span>
+                        <span class="nxz-ranked-list__value">R$ 1.2K</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code snippets -->
+      <div class="ds-code">
+        <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>&lt;!-- Stat Card --&gt;
+&lt;div class="nxz-stat-card"&gt;
+  &lt;div class="nxz-stat-card__header"&gt;
+    &lt;div class="nxz-stat-card__icon"&gt;&lt;svg&gt;...&lt;/svg&gt;&lt;/div&gt;
+    &lt;span class="nxz-stat-card__label"&gt;Hoje vs Meta&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;span class="nxz-stat-card__value"&gt;92%&lt;/span&gt;
+  &lt;div class="nxz-stat-card__comparison"&gt;
+    &lt;span class="nxz-stat-card__variation nxz-stat-card__variation--positive"&gt;R$ 8.4K&lt;/span&gt;
+    &lt;span&gt;vs mes ant.&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Chart Card --&gt;
+&lt;div class="nxz-chart-card"&gt;
+  &lt;div class="nxz-chart-card__header"&gt;
+    &lt;span class="nxz-chart-card__title"&gt;Titulo&lt;/span&gt;
+    &lt;span class="nxz-chart-card__period"&gt;Periodo&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="nxz-bar-chart"&gt;
+    &lt;div class="nxz-bar-chart__col"&gt;
+      &lt;div class="nxz-bar-chart__bar" style="height:65%;"&gt;
+        &lt;span class="nxz-bar-chart__bar-tooltip"&gt;R$ 2.0K&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;span class="nxz-bar-chart__label"&gt;11h&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Ranked List --&gt;
+&lt;div class="nxz-ranked-list"&gt;
+  &lt;div class="nxz-ranked-list__header"&gt;Curva ABC&lt;/div&gt;
+  &lt;div class="nxz-ranked-list__items"&gt;
+    &lt;div class="nxz-ranked-list__item"&gt;
+      &lt;span class="nxz-ranked-list__badge nxz-ranked-list__badge--primary"&gt;1&lt;/span&gt;
+      &lt;span class="nxz-ranked-list__name"&gt;Produto&lt;/span&gt;
+      &lt;span class="nxz-ranked-list__value"&gt;R$ 4.5K&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Dashboard Shell --&gt;
+&lt;div class="nxz-dashboard-shell"&gt;
+  &lt;div class="nxz-dashboard-sidebar"&gt;
+    &lt;div class="nxz-dashboard-sidebar__group"&gt;Secao&lt;/div&gt;
+    &lt;a class="nxz-dashboard-sidebar__item nxz-dashboard-sidebar__item--active"&gt;Item&lt;/a&gt;
+    &lt;a class="nxz-dashboard-sidebar__item"&gt;Item&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class="nxz-dashboard-content"&gt;
+    &lt;div class="nxz-dashboard-header"&gt;...&lt;/div&gt;
+    &lt;div class="nxz-dashboard-body"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== NAVEGACAO ==================== -->
+    <section class="ds-section" id="navegacao">
+      <h2 class="ds-section-title">Navegacao</h2>
+      <p class="ds-section-desc">
+        Header de navegacao com altura de 72px (density-nav), logo serif, links centrais e CTAs a direita.
+      </p>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">NavHeader</h3>
+        <div class="ds-demo" style="padding:var(--nxz-space-4);">
+          <div class="nxz-nav-header">
+            <span class="nxz-nav-logo">nxz.</span>
+            <ul class="nxz-nav-links">
+              <li><a href="#">Para Franqueadores</a></li>
+              <li><a href="#">Para Restaurantes</a></li>
+              <li><a href="#">Produtos</a></li>
+              <li><a href="#">Servicos</a></li>
+              <li><a href="#">Planos</a></li>
+            </ul>
+            <div class="nxz-nav-actions">
+              <button class="nxz-btn nxz-btn-primary nxz-btn-sm">Fale Conosco</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">MegaMenu (conceito)</h3>
+        <div class="ds-demo">
+          <div style="background:var(--nxz-card);border:1px solid var(--nxz-border);border-radius:var(--nxz-radius-lg);padding:var(--nxz-space-8);max-width:600px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--nxz-space-6);">
+              <div>
+                <p class="ds-demo-label">Plataforma</p>
+                <div style="display:flex;flex-direction:column;gap:var(--nxz-space-3);margin-top:var(--nxz-space-2);">
+                  <a href="#" style="font-size:var(--nxz-text-sm);font-weight:600;color:var(--nxz-foreground);">Dashboard</a>
+                  <a href="#" style="font-size:var(--nxz-text-sm);font-weight:600;color:var(--nxz-foreground);">Estoque</a>
+                  <a href="#" style="font-size:var(--nxz-text-sm);font-weight:600;color:var(--nxz-foreground);">Financeiro</a>
+                  <a href="#" style="font-size:var(--nxz-text-sm);font-weight:600;color:var(--nxz-foreground);">Equipes</a>
+                </div>
+              </div>
+              <div>
+                <p class="ds-demo-label">Solucoes</p>
+                <div style="display:flex;flex-direction:column;gap:var(--nxz-space-3);margin-top:var(--nxz-space-2);">
+                  <a href="#" style="font-size:var(--nxz-text-sm);font-weight:600;color:var(--nxz-foreground);">Fast Food</a>
+                  <a href="#" style="font-size:var(--nxz-text-sm);font-weight:600;color:var(--nxz-foreground);">Casual Dining</a>
+                  <a href="#" style="font-size:var(--nxz-text-sm);font-weight:600;color:var(--nxz-foreground);">Cafeterias</a>
+                  <a href="#" style="font-size:var(--nxz-text-sm);font-weight:600;color:var(--nxz-foreground);">Dark Kitchens</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-code">
+        <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>&lt;nav class="nxz-nav-header"&gt;
+  &lt;span class="nxz-nav-logo"&gt;nxz.&lt;/span&gt;
+  &lt;ul class="nxz-nav-links"&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Para Franqueadores&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Para Restaurantes&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Produtos&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Servicos&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Planos&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;div class="nxz-nav-actions"&gt;
+    &lt;button class="nxz-btn nxz-btn-primary nxz-btn-sm"&gt;Fale Conosco&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</pre>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== HERO ==================== -->
+    <section class="ds-section" id="hero">
+      <h2 class="ds-section-title">Hero Sections</h2>
+      <p class="ds-section-desc">
+        Secao hero com headline serifada, subtitulo, CTAs pill e fundo warm-gray. Espacamento generoso ao estilo Antigravity.
+      </p>
+
+      <div class="nxz-hero">
+        <p class="nxz-hero-overline">Plataforma para redes de alimentacao</p>
+        <h2>Sua rede cresce. O controle nao pode ficar para tras.</h2>
+        <p>A NXZ transforma a operacao da loja e a visao da franqueadora em uma plataforma so. Do PDV ao BI executivo, do pedido ao relatorio consolidado.</p>
+        <div class="nxz-hero-actions">
+          <button class="nxz-btn nxz-btn-primary nxz-btn-lg">Fale com Vendas</button>
+        </div>
+      </div>
+
+      <div class="ds-subsection" style="margin-top:var(--nxz-space-8);">
+        <h3 class="ds-subsection-title">Hero com Fundo Escuro</h3>
+        <div style="background:var(--nxz-foreground);border-radius:var(--nxz-radius-lg);padding:var(--nxz-space-20) var(--nxz-space-8);text-align:center;">
+          <p style="font-size:var(--nxz-text-sm);font-weight:600;color:var(--nxz-primary);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:var(--nxz-space-4);">Novo</p>
+          <h2 style="font-family:var(--nxz-font-heading);font-size:var(--nxz-text-5xl);color:var(--nxz-primary-foreground);margin-bottom:var(--nxz-space-6);max-width:600px;margin-left:auto;margin-right:auto;line-height:var(--nxz-leading-5xl);">O futuro da gestao de food service</h2>
+          <p style="font-size:var(--nxz-text-lg);color:hsl(0,0%,60%);max-width:480px;margin:0 auto var(--nxz-space-8);">Inteligencia artificial aplicada a cada decisao operacional da sua rede de franquias.</p>
+          <div style="display:flex;align-items:center;justify-content:center;gap:var(--nxz-space-4);flex-wrap:wrap;">
+            <button class="nxz-btn nxz-btn-primary nxz-btn-lg">Comecar gratis</button>
+            <button class="nxz-btn nxz-btn-outline-light nxz-btn-lg">Conhecer produto</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== CTA BANNER ==================== -->
+    <section class="ds-section" id="cta-banner">
+      <h2 class="ds-section-title">CTA Banner</h2>
+      <p class="ds-section-desc">
+        Banner de call-to-action com fundo escuro, headline serif e botao invertido. Usado para conversao no final de secoes.
+      </p>
+
+      <div class="nxz-cta-banner">
+        <h3>O proximo passo da sua rede comeca aqui.</h3>
+        <p>Se voce e franqueador, agende um diagnostico gratuito. Se tem uma loja, peca uma demonstracao e veja a NXZ funcionando na pratica.</p>
+        <div style="display:flex;align-items:center;justify-content:center;gap:var(--nxz-space-4);flex-wrap:wrap;">
+          <button class="nxz-btn nxz-btn-primary nxz-btn-lg">Agendar diagnostico gratuito</button>
+          <button class="nxz-btn nxz-btn-outline-light nxz-btn-lg">Pedir demonstracao</button>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== PROOF BAR ==================== -->
+    <section class="ds-section" id="proof-bar">
+      <h2 class="ds-section-title">Proof Bar</h2>
+      <p class="ds-section-desc">
+        Barra de prova social com metricas impactantes. Numeros em JetBrains Mono para destaque visual.
+      </p>
+
+      <div class="ds-demo">
+        <div class="nxz-proof-bar">
+          <div class="nxz-proof-item">
+            <p class="nxz-proof-number">10k+</p>
+            <p class="nxz-proof-label">Unidades Ativas</p>
+          </div>
+          <div class="nxz-proof-item">
+            <p class="nxz-proof-number">150+</p>
+            <p class="nxz-proof-label">Redes Atendidas</p>
+          </div>
+          <div class="nxz-proof-item">
+            <p class="nxz-proof-number">98%</p>
+            <p class="nxz-proof-label">Satisfacao (NPS)</p>
+          </div>
+          <div class="nxz-proof-item">
+            <p class="nxz-proof-number">30d</p>
+            <p class="nxz-proof-label">Setup Medio</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-code">
+        <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>&lt;div class="nxz-proof-bar"&gt;
+  &lt;div class="nxz-proof-item"&gt;
+    &lt;p class="nxz-proof-number"&gt;500+&lt;/p&gt;
+    &lt;p class="nxz-proof-label"&gt;Redes ativas&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;!-- ... --&gt;
+&lt;/div&gt;</pre>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== TESTIMONIAL ==================== -->
+    <section class="ds-section" id="testimonial">
+      <h2 class="ds-section-title">Testimonial</h2>
+      <p class="ds-section-desc">
+        Card de depoimento com fundo pastel, citacao em DM Serif Display e informacoes do autor.
+      </p>
+
+      <div class="ds-demo">
+        <div class="nxz-testimonial">
+          <p class="nxz-testimonial-quote">"O NXZ transformou completamente a forma como gerenciamos nossas 120 unidades. Reduzimos custos em 30% e ganhamos visibilidade total."</p>
+          <p class="nxz-testimonial-author">Carlos Mendes</p>
+          <p class="nxz-testimonial-role">CEO, Rede Sabor Express</p>
+        </div>
+      </div>
+
+      <div style="margin-top:var(--nxz-space-6);">
+        <div class="ds-demo">
+          <div class="nxz-testimonial" style="background:var(--nxz-pastel-amber);">
+            <p class="nxz-testimonial-quote">"A integracao com nossos fornecedores foi imediata. Hoje o estoque se gerencia praticamente sozinho."</p>
+            <p class="nxz-testimonial-author">Ana Luisa Ferreira</p>
+            <p class="nxz-testimonial-role">Diretora de Operacoes, Grillhouse</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-code" style="margin-top:var(--nxz-space-4);">
+        <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>&lt;div class="nxz-testimonial"&gt;
+  &lt;p class="nxz-testimonial-quote"&gt;"Citacao..."&lt;/p&gt;
+  &lt;p class="nxz-testimonial-author"&gt;Nome&lt;/p&gt;
+  &lt;p class="nxz-testimonial-role"&gt;Cargo, Empresa&lt;/p&gt;
+&lt;/div&gt;</pre>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== FAQ ACCORDION ==================== -->
+    <section class="ds-section" id="faq">
+      <h2 class="ds-section-title">FAQ Accordion</h2>
+      <p class="ds-section-desc">
+        Acordeao para perguntas frequentes com animacao suave. Clique para expandir/recolher.
+      </p>
+
+      <div class="ds-demo">
+        <div class="nxz-faq-list">
+          <div class="nxz-faq-item">
+            <button class="nxz-faq-trigger" onclick="toggleFaq(this)">
+              Como funciona o periodo de teste?
+              <svg class="nxz-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="nxz-faq-content">
+              <div class="nxz-faq-content-inner">
+                Oferecemos 14 dias de teste gratuito com acesso completo a todas as funcionalidades. Nao e necessario cartao de credito. Ao final do periodo, voce escolhe o plano ideal para sua operacao.
+              </div>
+            </div>
+          </div>
+
+          <div class="nxz-faq-item">
+            <button class="nxz-faq-trigger" onclick="toggleFaq(this)">
+              O NXZ integra com meu sistema de PDV?
+              <svg class="nxz-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="nxz-faq-content">
+              <div class="nxz-faq-content-inner">
+                Sim. Temos integracoes nativas com os principais PDVs do mercado (Stone, Totvs, Linx, iFood) e uma API aberta para integracoes customizadas.
+              </div>
+            </div>
+          </div>
+
+          <div class="nxz-faq-item">
+            <button class="nxz-faq-trigger" onclick="toggleFaq(this)">
+              Qual o suporte oferecido?
+              <svg class="nxz-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="nxz-faq-content">
+              <div class="nxz-faq-content-inner">
+                Todos os planos incluem suporte por chat e email. Planos Business e Enterprise contam com gerente de sucesso dedicado, onboarding assistido e SLA de resposta de 2h.
+              </div>
+            </div>
+          </div>
+
+          <div class="nxz-faq-item">
+            <button class="nxz-faq-trigger" onclick="toggleFaq(this)">
+              Consigo gerenciar multiplas marcas?
+              <svg class="nxz-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="nxz-faq-content">
+              <div class="nxz-faq-content-inner">
+                Sim. O NXZ suporta multi-brand nativamente. Cada marca tem seu dashboard, configuracoes e metricas independentes, com visao consolidada para a holding.
+              </div>
+            </div>
+          </div>
+
+          <div class="nxz-faq-item">
+            <button class="nxz-faq-trigger" onclick="toggleFaq(this)">
+              Os dados sao seguros?
+              <svg class="nxz-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="nxz-faq-content">
+              <div class="nxz-faq-content-inner">
+                Utilizamos criptografia AES-256 em repouso e TLS 1.3 em transito. Infraestrutura AWS com certificacao SOC 2 Type II e conformidade LGPD. Backups automaticos a cada 6 horas.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== FORMULARIOS ==================== -->
+    <section class="ds-section" id="formularios">
+      <h2 class="ds-section-title">Formularios</h2>
+      <p class="ds-section-desc">
+        Elementos de formulario com altura de 48px (density), borda suave e focus ring roxo.
+      </p>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Input de Texto</h3>
+        <div class="ds-demo">
+          <div style="max-width:400px;">
+            <div class="nxz-form-group">
+              <label class="nxz-label" for="demo-name">Nome completo</label>
+              <input class="nxz-input" type="text" id="demo-name" placeholder="Ex: Maria Silva">
+            </div>
+            <div class="nxz-form-group">
+              <label class="nxz-label" for="demo-email">E-mail</label>
+              <input class="nxz-input" type="email" id="demo-email" placeholder="email@empresa.com">
+              <p class="nxz-form-hint">Usaremos este email para entrar em contato.</p>
+            </div>
+            <div class="nxz-form-group">
+              <label class="nxz-label" for="demo-error">Campo com erro</label>
+              <input class="nxz-input" type="text" id="demo-error" value="abc" style="border-color:var(--nxz-destructive);">
+              <p class="nxz-form-error">Por favor, insira um valor valido.</p>
+            </div>
+            <div class="nxz-form-group">
+              <label class="nxz-label" for="demo-disabled">Campo desabilitado</label>
+              <input class="nxz-input" type="text" id="demo-disabled" placeholder="Nao editavel" disabled>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Select</h3>
+        <div class="ds-demo">
+          <div style="max-width:400px;">
+            <div class="nxz-form-group">
+              <label class="nxz-label" for="demo-select">Tipo de negocio</label>
+              <select class="nxz-select" id="demo-select">
+                <option value="" disabled selected>Selecione...</option>
+                <option>Fast Food</option>
+                <option>Casual Dining</option>
+                <option>Cafeteria</option>
+                <option>Dark Kitchen</option>
+                <option>Padaria</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Textarea</h3>
+        <div class="ds-demo">
+          <div style="max-width:400px;">
+            <div class="nxz-form-group">
+              <label class="nxz-label" for="demo-textarea">Mensagem</label>
+              <textarea class="nxz-textarea" id="demo-textarea" placeholder="Descreva sua necessidade..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Formulario Completo</h3>
+        <div class="ds-demo">
+          <div style="max-width:480px;">
+            <h3 style="font-family:var(--nxz-font-heading);font-size:var(--nxz-text-2xl);margin-bottom:var(--nxz-space-1);">Agendar demonstracao</h3>
+            <p style="font-size:var(--nxz-text-sm);color:var(--nxz-muted-foreground);margin-bottom:var(--nxz-space-6);">Preencha o formulario e nossa equipe entrara em contato em ate 24h.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--nxz-space-4);">
+              <div class="nxz-form-group">
+                <label class="nxz-label">Nome</label>
+                <input class="nxz-input" type="text" placeholder="Seu nome">
+              </div>
+              <div class="nxz-form-group">
+                <label class="nxz-label">Sobrenome</label>
+                <input class="nxz-input" type="text" placeholder="Seu sobrenome">
+              </div>
+            </div>
+            <div class="nxz-form-group">
+              <label class="nxz-label">E-mail corporativo</label>
+              <input class="nxz-input" type="email" placeholder="voce@empresa.com">
+            </div>
+            <div class="nxz-form-group">
+              <label class="nxz-label">Quantidade de unidades</label>
+              <select class="nxz-select">
+                <option value="" disabled selected>Selecione...</option>
+                <option>1 - 10</option>
+                <option>11 - 50</option>
+                <option>51 - 200</option>
+                <option>200+</option>
+              </select>
+            </div>
+            <div class="nxz-form-group">
+              <label class="nxz-label">Mensagem (opcional)</label>
+              <textarea class="nxz-textarea" placeholder="Conte-nos sobre sua operacao..."></textarea>
+            </div>
+            <button class="nxz-btn nxz-btn-primary" style="width:100%;">Enviar solicitacao</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-code">
+        <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>&lt;div class="nxz-form-group"&gt;
+  &lt;label class="nxz-label" for="email"&gt;E-mail&lt;/label&gt;
+  &lt;input class="nxz-input" type="email" id="email" placeholder="email@empresa.com"&gt;
+  &lt;p class="nxz-form-hint"&gt;Texto de ajuda&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class="nxz-form-group"&gt;
+  &lt;label class="nxz-label"&gt;Selecione&lt;/label&gt;
+  &lt;select class="nxz-select"&gt;...&lt;/select&gt;
+&lt;/div&gt;
+
+&lt;div class="nxz-form-group"&gt;
+  &lt;label class="nxz-label"&gt;Mensagem&lt;/label&gt;
+  &lt;textarea class="nxz-textarea"&gt;&lt;/textarea&gt;
+&lt;/div&gt;</pre>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== BADGES ==================== -->
+    <section class="ds-section" id="badges">
+      <h2 class="ds-section-title">Badges & Tags</h2>
+      <p class="ds-section-desc">
+        Badges em pill shape para status, categorias e labels. Seis variantes com cores semanticas.
+      </p>
+
+      <div class="ds-demo">
+        <div class="ds-demo-row">
+          <span class="nxz-badge nxz-badge-primary">Primary</span>
+          <span class="nxz-badge nxz-badge-secondary">Secondary</span>
+          <span class="nxz-badge nxz-badge-success">Success</span>
+          <span class="nxz-badge nxz-badge-warning">Warning</span>
+          <span class="nxz-badge nxz-badge-destructive">Destructive</span>
+          <span class="nxz-badge nxz-badge-outline">Outline</span>
+        </div>
+      </div>
+
+      <div class="ds-subsection" style="margin-top:var(--nxz-space-6);">
+        <h3 class="ds-subsection-title">Exemplos de Uso</h3>
+        <div class="ds-demo">
+          <div class="ds-demo-col" style="gap:var(--nxz-space-4);">
+            <div style="display:flex;align-items:center;gap:var(--nxz-space-3);">
+              <span class="nxz-badge nxz-badge-success">Ativo</span>
+              <span style="font-size:var(--nxz-text-sm);">Rede Burger Prime — 45 unidades</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:var(--nxz-space-3);">
+              <span class="nxz-badge nxz-badge-warning">Pendente</span>
+              <span style="font-size:var(--nxz-text-sm);">Cafeteria Belle — Aguardando ativacao</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:var(--nxz-space-3);">
+              <span class="nxz-badge nxz-badge-destructive">Inativo</span>
+              <span style="font-size:var(--nxz-text-sm);">Pizza Express — Contrato encerrado</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:var(--nxz-space-3);flex-wrap:wrap;">
+              <span class="nxz-badge nxz-badge-outline">Fast Food</span>
+              <span class="nxz-badge nxz-badge-outline">Casual Dining</span>
+              <span class="nxz-badge nxz-badge-outline">Cafeteria</span>
+              <span class="nxz-badge nxz-badge-outline">Dark Kitchen</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-code">
+        <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>&lt;span class="nxz-badge nxz-badge-primary"&gt;Primary&lt;/span&gt;
+&lt;span class="nxz-badge nxz-badge-success"&gt;Ativo&lt;/span&gt;
+&lt;span class="nxz-badge nxz-badge-warning"&gt;Pendente&lt;/span&gt;
+&lt;span class="nxz-badge nxz-badge-destructive"&gt;Inativo&lt;/span&gt;
+&lt;span class="nxz-badge nxz-badge-outline"&gt;Tag&lt;/span&gt;</pre>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== FEEDBACK ==================== -->
+    <section class="ds-section" id="feedback">
+      <h2 class="ds-section-title">Feedback</h2>
+      <p class="ds-section-desc">
+        Toasts para notificacoes transientes e modals para confirmacoes. Feedback visual com bordas coloridas semanticas.
+      </p>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Toast</h3>
+        <div class="ds-demo">
+          <div class="ds-demo-col" style="gap:var(--nxz-space-4);">
+            <div class="nxz-toast-demo nxz-toast-demo-success">
+              <div>
+                <p class="nxz-toast-title">Sucesso!</p>
+                <p class="nxz-toast-desc">Unidade cadastrada com sucesso.</p>
+              </div>
+            </div>
+            <div class="nxz-toast-demo nxz-toast-demo-warning">
+              <div>
+                <p class="nxz-toast-title">Atencao</p>
+                <p class="nxz-toast-desc">Estoque abaixo do minimo em 3 unidades.</p>
+              </div>
+            </div>
+            <div class="nxz-toast-demo nxz-toast-demo-destructive">
+              <div>
+                <p class="nxz-toast-title">Erro</p>
+                <p class="nxz-toast-desc">Falha ao processar pagamento. Tente novamente.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:var(--nxz-space-4);">
+          <button class="nxz-btn nxz-btn-primary nxz-btn-sm" onclick="showDemoToast('Acao realizada com sucesso!')">Disparar Toast</button>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Modal</h3>
+        <div class="ds-demo">
+          <button class="nxz-btn nxz-btn-primary nxz-btn-sm" onclick="openModal()">Abrir Modal</button>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="nxz-modal-backdrop" id="demo-modal" onclick="closeModal(event)">
+        <div class="nxz-modal" onclick="event.stopPropagation()">
+          <h3 class="nxz-modal-title">Confirmar exclusao</h3>
+          <p class="nxz-modal-text">Tem certeza que deseja remover esta unidade? Esta acao nao pode ser desfeita e todos os dados associados serao permanentemente excluidos.</p>
+          <div class="nxz-modal-actions">
+            <button class="nxz-btn nxz-btn-ghost nxz-btn-sm" onclick="closeModal()">Cancelar</button>
+            <button class="nxz-btn nxz-btn-sm" style="background:var(--nxz-destructive);color:white;border-color:var(--nxz-destructive);" onclick="closeModal()">Excluir</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== STEPS ==================== -->
+    <section class="ds-section" id="steps">
+      <h2 class="ds-section-title">Steps</h2>
+      <p class="ds-section-desc">
+        Componente de passos numerados para guiar o usuario por um fluxo sequencial. Usado na secao "Como funciona" do site.
+      </p>
+
+      <div class="ds-demo">
+        <div class="nxz-steps">
+          <div class="nxz-step">
+            <p class="nxz-step-number">01</p>
+            <h3>Converse com a gente</h3>
+            <p>Agende uma demonstracao ou solicite um diagnostico gratuito da sua rede. Sem compromisso, sem pressao.</p>
+          </div>
+          <div class="nxz-step">
+            <p class="nxz-step-number">02</p>
+            <h3>Implantacao assistida</h3>
+            <p>Nosso time configura tudo, treina sua equipe e acompanha o go-live. Prazo medio: 30 dias para a rede rodar.</p>
+          </div>
+          <div class="nxz-step">
+            <p class="nxz-step-number">03</p>
+            <h3>Resultados visiveis</h3>
+            <p>Acompanhe vendas, estoque, conformidade e performance em tempo real. Dados no lugar de achismo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-code">
+        <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>&lt;div class="nxz-steps"&gt;
+  &lt;div class="nxz-step"&gt;
+    &lt;p class="nxz-step-number"&gt;01&lt;/p&gt;
+    &lt;h3&gt;Titulo do passo&lt;/h3&gt;
+    &lt;p&gt;Descricao do passo...&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;!-- ... --&gt;
+&lt;/div&gt;</pre>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== ALTERNANCIA DE FUNDO ==================== -->
+    <section class="ds-section" id="alternancia-bg">
+      <h2 class="ds-section-title">Alternancia de Fundo</h2>
+      <p class="ds-section-desc">
+        O site NXZ alterna fundos entre secoes para criar ritmo visual e separacao clara de conteudo. Este padrao e fundamental para a identidade da marca.
+      </p>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Padrao de Alternancia</h3>
+        <div class="ds-demo">
+          <div style="display:flex;flex-direction:column;gap:2px;border-radius:var(--nxz-radius-md);overflow:hidden;">
+            <div style="background:var(--nxz-background);padding:var(--nxz-space-4) var(--nxz-space-6);">
+              <p class="ds-demo-label">background</p>
+              <p style="font-size:var(--nxz-text-sm);">Hero, secoes de conteudo principal</p>
+            </div>
+            <div style="background:var(--nxz-warm-gray);padding:var(--nxz-space-4) var(--nxz-space-6);">
+              <p class="ds-demo-label">warm-gray</p>
+              <p style="font-size:var(--nxz-text-sm);">Proof bar, secoes neutras, CTA steps</p>
+            </div>
+            <div style="background:var(--nxz-pastel-purple);padding:var(--nxz-space-4) var(--nxz-space-6);">
+              <p class="ds-demo-label">pastel-purple</p>
+              <p style="font-size:var(--nxz-text-sm);">Secao de destaque, "duas realidades"</p>
+            </div>
+            <div style="background:var(--nxz-foreground);padding:var(--nxz-space-4) var(--nxz-space-6);color:var(--nxz-background);">
+              <p class="ds-demo-label" style="color:rgba(255,255,255,0.6);">foreground (dark)</p>
+              <p style="font-size:var(--nxz-text-sm);color:rgba(255,255,255,0.8);">Servicos, CTA final, footer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Sequencia tipica (homepage)</h3>
+        <div class="ds-table-wrap">
+          <table class="ds-table">
+            <thead>
+              <tr><th>#</th><th>Secao</th><th>Fundo</th><th>Classe</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Hero</td><td class="mono">background</td><td class="mono">nxz-section-bg--background</td></tr>
+              <tr><td>2</td><td>Proof Bar</td><td class="mono">warm-gray</td><td class="mono">nxz-section-bg--warm-gray</td></tr>
+              <tr><td>3</td><td>Problema</td><td class="mono">background</td><td class="mono">nxz-section-bg--background</td></tr>
+              <tr><td>4</td><td>Solucao (destaque)</td><td class="mono">pastel-purple</td><td class="mono">nxz-section-bg--pastel</td></tr>
+              <tr><td>5</td><td>Duas realidades</td><td class="mono">foreground</td><td class="mono">nxz-section-bg--dark</td></tr>
+              <tr><td>6</td><td>Modulos</td><td class="mono">warm-gray</td><td class="mono">nxz-section-bg--warm-gray</td></tr>
+              <tr><td>7</td><td>Testimonials</td><td class="mono">background</td><td class="mono">nxz-section-bg--background</td></tr>
+              <tr><td>8</td><td>Servicos</td><td class="mono">foreground</td><td class="mono">nxz-section-bg--dark</td></tr>
+              <tr><td>9</td><td>Steps</td><td class="mono">background</td><td class="mono">nxz-section-bg--background</td></tr>
+              <tr><td>10</td><td>CTA Final</td><td class="mono">warm-gray</td><td class="mono">nxz-section-bg--warm-gray</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="ds-code">
+        <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>&lt;section class="nxz-section-bg nxz-section-bg--background"&gt;...&lt;/section&gt;
+&lt;section class="nxz-section-bg nxz-section-bg--warm-gray"&gt;...&lt;/section&gt;
+&lt;section class="nxz-section-bg nxz-section-bg--pastel"&gt;...&lt;/section&gt;
+&lt;section class="nxz-section-bg nxz-section-bg--dark"&gt;...&lt;/section&gt;</pre>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== FOOTER ==================== -->
+    <section class="ds-section" id="footer">
+      <h2 class="ds-section-title">Footer</h2>
+      <p class="ds-section-desc">
+        Footer com fundo preto, grid de 4 colunas (brand, solucoes, empresa, CTA), bottom bar com copyright e links legais.
+      </p>
+
+      <div class="nxz-footer" style="border-radius:var(--nxz-radius-lg);">
+        <div class="nxz-footer-grid">
+          <div class="nxz-footer-brand">
+            <span class="nxz-footer-logo">nxz.</span>
+            <p>A plataforma que transforma dados em decisoes — do PDV a visao consolidada da sua rede.</p>
+          </div>
+          <div class="nxz-footer-col">
+            <h4>Solucoes</h4>
+            <a href="#">Para Franqueadores</a>
+            <a href="#">Para Restaurantes</a>
+            <a href="#">Produtos</a>
+            <a href="#">Servicos</a>
+            <a href="#">Planos</a>
+          </div>
+          <div class="nxz-footer-col">
+            <h4>Empresa</h4>
+            <a href="#">Cases</a>
+            <a href="#">Sobre Nos</a>
+            <a href="#">Contato</a>
+          </div>
+          <div class="nxz-footer-col">
+            <h4>Pronto para comecar?</h4>
+            <button class="nxz-btn nxz-btn-primary" style="width:100%;margin-top:var(--nxz-space-2);">Fale Conosco</button>
+          </div>
+        </div>
+        <div class="nxz-footer-bottom">
+          <p>&copy; 2026 NXZ. Todos os direitos reservados.</p>
+          <div class="nxz-footer-bottom-links">
+            <a href="#">Termos</a>
+            <a href="#">Privacidade</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-code" style="margin-top:var(--nxz-space-6);">
+        <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>&lt;footer class="nxz-footer"&gt;
+  &lt;div class="nxz-footer-grid"&gt;
+    &lt;div class="nxz-footer-brand"&gt;
+      &lt;span class="nxz-footer-logo"&gt;nxz.&lt;/span&gt;
+      &lt;p&gt;Descricao da empresa...&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="nxz-footer-col"&gt;
+      &lt;h4&gt;Solucoes&lt;/h4&gt;
+      &lt;a href="#"&gt;Link&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="nxz-footer-col"&gt;
+      &lt;h4&gt;Empresa&lt;/h4&gt;
+      &lt;a href="#"&gt;Link&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="nxz-footer-col"&gt;
+      &lt;h4&gt;CTA Title&lt;/h4&gt;
+      &lt;button class="nxz-btn nxz-btn-primary"&gt;Acao&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="nxz-footer-bottom"&gt;
+    &lt;p&gt;&amp;copy; 2026 NXZ.&lt;/p&gt;
+    &lt;div class="nxz-footer-bottom-links"&gt;
+      &lt;a href="#"&gt;Termos&lt;/a&gt;
+      &lt;a href="#"&gt;Privacidade&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;</pre>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== LINK ARROW ==================== -->
+    <section class="ds-section" id="link-arrow">
+      <h2 class="ds-section-title">Link Arrow</h2>
+      <p class="ds-section-desc">
+        Link com seta animada usado em cards de produto e servico para indicar navegacao. A seta se afasta no hover.
+      </p>
+
+      <div class="ds-demo">
+        <div class="ds-demo-col" style="gap:var(--nxz-space-6);">
+          <a href="#" class="nxz-link-arrow">
+            Ver modulos da loja
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="#" class="nxz-link-arrow">
+            Conhecer o BI
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="#" class="nxz-link-arrow">
+            Ver governanca
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="ds-code">
+        <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>&lt;a href="#" class="nxz-link-arrow"&gt;
+  Ver modulos da loja
+  &lt;svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round"&gt;
+    &lt;path d="M5 12h14"/&gt;
+    &lt;path d="m12 5 7 7-7 7"/&gt;
+  &lt;/svg&gt;
+&lt;/a&gt;</pre>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== ICONES ==================== -->
+    <section class="ds-section" id="icones">
+      <h2 class="ds-section-title">Icones</h2>
+      <p class="ds-section-desc">
+        O NXZ utiliza icones no estilo Lucide (stroke-based, 24x24, stroke-width 2). Abaixo uma selecao de icones frequentes na plataforma.
+      </p>
+
+      <div class="ds-demo">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:var(--nxz-space-4);text-align:center;">
+          <div style="padding:var(--nxz-space-4);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <p style="font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);margin-top:var(--nxz-space-2);">Home</p>
+          </div>
+          <div style="padding:var(--nxz-space-4);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <p style="font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);margin-top:var(--nxz-space-2);">Analytics</p>
+          </div>
+          <div style="padding:var(--nxz-space-4);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <p style="font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);margin-top:var(--nxz-space-2);">Equipes</p>
+          </div>
+          <div style="padding:var(--nxz-space-4);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            <p style="font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);margin-top:var(--nxz-space-2);">Pagamentos</p>
+          </div>
+          <div style="padding:var(--nxz-space-4);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <p style="font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);margin-top:var(--nxz-space-2);">Config</p>
+          </div>
+          <div style="padding:var(--nxz-space-4);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <p style="font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);margin-top:var(--nxz-space-2);">Chat</p>
+          </div>
+          <div style="padding:var(--nxz-space-4);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+            <p style="font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);margin-top:var(--nxz-space-2);">Metricas</p>
+          </div>
+          <div style="padding:var(--nxz-space-4);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <p style="font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);margin-top:var(--nxz-space-2);">Busca</p>
+          </div>
+          <div style="padding:var(--nxz-space-4);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <p style="font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);margin-top:var(--nxz-space-2);">Relatorios</p>
+          </div>
+          <div style="padding:var(--nxz-space-4);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <p style="font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);margin-top:var(--nxz-space-2);">Seguranca</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection" style="margin-top:var(--nxz-space-6);">
+        <h3 class="ds-subsection-title">Especificacoes</h3>
+        <div class="ds-table-wrap">
+          <table class="ds-table">
+            <thead><tr><th>Propriedade</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>Biblioteca</td><td>Lucide Icons (ou equivalente stroke-based)</td></tr>
+              <tr><td>Tamanho padrao</td><td class="mono">24 x 24px</td></tr>
+              <tr><td>Stroke width</td><td class="mono">2</td></tr>
+              <tr><td>Stroke linecap</td><td class="mono">round</td></tr>
+              <tr><td>Stroke linejoin</td><td class="mono">round</td></tr>
+              <tr><td>Cor</td><td class="mono">currentColor (herda do pai)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="ds-code">
+        <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>&lt;!-- Lucide-style inline SVG --&gt;
+&lt;svg width="24" height="24" viewBox="0 0 24 24"
+  fill="none" stroke="currentColor"
+  stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"&gt;
+  &lt;path d="M18 20V10"/&gt;
+  &lt;path d="M12 20V4"/&gt;
+  &lt;path d="M6 20v-6"/&gt;
+&lt;/svg&gt;
+
+&lt;!-- Ou via CDN Lucide --&gt;
+&lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt;
+&lt;i data-lucide="bar-chart-3"&gt;&lt;/i&gt;</pre>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== ACESSIBILIDADE ==================== -->
+    <section class="ds-section" id="acessibilidade">
+      <h2 class="ds-section-title">Acessibilidade</h2>
+      <p class="ds-section-desc">
+        Diretrizes para garantir que a plataforma NXZ seja acessivel a todos os usuarios, seguindo WCAG 2.1 nivel AA.
+      </p>
+
+      <div class="ds-a11y-grid">
+        <div class="ds-a11y-card">
+          <h4>Contraste de Cores</h4>
+          <p>Texto principal (preto sobre off-white) atinge ratio 19:1. Texto muted (44% cinza) atinge 4.7:1, acima do minimo AA de 4.5:1. Botoes primary (branco sobre roxo) atingem 5.2:1.</p>
+        </div>
+        <div class="ds-a11y-card">
+          <h4>Focus Visible</h4>
+          <p>Todos os elementos interativos possuem <code>:focus-visible</code> com ring roxo de 2px e offset de 2px. Nunca remova o outline sem fornecer alternativa visivel.</p>
+        </div>
+        <div class="ds-a11y-card">
+          <h4>Tamanho de Toque</h4>
+          <p>Botoes e inputs tem altura minima de 48px, atendendo ao requisito de area de toque de 44x44px do WCAG. Espacamento entre alvos de toque: minimo 8px.</p>
+        </div>
+        <div class="ds-a11y-card">
+          <h4>Hierarquia de Headings</h4>
+          <p>Use headings em ordem sequencial (h1 > h2 > h3). Apenas um h1 por pagina. Nao pule niveis. Headings em DM Serif facilitam o escaneamento visual.</p>
+        </div>
+        <div class="ds-a11y-card">
+          <h4>ARIA Labels</h4>
+          <p>Icones decorativos: <code>aria-hidden="true"</code>. Icones funcionais: <code>aria-label="descricao"</code>. Botoes com so icone devem ter <code>aria-label</code>.</p>
+        </div>
+        <div class="ds-a11y-card">
+          <h4>Navegacao por Teclado</h4>
+          <p>Todos os componentes devem ser operaveis via teclado. Tab para navegar, Enter/Space para ativar, Escape para fechar. Modais fazem trap de foco.</p>
+        </div>
+        <div class="ds-a11y-card">
+          <h4>Reduced Motion</h4>
+          <p>Respeitar <code>prefers-reduced-motion</code>. Quando ativa, remover ou reduzir todas as animacoes e transicoes para usuarios sensiveis a movimento.</p>
+        </div>
+        <div class="ds-a11y-card">
+          <h4>Texto Alternativo</h4>
+          <p>Todas as imagens significativas devem ter <code>alt</code> descritivo. Imagens decorativas: <code>alt=""</code>. Graficos devem ter descricao textual alternativa.</p>
+        </div>
+      </div>
+
+      <div class="ds-code" style="margin-top:var(--nxz-space-6);">
+        <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus visible */
+.nxz-btn:focus-visible,
+.nxz-input:focus-visible {
+  outline: 2px solid var(--nxz-ring);
+  outline-offset: 2px;
+}</pre>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ==================== DENSIDADE ==================== -->
+    <section class="ds-section" id="densidade">
+      <h2 class="ds-section-title">Densidade</h2>
+      <p class="ds-section-desc">
+        O NXZ usa density mode "comfortable" — alturas generosas para toque mobile-first e espacamento amplo para legibilidade.
+      </p>
+
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead>
+            <tr>
+              <th>Elemento</th>
+              <th>Altura</th>
+              <th>Token</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Botoes (default)</td>
+              <td style="font-family:var(--nxz-font-mono);">40px</td>
+              <td class="mono">--nxz-density-button-h</td>
+            </tr>
+            <tr>
+              <td>Botoes (sm)</td>
+              <td style="font-family:var(--nxz-font-mono);">36px</td>
+              <td class="mono">--nxz-density-button-h-sm</td>
+            </tr>
+            <tr>
+              <td>Botoes (lg)</td>
+              <td style="font-family:var(--nxz-font-mono);">48px</td>
+              <td class="mono">--nxz-density-button-h-lg</td>
+            </tr>
+            <tr>
+              <td>Inputs / Selects</td>
+              <td style="font-family:var(--nxz-font-mono);">48px</td>
+              <td class="mono">--nxz-density-input-h</td>
+            </tr>
+            <tr>
+              <td>Nav Header</td>
+              <td style="font-family:var(--nxz-font-mono);">72px</td>
+              <td class="mono">--nxz-density-nav-h</td>
+            </tr>
+            <tr>
+              <td>Gap padrao</td>
+              <td style="font-family:var(--nxz-font-mono);">16px</td>
+              <td class="mono">--nxz-density-gap (space-4)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ds-subsection" style="margin-top:var(--nxz-space-6);">
+        <h3 class="ds-subsection-title">Comparacao Visual</h3>
+        <div class="ds-demo">
+          <p class="ds-demo-label" style="margin-bottom:var(--nxz-space-4);">Elementos em tamanho real</p>
+          <div class="ds-demo-row" style="gap:var(--nxz-space-6);flex-wrap:wrap;">
+            <button class="nxz-btn nxz-btn-primary">Botao 40px</button>
+            <input class="nxz-input" type="text" placeholder="Input 48px" style="max-width:200px;">
+            <select class="nxz-select" style="max-width:200px;">
+              <option>Select 48px</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-code">
+        <button class="ds-code-copy" onclick="copyCode(this)">Copiar</button>
+<pre>:root {
+  --nxz-density-button-h: 40px;
+  --nxz-density-button-h-sm: 36px;
+  --nxz-density-button-h-lg: 48px;
+  --nxz-density-input-h: 48px;
+  --nxz-density-nav-h: 72px;
+  --nxz-density-gap: var(--nxz-space-4); /* 16px */
+}
+
+/* Uso */
+.my-button { height: var(--nxz-density-button-h); }
+.my-button-lg { height: var(--nxz-density-button-h-lg); }
+.my-input  { height: var(--nxz-density-input-h); }
+.my-grid   { gap: var(--nxz-density-gap); }</pre>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div style="text-align:center;padding:var(--nxz-space-10) 0;color:var(--nxz-muted-foreground);font-size:var(--nxz-text-sm);">
+      <p>NXZ Design System v2.0 — SaaS para gestao de franquias de food service</p>
+      <p style="margin-top:var(--nxz-space-1);font-size:var(--nxz-text-xs);">Construido sem frameworks, sem build tools. Puro HTML/CSS/JS.</p>
+    </div>
+
+  </main>
+
+  <!-- Toast Container -->
+  <div class="ds-toast-container" id="toast-container"></div>
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+  <script>
+    /* ============================================================
+       COLOR SWATCHES
+       ============================================================ */
+    const colorGroups = {
+      main: [
+        { name: 'background', value: '#fafaf9', token: '--nxz-background' },
+        { name: 'foreground', value: '#000000', token: '--nxz-foreground' },
+        { name: 'primary', value: '#7430e8', token: '--nxz-primary' },
+        { name: 'primary-end', value: '#b34de6', token: '--nxz-primary-end' },
+        { name: 'primary-foreground', value: '#ffffff', token: '--nxz-primary-foreground' },
+        { name: 'secondary', value: '#eeebf4', token: '--nxz-secondary' },
+        { name: 'secondary-foreground', value: '#4b248f', token: '--nxz-secondary-foreground' },
+        { name: 'muted', value: '#f6f5f4', token: '--nxz-muted' },
+        { name: 'muted-foreground', value: '#707070', token: '--nxz-muted-foreground' },
+        { name: 'accent', value: '#f6f5f4', token: '--nxz-accent' },
+        { name: 'accent-foreground', value: '#000000', token: '--nxz-accent-foreground' },
+      ],
+      surface: [
+        { name: 'card', value: '#ffffff', token: '--nxz-card' },
+        { name: 'card-foreground', value: '#000000', token: '--nxz-card-foreground' },
+        { name: 'popover', value: '#ffffff', token: '--nxz-popover' },
+        { name: 'border', value: '#cccccc', token: '--nxz-border' },
+        { name: 'input', value: '#cccccc', token: '--nxz-input' },
+        { name: 'ring', value: '#7430e8', token: '--nxz-ring' },
+        { name: 'warm-gray', value: '#f6f5f4', token: '--nxz-warm-gray' },
+      ],
+      semantic: [
+        { name: 'destructive', value: '#dc2828', token: '--nxz-destructive' },
+        { name: 'success', value: '#2bab6f', token: '--nxz-success' },
+        { name: 'warning', value: '#f59f0a', token: '--nxz-warning' },
+      ],
+      pastel: [
+        { name: 'pastel-purple', value: '#f9f1ec', token: '--nxz-pastel-purple' },
+        { name: 'pastel-blue', value: 'hsl(206, 50%, 87%)', token: '--nxz-pastel-blue' },
+        { name: 'pastel-green', value: 'hsl(72, 60%, 88%)', token: '--nxz-pastel-green' },
+        { name: 'pastel-amber', value: 'hsl(38, 45%, 95%)', token: '--nxz-pastel-amber' },
+      ]
+    };
+
+    function renderSwatches(containerId, colors) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = colors.map(c => `
+        <div class="ds-swatch" onclick="copySwatch('${c.value}', this)" title="Clique para copiar">
+          <div class="ds-swatch-color" style="background:${c.value};">
+            <div class="ds-swatch-copied">Copiado!</div>
+          </div>
+          <div class="ds-swatch-info">
+            <p class="ds-swatch-name">${c.name}</p>
+            <p class="ds-swatch-value">${c.value}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function copySwatch(value, el) {
+      navigator.clipboard.writeText(value).then(() => {
+        const badge = el.querySelector('.ds-swatch-copied');
+        badge.classList.add('show');
+        showToast(`Copiado: ${value}`);
+        setTimeout(() => badge.classList.remove('show'), 1200);
+      });
+    }
+
+    renderSwatches('swatches-main', colorGroups.main);
+    renderSwatches('swatches-surface', colorGroups.surface);
+    renderSwatches('swatches-semantic', colorGroups.semantic);
+    renderSwatches('swatches-pastel', colorGroups.pastel);
+
+    /* ============================================================
+       TYPOGRAPHY SCALE DEMO
+       ============================================================ */
+    function renderTypeScale() {
+      const container = document.getElementById('type-scale-demo');
+      if (!container) return;
+      const sizes = [
+        { name: '7xl', size: '5.625rem', sample: 'Display' },
+        { name: '6xl', size: '4rem', sample: 'Headline' },
+        { name: '5xl', size: '2.75rem', sample: 'Hero Title' },
+        { name: '4xl', size: '2.5rem', sample: 'Section Title' },
+        { name: '3xl', size: '1.75rem', sample: 'Page Heading' },
+        { name: '2xl', size: '1.5rem', sample: 'Card Title' },
+        { name: 'xl', size: '1.25rem', sample: 'Subtitle' },
+        { name: 'lg', size: '1.125rem', sample: 'Lead text paragraph' },
+        { name: 'base', size: '1rem', sample: 'Body text — the default reading size' },
+        { name: 'sm', size: '0.875rem', sample: 'Secondary text, buttons, meta' },
+        { name: 'xs', size: '0.75rem', sample: 'Captions, labels, fine print' },
+      ];
+
+      container.innerHTML = sizes.map(s => `
+        <div style="margin-bottom:var(--nxz-space-4);display:flex;align-items:baseline;gap:var(--nxz-space-4);flex-wrap:wrap;">
+          <span style="font-family:var(--nxz-font-mono);font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);width:40px;flex-shrink:0;text-align:right;">${s.name}</span>
+          <span style="font-size:${s.size};font-family:${['7xl','6xl','5xl','4xl'].includes(s.name) ? 'var(--nxz-font-heading)' : 'var(--nxz-font-body)'};line-height:1.3;letter-spacing:${['7xl','6xl','5xl','4xl'].includes(s.name) ? '-0.02em' : 'normal'};">${s.sample}</span>
+        </div>
+      `).join('');
+    }
+    renderTypeScale();
+
+    /* ============================================================
+       SPACING SCALE VISUAL
+       ============================================================ */
+    function renderSpacing() {
+      const container = document.getElementById('spacing-visual');
+      if (!container) return;
+      const spaces = [
+        { name: 'space-1', px: 4 },
+        { name: 'space-2', px: 8 },
+        { name: 'space-3', px: 12 },
+        { name: 'space-4', px: 16 },
+        { name: 'space-5', px: 20 },
+        { name: 'space-6', px: 24 },
+        { name: 'space-8', px: 32 },
+        { name: 'space-10', px: 40 },
+        { name: 'space-12', px: 48 },
+        { name: 'space-14', px: 56 },
+        { name: 'space-16', px: 64 },
+        { name: 'space-20', px: 80 },
+        { name: 'space-24', px: 96 },
+        { name: 'space-28', px: 112 },
+        { name: 'space-32', px: 128 },
+        { name: 'space-36', px: 144 },
+        { name: 'space-40', px: 160 },
+      ];
+
+      const maxPx = 160;
+      container.innerHTML = spaces.map(s => `
+        <div class="ds-spacing-row">
+          <span class="ds-spacing-label">${s.name}</span>
+          <div class="ds-spacing-bar" style="width:${(s.px / maxPx) * 100}%;"></div>
+          <span class="ds-spacing-value">${s.px}px</span>
+        </div>
+      `).join('');
+    }
+    renderSpacing();
+
+    /* ============================================================
+       SCROLL SPY
+       ============================================================ */
+    function initScrollSpy() {
+      const sections = document.querySelectorAll('.ds-section');
+      const navLinks = document.querySelectorAll('.ds-sidebar-nav a[href^="#"]');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            navLinks.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+            });
+          }
+        });
+      }, {
+        rootMargin: '-80px 0px -60% 0px',
+        threshold: 0
+      });
+
+      sections.forEach(s => observer.observe(s));
+    }
+    initScrollSpy();
+
+    /* Close sidebar on nav click (mobile) */
+    document.querySelectorAll('.ds-sidebar-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          closeSidebar();
+        }
+      });
+    });
+
+    /* ============================================================
+       SIDEBAR TOGGLE (MOBILE)
+       ============================================================ */
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('overlay').classList.toggle('open');
+    }
+
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('overlay').classList.remove('open');
+    }
+
+    /* ============================================================
+       TOAST
+       ============================================================ */
+    function showToast(message) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'ds-toast';
+      toast.textContent = message;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.add('removing');
+        toast.addEventListener('animationend', () => toast.remove());
+      }, 2000);
+    }
+
+    function showDemoToast(message) {
+      showToast(message);
+    }
+
+    /* ============================================================
+       FAQ ACCORDION
+       ============================================================ */
+    function toggleFaq(trigger) {
+      const item = trigger.closest('.nxz-faq-item');
+      const content = item.querySelector('.nxz-faq-content');
+      const isOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.nxz-faq-item.open').forEach(openItem => {
+        openItem.classList.remove('open');
+        openItem.querySelector('.nxz-faq-content').style.maxHeight = null;
+      });
+
+      if (!isOpen) {
+        item.classList.add('open');
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    }
+
+    /* ============================================================
+       MODAL
+       ============================================================ */
+    function openModal() {
+      document.getElementById('demo-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(event) {
+      if (event && event.target !== event.currentTarget && event.target.closest('.nxz-modal')) return;
+      document.getElementById('demo-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Close modal on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    /* ============================================================
+       COPY CODE BLOCK
+       ============================================================ */
+    function copyCode(btn) {
+      const codeBlock = btn.closest('.ds-code');
+      const pre = codeBlock.querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(() => {
+        const original = btn.textContent;
+        btn.textContent = 'Copiado!';
+        setTimeout(() => btn.textContent = original, 1500);
+      });
+    }
+  </script>
+
+</body>
+</html>

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Classplay Design System — a self-contained, single-page HTML documentation site for the Classplay gamified LMS platform. No build tools, no frameworks, no dependencies. Everything lives in `index.html` (~4700 lines of embedded CSS, JS, and HTML).
+Classplay Design System — a self-contained, single-page HTML documentation site for the Classplay gamified LMS platform. No build tools, no frameworks, no dependencies. Everything lives in `index.html` (~6500 lines of embedded CSS, JS, and HTML).
 
 ## Running Locally
 
@@ -21,9 +21,11 @@ No build step, no install, no linting configured.
 
 ### Single-file structure (`index.html`)
 
-1. **CSS** — Design tokens + component styles + layout
-2. **HTML** — Sidebar nav, header, main content sections, embedded Markdown spec
-3. **JavaScript** — Theme toggle, scroll spy, interactive demos, dynamic rendering
+The file is divided into three major blocks — use these line ranges to navigate:
+
+1. **CSS** (lines ~12–2955) — Design tokens (`:root`), component styles, layout, dark/light theme overrides
+2. **HTML** (lines ~2956–4360) — Sidebar nav, header, 17 content sections (`<section id="...">`), embedded Markdown spec
+3. **JavaScript** (lines ~4361–end) — Theme toggle, scroll spy, interactive demos, dynamic rendering
 
 ### CSS Token Convention
 

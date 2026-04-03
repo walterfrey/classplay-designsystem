@@ -2,3 +2,5 @@
 .playwright-mcp/
 node_modules/
 test-results/
+.history/
+.playwright-cli/*
