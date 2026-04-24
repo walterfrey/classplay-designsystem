@@ -7,6 +7,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('nxz-theme');
+        var theme = saved || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
   <style>
     /* ============================================================
        NXZ DESIGN SYSTEM — CSS TOKENS & STYLES
@@ -48,6 +59,9 @@
       --nxz-pastel-green: hsl(72, 60%, 88%);
       --nxz-pastel-amber: hsl(38, 45%, 95%);
 
+      /* Text hierarchy extras */
+      --nxz-disabled-foreground: hsl(0, 0%, 64%);
+
       /* Variation (for KPI indicators) */
       --nxz-variation-positive: var(--nxz-success);
       --nxz-variation-negative: var(--nxz-destructive);
@@ -56,6 +70,13 @@
       --nxz-primary-10: hsl(262 80% 55% / 0.1);
       --nxz-primary-20: hsl(262 80% 55% / 0.2);
       --nxz-primary-50: hsl(262 80% 55% / 0.5);
+
+      /* Chart palette — Radix step 9 solids (accessible on warm off-white) */
+      --nxz-chart-1: #7430e8;
+      --nxz-chart-2: #0d74ce;
+      --nxz-chart-3: #29a383;
+      --nxz-chart-4: #e5484d;
+      --nxz-chart-5: #f76b15;
 
       /* Typography */
       --nxz-font-heading: 'DM Serif Display', serif;
@@ -129,6 +150,59 @@
       --nxz-density-input-h: 48px;
       --nxz-density-nav-h: 72px;
       --nxz-density-gap: var(--nxz-space-4);
+    }
+
+    /* ---- Dark Theme (Carbon-flat + warm near-black) ---- */
+    [data-theme="dark"] {
+      /* Surfaces — flat layered neutrals, warm near-black baseline */
+      --nxz-background: hsl(40, 6%, 9%);
+      --nxz-muted: hsl(40, 5%, 13%);
+      --nxz-card: hsl(40, 5%, 16%);
+      --nxz-popover: hsl(40, 5%, 19%);
+      --nxz-warm-gray: hsl(40, 5%, 13%);
+
+      /* Text — explicit tokens (not opacity) */
+      --nxz-foreground: hsl(40, 10%, 96%);
+      --nxz-muted-foreground: hsl(40, 6%, 64%);
+      --nxz-disabled-foreground: hsl(40, 5%, 40%);
+      --nxz-card-foreground: hsl(40, 10%, 96%);
+
+      /* Brand — preserved (Radix approach, not MD3 desaturation) */
+      --nxz-primary: #7430e8;
+      --nxz-primary-end: #b34de6;
+      --nxz-primary-foreground: #ffffff;
+      --nxz-secondary: hsl(262, 25%, 18%);
+      --nxz-secondary-foreground: hsl(262, 70%, 82%);
+      --nxz-accent: hsl(40, 5%, 13%);
+      --nxz-accent-foreground: hsl(40, 10%, 96%);
+
+      /* Semantic — shifted ~10-15% lighter for dark */
+      --nxz-destructive: hsl(0, 75%, 64%);
+      --nxz-success: hsl(152, 55%, 55%);
+      --nxz-warning: hsl(38, 92%, 55%);
+
+      /* Borders & rings */
+      --nxz-border: hsl(40, 4%, 23%);
+      --nxz-input: hsl(40, 4%, 23%);
+      --nxz-ring: #7430e8;
+
+      /* Pastels sombrios (D1a) — preserve section rhythm in dark */
+      --nxz-pastel-purple: hsl(270, 25%, 16%);
+      --nxz-pastel-blue: hsl(206, 25%, 18%);
+      --nxz-pastel-green: hsl(120, 20%, 15%);
+      --nxz-pastel-amber: hsl(38, 22%, 16%);
+
+      /* Shadows — stronger alpha for dark visibility */
+      --nxz-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+      --nxz-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+      --nxz-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+
+      /* Chart palette — Radix dark step 9 */
+      --nxz-chart-1: #8e4ec6;
+      --nxz-chart-2: #0091ff;
+      --nxz-chart-3: #12a594;
+      --nxz-chart-4: #e5484d;
+      --nxz-chart-5: #f76b15;
     }
 
     /* ---- Base ---- */
@@ -296,6 +370,42 @@
       align-items: center;
       gap: var(--nxz-space-3);
     }
+
+    .ds-theme-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--nxz-radius-full);
+      border: 1px solid var(--nxz-border);
+      background: var(--nxz-card);
+      color: var(--nxz-foreground);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      transition: background var(--nxz-motion-fast) var(--nxz-easing),
+                  border-color var(--nxz-motion-fast) var(--nxz-easing);
+    }
+    .ds-theme-toggle:hover {
+      background: var(--nxz-muted);
+      border-color: var(--nxz-foreground);
+    }
+    .ds-theme-toggle:focus-visible {
+      outline: 2px solid var(--nxz-ring);
+      outline-offset: 2px;
+    }
+    .ds-theme-toggle svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .ds-theme-icon-moon { display: none; }
+    [data-theme="dark"] .ds-theme-icon-sun { display: none; }
+    [data-theme="dark"] .ds-theme-icon-moon { display: inline-block; }
 
     .ds-hamburger {
       display: none;
@@ -639,12 +749,12 @@
 
     .nxz-btn-dark {
       background: var(--nxz-foreground);
-      color: var(--nxz-primary-foreground);
+      color: var(--nxz-background);
       border-color: var(--nxz-foreground);
     }
     .nxz-btn-dark:hover {
-      background: hsl(0, 0%, 15%);
-      border-color: hsl(0, 0%, 15%);
+      background: color-mix(in srgb, var(--nxz-foreground) 85%, var(--nxz-background));
+      border-color: color-mix(in srgb, var(--nxz-foreground) 85%, var(--nxz-background));
       transform: translateY(-1px);
       box-shadow: var(--nxz-shadow-md);
     }
@@ -655,12 +765,12 @@
 
     .nxz-btn-outline-light {
       background: transparent;
-      color: var(--nxz-primary-foreground);
-      border-color: rgba(255, 255, 255, 0.3);
+      color: var(--nxz-background);
+      border-color: color-mix(in srgb, var(--nxz-background) 30%, transparent);
     }
     .nxz-btn-outline-light:hover {
-      border-color: rgba(255, 255, 255, 0.6);
-      background: rgba(255, 255, 255, 0.05);
+      border-color: color-mix(in srgb, var(--nxz-background) 60%, transparent);
+      background: color-mix(in srgb, var(--nxz-background) 5%, transparent);
     }
 
     .nxz-btn-sm {
@@ -956,20 +1066,20 @@
     /* ---- CTA Banner ---- */
     .nxz-cta-banner {
       background: var(--nxz-foreground);
-      color: var(--nxz-primary-foreground);
+      color: var(--nxz-background);
       padding: var(--nxz-space-16) var(--nxz-space-8);
       border-radius: var(--nxz-radius-lg);
       text-align: center;
     }
 
     .nxz-cta-banner h3 {
-      color: var(--nxz-primary-foreground);
+      color: var(--nxz-background);
       font-size: var(--nxz-text-4xl);
       margin-bottom: var(--nxz-space-4);
     }
 
     .nxz-cta-banner p {
-      color: hsl(0, 0%, 70%);
+      color: color-mix(in srgb, var(--nxz-background) 70%, transparent);
       font-size: var(--nxz-text-lg);
       max-width: 500px;
       margin: 0 auto var(--nxz-space-8);
@@ -1383,7 +1493,7 @@
 
     .nxz-footer-brand p {
       font-size: var(--nxz-text-sm);
-      color: rgba(255, 255, 255, 0.6);
+      color: color-mix(in srgb, var(--nxz-background) 60%, transparent);
       line-height: var(--nxz-leading-sm);
       margin-top: var(--nxz-space-4);
     }
@@ -1391,7 +1501,7 @@
     .nxz-footer-logo {
       font-family: var(--nxz-font-heading);
       font-size: var(--nxz-text-2xl);
-      color: var(--nxz-primary-foreground);
+      color: var(--nxz-background);
       letter-spacing: -0.03em;
     }
 
@@ -1399,20 +1509,20 @@
       font-family: var(--nxz-font-body);
       font-size: var(--nxz-text-sm);
       font-weight: 600;
-      color: var(--nxz-primary-foreground);
+      color: var(--nxz-background);
       margin-bottom: var(--nxz-space-4);
     }
 
     .nxz-footer-col a {
       display: block;
       font-size: var(--nxz-text-sm);
-      color: rgba(255, 255, 255, 0.6);
+      color: color-mix(in srgb, var(--nxz-background) 60%, transparent);
       text-decoration: none;
       margin-bottom: var(--nxz-space-2);
       transition: color var(--nxz-motion-fast);
     }
     .nxz-footer-col a:hover {
-      color: var(--nxz-primary-foreground);
+      color: var(--nxz-background);
       text-decoration: none;
     }
 
@@ -1421,14 +1531,14 @@
       align-items: center;
       justify-content: space-between;
       padding-top: var(--nxz-space-6);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid color-mix(in srgb, var(--nxz-background) 10%, transparent);
       max-width: 1200px;
       margin: 0 auto;
     }
 
     .nxz-footer-bottom p {
       font-size: var(--nxz-text-xs);
-      color: rgba(255, 255, 255, 0.4);
+      color: color-mix(in srgb, var(--nxz-background) 40%, transparent);
     }
 
     .nxz-footer-bottom-links {
@@ -1438,12 +1548,12 @@
 
     .nxz-footer-bottom-links a {
       font-size: var(--nxz-text-xs);
-      color: rgba(255, 255, 255, 0.4);
+      color: color-mix(in srgb, var(--nxz-background) 40%, transparent);
       text-decoration: none;
       transition: color var(--nxz-motion-fast);
     }
     .nxz-footer-bottom-links a:hover {
-      color: rgba(255, 255, 255, 0.8);
+      color: color-mix(in srgb, var(--nxz-background) 80%, transparent);
       text-decoration: none;
     }
 
@@ -1483,10 +1593,11 @@
     .nxz-section-bg--background { background: var(--nxz-background); }
     .nxz-section-bg--warm-gray { background: var(--nxz-warm-gray); }
     .nxz-section-bg--pastel { background: var(--nxz-pastel-purple); }
-    .nxz-section-bg--dark { background: var(--nxz-foreground); color: var(--nxz-background); }
-    .nxz-section-bg--dark h2,
-    .nxz-section-bg--dark h3 { color: var(--nxz-primary-foreground); }
-    .nxz-section-bg--dark p { color: rgba(255, 255, 255, 0.6); }
+    .nxz-section-bg--inverted { background: var(--nxz-foreground); color: var(--nxz-background); }
+    .nxz-section-bg--inverted h1,
+    .nxz-section-bg--inverted h2,
+    .nxz-section-bg--inverted h3 { color: inherit; }
+    .nxz-section-bg--inverted p { color: color-mix(in srgb, currentColor 75%, transparent); }
 
     /* ---- Link Arrow ---- */
     .nxz-link-arrow {
@@ -1657,7 +1768,7 @@
       left: 50%;
       transform: translateX(-50%);
       background: var(--nxz-foreground);
-      color: var(--nxz-primary-foreground);
+      color: var(--nxz-background);
       font-size: var(--nxz-text-xs);
       font-family: var(--nxz-font-mono);
       padding: 2px 8px;
@@ -1935,7 +2046,7 @@
   <aside class="ds-sidebar" id="sidebar">
     <div class="ds-sidebar-brand">
       <span class="nxz-logo">nxz.</span>
-      <span>Design System v2.0</span>
+      <span>Design System v2.1</span>
     </div>
     <nav class="ds-sidebar-nav" id="sidebar-nav">
       <div class="ds-nav-group">Fundamentos</div>
@@ -1991,7 +2102,16 @@
       <span class="ds-header-title">Design System</span>
     </div>
     <div class="ds-header-actions">
-      <span style="font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);">v2.0.0</span>
+      <button class="ds-theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema claro/escuro">
+        <svg class="ds-theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+        <svg class="ds-theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+      <span style="font-size:var(--nxz-text-xs);color:var(--nxz-muted-foreground);">v2.1.0</span>
     </div>
   </header>
 
@@ -2017,7 +2137,7 @@
           </div>
           <div>
             <p class="ds-demo-label">Tema</p>
-            <p style="font-weight:600;">Light only (sem dark mode)</p>
+            <p style="font-weight:600;">Light + Dark (system + toggle)</p>
           </div>
           <div>
             <p class="ds-demo-label">Inspiracao</p>
@@ -3071,8 +3191,8 @@ transition: all var(--nxz-motion-fast) var(--nxz-easing);</pre>
         <h3 class="ds-subsection-title">Hero com Fundo Escuro</h3>
         <div style="background:var(--nxz-foreground);border-radius:var(--nxz-radius-lg);padding:var(--nxz-space-20) var(--nxz-space-8);text-align:center;">
           <p style="font-size:var(--nxz-text-sm);font-weight:600;color:var(--nxz-primary);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:var(--nxz-space-4);">Novo</p>
-          <h2 style="font-family:var(--nxz-font-heading);font-size:var(--nxz-text-5xl);color:var(--nxz-primary-foreground);margin-bottom:var(--nxz-space-6);max-width:600px;margin-left:auto;margin-right:auto;line-height:var(--nxz-leading-5xl);">O futuro da gestao de food service</h2>
-          <p style="font-size:var(--nxz-text-lg);color:hsl(0,0%,60%);max-width:480px;margin:0 auto var(--nxz-space-8);">Inteligencia artificial aplicada a cada decisao operacional da sua rede de franquias.</p>
+          <h2 style="font-family:var(--nxz-font-heading);font-size:var(--nxz-text-5xl);color:var(--nxz-background);margin-bottom:var(--nxz-space-6);max-width:600px;margin-left:auto;margin-right:auto;line-height:var(--nxz-leading-5xl);">O futuro da gestao de food service</h2>
+          <p style="font-size:var(--nxz-text-lg);color:color-mix(in srgb, var(--nxz-background) 60%, transparent);max-width:480px;margin:0 auto var(--nxz-space-8);">Inteligencia artificial aplicada a cada decisao operacional da sua rede de franquias.</p>
           <div style="display:flex;align-items:center;justify-content:center;gap:var(--nxz-space-4);flex-wrap:wrap;">
             <button class="nxz-btn nxz-btn-primary nxz-btn-lg">Comecar gratis</button>
             <button class="nxz-btn nxz-btn-outline-light nxz-btn-lg">Conhecer produto</button>
@@ -3561,8 +3681,8 @@ transition: all var(--nxz-motion-fast) var(--nxz-easing);</pre>
               <p style="font-size:var(--nxz-text-sm);">Secao de destaque, "duas realidades"</p>
             </div>
             <div style="background:var(--nxz-foreground);padding:var(--nxz-space-4) var(--nxz-space-6);color:var(--nxz-background);">
-              <p class="ds-demo-label" style="color:rgba(255,255,255,0.6);">foreground (dark)</p>
-              <p style="font-size:var(--nxz-text-sm);color:rgba(255,255,255,0.8);">Servicos, CTA final, footer</p>
+              <p class="ds-demo-label" style="color:color-mix(in srgb, currentColor 60%, transparent);">foreground (inverted)</p>
+              <p style="font-size:var(--nxz-text-sm);color:color-mix(in srgb, currentColor 80%, transparent);">Servicos, CTA final, footer</p>
             </div>
           </div>
         </div>
@@ -3580,10 +3700,10 @@ transition: all var(--nxz-motion-fast) var(--nxz-easing);</pre>
               <tr><td>2</td><td>Proof Bar</td><td class="mono">warm-gray</td><td class="mono">nxz-section-bg--warm-gray</td></tr>
               <tr><td>3</td><td>Problema</td><td class="mono">background</td><td class="mono">nxz-section-bg--background</td></tr>
               <tr><td>4</td><td>Solucao (destaque)</td><td class="mono">pastel-purple</td><td class="mono">nxz-section-bg--pastel</td></tr>
-              <tr><td>5</td><td>Duas realidades</td><td class="mono">foreground</td><td class="mono">nxz-section-bg--dark</td></tr>
+              <tr><td>5</td><td>Duas realidades</td><td class="mono">foreground</td><td class="mono">nxz-section-bg--inverted</td></tr>
               <tr><td>6</td><td>Modulos</td><td class="mono">warm-gray</td><td class="mono">nxz-section-bg--warm-gray</td></tr>
               <tr><td>7</td><td>Testimonials</td><td class="mono">background</td><td class="mono">nxz-section-bg--background</td></tr>
-              <tr><td>8</td><td>Servicos</td><td class="mono">foreground</td><td class="mono">nxz-section-bg--dark</td></tr>
+              <tr><td>8</td><td>Servicos</td><td class="mono">foreground</td><td class="mono">nxz-section-bg--inverted</td></tr>
               <tr><td>9</td><td>Steps</td><td class="mono">background</td><td class="mono">nxz-section-bg--background</td></tr>
               <tr><td>10</td><td>CTA Final</td><td class="mono">warm-gray</td><td class="mono">nxz-section-bg--warm-gray</td></tr>
             </tbody>
@@ -3596,7 +3716,7 @@ transition: all var(--nxz-motion-fast) var(--nxz-easing);</pre>
 <pre>&lt;section class="nxz-section-bg nxz-section-bg--background"&gt;...&lt;/section&gt;
 &lt;section class="nxz-section-bg nxz-section-bg--warm-gray"&gt;...&lt;/section&gt;
 &lt;section class="nxz-section-bg nxz-section-bg--pastel"&gt;...&lt;/section&gt;
-&lt;section class="nxz-section-bg nxz-section-bg--dark"&gt;...&lt;/section&gt;</pre>
+&lt;section class="nxz-section-bg nxz-section-bg--inverted"&gt;...&lt;/section&gt;</pre>
       </div>
     </section>
 
@@ -3956,7 +4076,7 @@ transition: all var(--nxz-motion-fast) var(--nxz-easing);</pre>
 
     <!-- Footer -->
     <div style="text-align:center;padding:var(--nxz-space-10) 0;color:var(--nxz-muted-foreground);font-size:var(--nxz-text-sm);">
-      <p>NXZ Design System v2.0 — SaaS para gestao de franquias de food service</p>
+      <p>NXZ Design System v2.1 — SaaS para gestao de franquias de food service</p>
       <p style="margin-top:var(--nxz-space-1);font-size:var(--nxz-text-xs);">Construido sem frameworks, sem build tools. Puro HTML/CSS/JS.</p>
     </div>
 
@@ -4137,6 +4257,28 @@ transition: all var(--nxz-motion-fast) var(--nxz-easing);</pre>
         }
       });
     });
+
+    /* ============================================================
+       THEME TOGGLE (LIGHT/DARK)
+       ============================================================ */
+    function toggleTheme() {
+      var root = document.documentElement;
+      var current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      var next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('nxz-theme', next); } catch (e) {}
+    }
+
+    /* Keep in sync with system changes only when user has no explicit preference */
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+        try {
+          if (!localStorage.getItem('nxz-theme')) {
+            document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+          }
+        } catch (err) {}
+      });
+    }
 
     /* ============================================================
        SIDEBAR TOGGLE (MOBILE)

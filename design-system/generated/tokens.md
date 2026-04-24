@@ -22,59 +22,78 @@
 
 | Token | Light | Dark | Uso |
 |-------|-------|------|-----|
-| `--background` | hsl(40, 10%, 98%) | -- | Fundo principal (off-white quente, similar a Square `rgb(247,246,245)`) |
-| `--foreground` | hsl(0, 0%, 0%) | -- | Texto principal (preto puro, como Square) |
-| `--muted` | hsl(40, 10%, 96%) | -- | Fundos secundarios (cinza quente, como Square `#f7f6f5`) |
-| `--muted-foreground` | hsl(0, 0%, 44%) | -- | Texto secundario (cinza medio `rgb(112,112,112)`, hierarquia Square) |
+| `--background` | hsl(40, 10%, 98%) | hsl(40, 6%, 9%) | Fundo principal (off-white quente em light, warm near-black em dark) |
+| `--foreground` | hsl(0, 0%, 0%) | hsl(40, 10%, 96%) | Texto principal |
+| `--muted` | hsl(40, 10%, 96%) | hsl(40, 5%, 13%) | Fundos secundarios (layer-01) |
+| `--muted-foreground` | hsl(0, 0%, 44%) | hsl(40, 6%, 64%) | Texto secundario |
+| `--disabled-foreground` | hsl(0, 0%, 64%) | hsl(40, 5%, 40%) | Texto/icones em elementos disabled |
 
 ### Acoes
 
 | Token | Light | Dark | Uso |
 |-------|-------|------|-----|
-| `--primary` | hsl(262, 80%, 55%) | -- | Acoes principais, links, botoes primarios (roxo forte/vibrante NXZ) |
-| `--primary-foreground` | hsl(0, 0%, 100%) | -- | Texto sobre primary (branco) |
-| `--secondary` | hsl(262, 30%, 94%) | -- | Acoes secundarias (roxo pastel claro) |
-| `--secondary-foreground` | hsl(262, 60%, 35%) | -- | Texto sobre secondary (roxo escuro) |
-| `--accent` | hsl(40, 10%, 96%) | -- | Destaques, hover (cinza quente sutil, estilo Square) |
-| `--accent-foreground` | hsl(0, 0%, 0%) | -- | Texto sobre accent (preto) |
+| `--primary` | hsl(262, 80%, 55%) | hsl(262, 80%, 55%) | Acoes principais. **Preservado em dark** (approach Radix) — marca mantem equity |
+| `--primary-foreground` | hsl(0, 0%, 100%) | hsl(0, 0%, 100%) | Texto sobre primary (branco em ambos) |
+| `--secondary` | hsl(262, 30%, 94%) | hsl(262, 25%, 18%) | Acoes secundarias (roxo pastel em light, roxo sombrio em dark) |
+| `--secondary-foreground` | hsl(262, 60%, 35%) | hsl(262, 70%, 82%) | Texto sobre secondary (Radix step 11 em dark) |
+| `--accent` | hsl(40, 10%, 96%) | hsl(40, 5%, 13%) | Destaques, hover |
+| `--accent-foreground` | hsl(0, 0%, 0%) | hsl(40, 10%, 96%) | Texto sobre accent |
 
 ### Estados
 
+> Semanticos deslocam ~10-15% lighter, ~10% menos saturado em dark (padrao IBM Carbon / MD3).
+
 | Token | Light | Dark | Uso |
 |-------|-------|------|-----|
-| `--destructive` | hsl(0, 72%, 51%) | -- | Erros, acoes destrutivas |
-| `--destructive-foreground` | hsl(0, 0%, 100%) | -- | Texto sobre destructive |
-| `--success` | hsl(152, 60%, 42%) | -- | Sucesso, confirmacoes |
-| `--success-foreground` | hsl(0, 0%, 100%) | -- | Texto sobre success |
-| `--warning` | hsl(38, 92%, 50%) | -- | Alertas, atencao |
-| `--warning-foreground` | hsl(38, 50%, 10%) | -- | Texto sobre warning |
+| `--destructive` | hsl(0, 72%, 51%) | hsl(0, 75%, 64%) | Erros, acoes destrutivas |
+| `--destructive-foreground` | hsl(0, 0%, 100%) | hsl(0, 0%, 100%) | Texto sobre destructive |
+| `--success` | hsl(152, 60%, 42%) | hsl(152, 55%, 55%) | Sucesso, confirmacoes |
+| `--success-foreground` | hsl(0, 0%, 100%) | hsl(0, 0%, 100%) | Texto sobre success |
+| `--warning` | hsl(38, 92%, 50%) | hsl(38, 92%, 55%) | Alertas (pouca mudanca — amarelo ja e luminante) |
+| `--warning-foreground` | hsl(38, 50%, 10%) | hsl(38, 50%, 10%) | Texto sobre warning (permanece escuro) |
 
 ### Superficies
 
+> Modelo **Carbon-flat**: camadas lisas de cinza em dark (sem tonal overlay estilo MD3). Elevacao vem da mudanca de cor de fundo, nao de sombras.
+
 | Token | Light | Dark | Uso |
 |-------|-------|------|-----|
-| `--card` | hsl(0, 0%, 100%) | -- | Fundo de cards (branco puro) |
-| `--card-foreground` | hsl(0, 0%, 0%) | -- | Texto em cards (preto) |
-| `--popover` | hsl(0, 0%, 100%) | -- | Fundo de popovers/dropdowns |
-| `--popover-foreground` | hsl(0, 0%, 0%) | -- | Texto em popovers (preto) |
+| `--card` | hsl(0, 0%, 100%) | hsl(40, 5%, 16%) | Cards (layer-02) |
+| `--card-foreground` | hsl(0, 0%, 0%) | hsl(40, 10%, 96%) | Texto em cards |
+| `--popover` | hsl(0, 0%, 100%) | hsl(40, 5%, 19%) | Popovers/dropdowns (layer-03, mais elevado) |
+| `--popover-foreground` | hsl(0, 0%, 0%) | hsl(40, 10%, 96%) | Texto em popovers |
 
 ### Bordas e Focus
 
 | Token | Light | Dark | Uso |
 |-------|-------|------|-----|
-| `--border` | hsl(0, 0%, 80%) | -- | Bordas gerais (cinza neutro `rgb(204,204,204)`, estilo Square) |
-| `--input` | hsl(0, 0%, 80%) | -- | Borda de inputs (mesma cor, consistente com Square) |
-| `--ring` | hsl(262, 80%, 55%) | -- | Focus ring (roxo primary NXZ) |
+| `--border` | hsl(0, 0%, 80%) | hsl(40, 4%, 23%) | Bordas gerais |
+| `--input` | hsl(0, 0%, 80%) | hsl(40, 4%, 23%) | Borda de inputs |
+| `--ring` | hsl(262, 80%, 55%) | hsl(262, 80%, 55%) | Focus ring (roxo primary em ambos) |
 
 ### Cores Adicionais (Secoes e pasteis)
 
-| Token | Valor | Uso |
-|-------|-------|-----|
-| `--warm-gray` | hsl(40, 10%, 96%) | Fundo de secoes alternadas (inspirado Square `rgb(247,246,245)`) |
-| `--pastel-purple` | hsl(270, 40%, 95%) | Fundo de secoes com identidade NXZ |
-| `--pastel-blue` | hsl(206, 50%, 87%) | Fundo de cards/secoes (inspirado Square `rgb(206,231,243)`) |
-| `--pastel-green` | hsl(72, 60%, 88%) | Fundo de testimonials/depoimentos (gradiente pastel estilo Square) |
-| `--pastel-amber` | hsl(38, 45%, 95%) | Destaques de atencao/numeros |
+> **Decisao D1**: pasteis **sombrios** em dark (nao abandonados). Preservam o ritmo visual de secoes alternadas do padrao Square.
+
+| Token | Light | Dark | Uso |
+|-------|-------|------|-----|
+| `--warm-gray` | hsl(40, 10%, 96%) | hsl(40, 5%, 13%) | Fundo de secoes alternadas |
+| `--pastel-purple` | hsl(270, 40%, 95%) | hsl(270, 25%, 16%) | Fundo de secoes com identidade NXZ |
+| `--pastel-blue` | hsl(206, 50%, 87%) | hsl(206, 25%, 18%) | Fundo de cards/secoes |
+| `--pastel-green` | hsl(72, 60%, 88%) | hsl(120, 20%, 15%) | Fundo de testimonials/depoimentos |
+| `--pastel-amber` | hsl(38, 45%, 95%) | hsl(38, 22%, 16%) | Destaques de atencao/numeros |
+
+### Chart Palette
+
+> Paleta de dados para dashboard (barras, series, KPIs multi-categoria). Light usa step 9 da Radix; dark usa Radix dark step 9.
+
+| Token | Light | Dark | Hue (Radix) |
+|-------|-------|------|-------------|
+| `--chart-1` | #7430e8 | #8e4ec6 | purple |
+| `--chart-2` | #0d74ce | #0091ff | blue |
+| `--chart-3` | #29a383 | #12a594 | teal |
+| `--chart-4` | #e5484d | #e5484d | red |
+| `--chart-5` | #f76b15 | #f76b15 | orange |
 
 ---
 
@@ -318,8 +337,26 @@ Fundos alternados entre branco (`--card`), cinza quente (`--warm-gray` / `--mute
 - **font-sans** (Plus Jakarta Sans): Tudo mais — corpo, nav, botoes, H3, subtitulos, labels.
 - **font-mono** (JetBrains Mono): Numeros de impacto (Proof Bar), metricas de cases, dados.
 
-### Sem Dark Mode
-O projeto nao implementa dark mode. Todas as colunas "Dark" estao vazias intencionalmente. O site e exclusivamente light.
+### Dark Mode (v2.1)
+
+Tema claro/escuro implementado via `[data-theme="dark"]` no `<html>`. Fontes de referencia: IBM Carbon (superficies flat layered), Radix Colors (preservacao de brand em dark), Material Design 3 (regras de contraste semantico), Nielsen Norman Group (diretrizes de UX).
+
+**Decisoes fundamentais:**
+- **Base:** `hsl(40, 6%, 9%)` (warm near-black) — espelha o off-white quente do light. Nao usamos `#000` puro (gera halation contra imagens, MD3).
+- **Superficies:** modelo Carbon-flat com camadas explicitas (`background` → `muted` → `card` → `popover` em luminosidades crescentes). Sem tonal overlay.
+- **Brand:** roxo `#7430e8` **preservado** em dark (approach Radix, nao a desaturacao do MD3). Equity de marca vale mais que a teoria de "saturados vibram".
+- **Hierarquia de texto:** tokens nomeados com hex explicito (nao opacity-on-white). Mais claro de implementar e nao vaza entre camadas de superficie.
+- **Semanticos:** deslocam ~10-15% lighter em dark. Warning fica (amarelo alto ja e luminante).
+- **Pasteis:** versao sombria em dark (nao abandonados). Preservam o ritmo de secoes alternadas.
+
+**Comportamento do toggle:**
+- Default segue `prefers-color-scheme` do SO
+- Toggle manual no header persiste em `localStorage['nxz-theme']`
+- Script inline no `<head>` evita FOUC
+- Listener em `matchMedia` sincroniza com mudancas do SO quando usuario ainda nao fez override manual
+
+**Classes invertidas:**
+- `.nxz-section-bg--inverted` (antes `--dark` em v2.0) — inverte contraste contra o tema vigente. Usada em testimonial/CTA/footer (padrao Square).
 
 ### Pagina de Planos
 A pagina /planos exibe tiers e funcionalidades incluidas, mas NAO exibe precos. CTAs direcionam para contato comercial.
